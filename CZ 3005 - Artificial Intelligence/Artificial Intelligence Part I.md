@@ -222,3 +222,120 @@
 
 #### Heuristics from Relaxed Problems
 - The cost of an optimal solution to a relaxed problem is an admissible heuristic for the original problem.	- Relaxed problem adds edges to the state space.	- Any optimal solution in the original problem is also a solution for the relaxed problem.
+
+## Constraint Satisfaction Problems
+- Goal: Discover some state that satisfies a given set of constraints.
+- State: Defined by variables *V<sub>i</sub>* with values from domain *D<sub>i</sub>*.
+- Goal Test: A set of constraints specifying allowable combinations of values for subsets of variables.
+- Constraints can be unary (involving one variable), binary (involving two variables) or high-order (involving more than two variables).
+
+#### Definitions
+- A state of the problem is defined by an assignment of values to some or all of the variables.- An assignment that does not violate any constraints is called a consistent or legal assignment.- A solution to a CSP is an assignment with every variable given a value (complete) and one that satisfies all the constraints.
+
+### CSP Incremental Formulation
+- States: defined by the values assigned so far- Initial State: all variables unassigned- Operators: assign a value to an unassigned variable
+- Goal Test: all variables assigned, no constraints violated
+
+### Search
+- No. of Variables: *n*
+- Max. Depth of Space: *n*
+- Depth of Solution State: *n* (all variables assigned)
+- Search Algorithm: Depth-First Search
+
+#### Backtracking
+- Simple DFS wastes time searching when constraints have already been violated.
+- Solution: Before generating successors, check if constraints have been violated. If yes, backtrack to last decision point and continue.
+
+#### Heuristics/Methods for CSP
+- Plain backtracking is an uninformed algorithm.
+- General-Purpose Heuristics:
+	- Which variable to assign next?
+	- In which order should the possible values be tried for each variable?
+- Forward Checking & Constraint Propagation:
+	- Implications of current variable assignments on the other unassigned variables.
+
+**Most Constraining Variable / Degree Heuristic**
+
+- The variable to be assigned next should be the variable that is involved in the largest number of constraints on unassigned variables.
+- This reduces the branching factor on future choices.
+- Useful to optimise the order of variable assignments.
+
+**Most Constrained Variable / Minimum Remaining Values Heuristic**
+
+- The variable to be assigned next should be the variable with the fewest possible values.
+- Useful to complement *Most Constraining Variable* in case of a tie.
+
+**Least Constraining Value**
+
+- Choose the value for a variable that leaves the largest choice of values for other constraint-related variables.
+- Useful to prevent deadlocks, reduce backtracking.
+
+**Forward Checking**
+
+- When a variable *X* is assigned, look at each unassigned variable *Y* connected to *X* and delete from *Y* any value that is inconsistent with the value chosen for *X*.
+
+**Constraint Propagation**
+
+- *Forward Checking* does not look far enough ahead.
+- Constraint propagation involves propagating the implications of a constraint on one variable onto all other variables.
+
+#### Local Search
+- **Complete-State Formulation:**
+	- States: Every state is a complete assignment that might or might not satisfy the constraints.	- Initial State: A random complete assignment.	- Operators: Changing the value of one variable at a time.
+	- Goal Test: All variables assigned & no constraints violated.
+- **Local Search:**
+	- The solution path does not matter.
+	- The next state is a *neighbour* of the current state.
+- **Minimum Conflicts Heuristic:**
+	- Choose a value for a variable that results in the fewest conflicts with other variables.
+
+## Adversarial Search for Game Playing
+### Properties of a Game
+- Deterministic.- Fully observable environment with two agents (or players).
+- Action of two agents alternate.
+- Utility values at the end of the game are always equal and opposite (i.e. adversarial).
+
+### Game as a Search Problem
+- Initial State: The board position and the player to move is identified.- Successor Function: Returns a list of (move, state) pairs, each indicating a legal move and the resulting state.- Terminal Test: Determines whether the game is over. States where the game has ended are the terminal states.- Utility Function: Gives a numeric value to the terminal states.
+
+### Minimax Algorithm
+#### MIN & MAX
+- Assumption: You are **MAX**.
+- In a normal search problem, the optimal solution is a sequence of moves leading to a goal state - a terminal state that is a win.
+- In a game, MIN affects the solution.
+- The optimal strategy cannot perform worse than any strategy against an infallible opponent (i.e. MIN plays optimally) - it maximises the worst case outcome for MAX.
+
+#### Minimax Algorithm
+- Minimax algorithm performs a depth-first exploration of the game tree.
+- Time: *O(b<sup>m</sup>)*, *b* is the no. of legal moves at each point and *m* is the max. depth of the tree.
+- Space: *O(bm)* if it generates all the successors at once, or *O(m)* if it generates successors one at a time.
+- For real games, the time cost is impractical.
+
+### &alpha;-&beta; Pruning
+- In minimax search, the number of game states to examine is exponential in the number of moves.- The exponent cannot be eliminated but it can be halved by pruning away branches that cannot possibly influence the final decision.- Returns the same move as the minimax algorithm.
+
+**General Idea**
+
+- If *m* is better than *n* for Player, then
+	- the state with utility *n* will never be reached
+	- and hence can be pruned away
+
+#### &alpha;-&beta; Pruning
+- &alpha; is the lower bound of optimal utility.
+- &beta; is the upper bound of optimal utility.
+- The maximiser is always trying to push the value of &alpha; up.
+- The minimiser is always trying to push the value of &beta; down.
+- If the node's value is between &alpha; & &beta;, then the players might reach it.
+- At the beginning (root of the tree), we set &beta; to &infin; and &alpha; to -&infin;.
+
+#### Advantages
+- Pruning does not affect the final result.
+- Effectiveness depends on the order in which successor nodes are examined.
+- In the ideal case, the time complexity can be reduced to *O(b<sup>m/2</sup>)*.
+
+### Games with Elements of Chance
+- Non-deterministic games have random elements that can affect the operators.
+- This increases the size of the search space.
+- The assumption that the opponent minimises utility does not hold.
+	- Chance nodes need to be added to the MAX & MIN nodes.
+	- Probability needs to be taken into account.

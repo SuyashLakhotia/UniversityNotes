@@ -16,13 +16,13 @@
 
 #### Reflex Agents with State (Model-Based)1. Find the rule whose condition matches the current situation (as defined by the percept and the stored internal state).2. Perform the action associated with that rule.
 
-- The *state* is a description of the current world state. It contains all the necessary information to predict the effects of an action and to determine if the state is a goal state.
+**Note:** The *state* is a description of the current world state. It contains all the necessary information to predict the effects of an action and to determine if the state is a goal state.
 
 #### Goal-Based Agents
 1. Find the action that will get me closer from my current state to the goal state.
 2. Perform that action.
 
-- A **goal** can be specific (explicit destination), abstract (speed, safety) or numerous.
+**Note:** A *goal* can be specific (explicit destination), abstract (speed, safety) or numerous.
 
 #### Utility-Based Agents
 - There may be many action sequences that can achieve the same goal.
@@ -61,7 +61,7 @@
 - Definition of a Problem	- The information used by an agent to decide what to do.- Specification	- Initial State	- Action Set i.e. available actions (successor functions)
 	- State Space i.e. states reachable from the initial state		- Solution Path: sequence of actions from one state to another
 	- Goal Test Predicate		- Single state, enumerated list of states, abstract properties
-	- Cost Function		- Path cost `g(n)`, sum of all (action) step costs along the path.
+	- Cost Function		- Path cost *g(n)*, sum of all (action) step costs along the path.
 - Solution	- A path (a sequence of operators leading) from the *Initial-State* to a state that satisfies the *Goal-Test*.
 - Search Cost
 	- Does the agent find a solution?
@@ -165,3 +165,60 @@
 		- Cost from initial state to current state (search-node) *n*.
 		- No information on the cost towards the goal.
 	- Need to estimate cost to the closest goal.
+- **Heuristic Function*****h(n)*****:**
+	- Estimated cost of the cheapest path from the state at node *n* to a goal state.
+		- Exact cost cannot be determined.
+	- Depends only on the state at that node.
+	- Additional knowledge of the problem is imparted to the search algorithm.
+	- Non-negative, problem specific function.
+	- If *n* is a goal node, then *h(n) = 0*.
+
+### Greedy Best-First Search
+- Expands the node that appears to be closest to goal.	- Evaluation Function: *f(n) = h(n)*	- Objective: Quick Solution (but may be suboptimal)
+- The cost is estimated using problem-specific knowledge.
+- Useful but potentially fallible.
+- Complete: No
+- Time: *O(b<sup>m</sup>)* (Worst Case)
+- Space: *O(b<sup>m</sup>)* (Worst Case)
+- Optimal: No
+- With a good heuristic function, the complexity can be reduced substantially.### A* Search
+- Uniform-Cost Search:
+	- *g(n)*: Path cost to reach node *n* from the start node (PastExperience).
+	- Optimal & Complete, but inefficient.
+- Greedy Best-First Search:
+	- *h(n)*: estimated cost of the cheapest path from node *n* to goal node (Future Cost).
+	- Neither optimal nor complete but relatively more efficient.
+- Combining, UCS & GBFS:
+	- *f(n) = g(n) + h(n)*
+	- *f(n)*: Estimated total cost of the cheapest path through node *n* from start node to goal.
+	- Complete & Optimal when *h(n)* satisfies certain conditions.
+
+#### Optimality of A* Search
+- If *h* is admissible, then the tree-search version of A* search is optimal.
+
+#### Complexity of A*
+- Time: exponential in length of solution
+- Space: exponential in length of solution
+- With a good heuristic, significant savings are still possible compared to uninformed search methods.
+- Variants of A* search exist to deal with complexity issues.
+
+### Heuristics
+#### Admissible Heuristic
+- *h\*(n)*: True cost from node *n* to goal.
+- A heuristic is admissible if ***h(n) &le; h\*(n)*** for all *n*.
+- An admissible heuristic should never overestimate the cost to reach the goal
+- i.e. *f(n)* never overestimates the actual cost of a path through node *n* to the goal.
+
+#### Dominance
+- *h<sub>2</sub>* dominates *h<sub>1</sub>* if ***h<sub>2</sub>(n) &ge; h<sub>1</sub>(n)*** for all *n*.
+- Domination translates to efficiency.
+- Always better to use a heuristic function with higher values as long as it does not overestimate the cost.
+- If no heuristic dominates, ***h(n) = max(h<sub>1</sub>(n), h<sub>2</sub>(n), ... , h<sub>m</sub>(n)***.
+
+### Relaxed Problem
+- A problem with fewer restrictions on the actions compared to an original problem is called a relaxed problem.
+- State space graph of the relaxed problem is a supergraph of the original state space.
+- Removal of restrictions creates more edges in the graph.
+
+#### Heuristics from Relaxed Problems
+- The cost of an optimal solution to a relaxed problem is an admissible heuristic for the original problem.	- Relaxed problem adds edges to the state space.	- Any optimal solution in the original problem is also a solution for the relaxed problem.

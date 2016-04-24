@@ -1,9 +1,9 @@
 # Module 1
 
 ## Review of Hardware Components
-- **Arithmetic Logic Unit (ALU)** performs arithmetic operations and logical operations.- **Control Unit** generates control signals to load data into the registers, to read data from the memory or from registers, to write data into the memory, and to perform ALU operations, etc.- **Memory:** stores data and instructions
-- **Input Units:** provide the input data- **Output Units:** deliver out the output
-- ALU, control unit and a set of registers make up the **Central Processing Unit (CPU)**.
+- **Arithmetic Logic Unit (ALU)** performs arithmetic and logical operations.- **Control Unit** generates control signals to load data into the registers, read data from memory/registers, write data into memory, perform ALU operations etc.- **Memory** stores data and instructions.
+- **Input Units** provide the input data.- **Output Units** deliver the output.
+- The ALU, control unit and a set of registers make up the **Central Processing Unit (CPU)**.
 
 ## Performance Metrics
 ### Execution Time
@@ -31,8 +31,8 @@
 
 ### Amdahl's Law
 - Speedup via parallelism is limited by that component of an application which cannot be enhanced (the sequential component).
-- If fraction *U* of an application cannot be enhanced for parallel implementation, then the speedup is limited by a factor of *1/U*.
-	- If *x%* of an application cannot be enhanced, then the speedup is limited by a factor of *100/x*.
+- If a fraction *U* of an application cannot be enhanced for parallel implementation, then the speedup is limited to *1/U*.
+	- If *x%* of an application cannot be enhanced, then the speedup is limited to *100/x*.
 
 #### Speedup
 Speedup of Computer B over Computer A:
@@ -54,9 +54,7 @@ Exec. Time in Comp A / Exec. Time in Comp B
 - Mainly due to charging and discharging of pseudo capacitors in the CMOS transistors.
 
 #### Formula
-<p align="center">
-	P<sub>dyn</sub> = ACV<sup>2</sup>f
-</p>
+**P<sub>dyn</sub> = ACV<sup>2</sup>f**
 
 - A: switching activity factor (avg. fraction of transistors switching in one clock cycle)
 - C: total load capacitance in the circuit
@@ -69,14 +67,12 @@ Exec. Time in Comp A / Exec. Time in Comp B
 - Mainly due to leakage current.
 
 #### Formula
-<p align="center">
-	P<sub>static</sub> = VI<sub>leak</sub>
-</p>
+**P<sub>static</sub> = VI<sub>leak</sub>**
 
 - Leakage current increases with temperature and vice-versa.
 
 ### Reducing Power Consumption
-- **Maximum Operating Frequency:** f<sub>max</sub> &prop; V
+- **Maximum Operating Frequency:** f<sub>max</sub> &prop; (V - V<sub>th</sub>)<sup>2</sup> / V
 - Voltage reduction can result in considerable saving of power, however, performance is linearly degraded with voltage reduction.
 - If performance degrades, clock period increases, increasing total energy consumed.
 
@@ -86,7 +82,7 @@ Exec. Time in Comp A / Exec. Time in Comp B
 	- Either increase the performance or reduce the energy dissipation without significantly deteriorating the other.
 		- Parallel Processing & Pipelining.
 	- Voltage-Frequency Scaling
-		- If a system is designed to provide more than required performance at a givenvoltage, then the operating voltage and frequency can be scaled down to provide needed performance with lower power dissipation.
+		- If a system is designed to provide more than required performance at a given voltage, then the operating voltage and frequency can be scaled down to provide needed performance with lower power dissipation.
 
-### Misc. Notes
+### Notes
 - Power dissipation makes the device hotter, which reduces the reliability of the processor.

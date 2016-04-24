@@ -95,14 +95,14 @@ X &rArr; Y, Y &#8866; X
 - Equivalence: &hArr;
 - Negation: &not;
 
-*Precedence (from highest to lowest)*: &not;, &and;, &or;, &rArr;, &hArr;
+**Precedence (from highest to lowest):** &not;, &and;, &or;, &rArr;, &hArr;
 
 ### Validity & Inference
 - A sentence can be tested for validation using truth-tables and checking all possible configurations.
 - Sound inference can be checked by building a truth-table for *Premises &rArr; Conclusion*.
 
 ### Inference Rules
-**Implication-Elimination or** ***Modus Ponens*****:**
+**Implication-Elimination or *****Modus Ponens*****:**
 > &alpha; &rArr; &beta;,&nbsp; &alpha; &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &beta;
 
 **And-Elimination:**
@@ -155,7 +155,7 @@ X &rArr; Y, Y &#8866; X
 			- &not;P &or; &not;Q &or; ... &or; &not;T &or; U
 			- P &and; Q &and; ... &and; T &rArr; U
 		- Fact: U
-- Using a logic programming language like Prolog, which uses horn clauses and Modus Ponens. Inference can be achieved in polynomial time complexity.
+- Using a logic programming language like Prolog, which uses horn clauses and Modus Ponens, inference can be achieved in polynomial time complexity.
 
 ### Limits of Propositional Logic
 Propositional logic is a **weak logic**.
@@ -215,10 +215,10 @@ Propositional logic is a **weak logic**.
 - The *knowledge domain* is the part of the world we want to express knowledge about.
 - The **facts** and **rules** are fed into the KB.
 - TELLing the KB:
-	- Assertion: add a sentence to the KB
+	- i.e. Assertion (add a sentence to the KB)
 	- e.g. TELL(KB, &forall;x,y MotherOf(x)=y &hArr; Parent(x,y) &and; Female(y))
 - ASKing the KB:
-	- Query: retrieve/infer a sentence from the KB
+	- i.e. Query (retrieve/infer a sentence from the KB)
 	- Yes/No Answer
 		- e.g. ASK(KB, Grandparent(Elizabeth, William))
 	- Binding List or *Substitution*

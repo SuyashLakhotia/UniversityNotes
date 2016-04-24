@@ -43,9 +43,11 @@ Exec. Time in Comp A / Exec. Time in Comp B
 - FLOPS (Floating Point Operations per Second)
 
 ## Types of Parallelism
-- **Instruction Level Parallelism:** Multiple instructions are executed concurrently at different stages of the pipeline.
-- **Data Level Parallelism:** Each processor performs the same task on different data.
-- **Task Level Parallelism:** Each processor performs a different set of independent tasks concurrently.
+- **Instruction Level Parallelism:**
+	- **Scalar Pipeline:** Multiple instructions are executed concurrently at different stages of the pipeline in a single processor.
+	- **Superscalar/VLIW Processors:** Multiple independent instructions are identified and grouped to be executed concurrently in different functional units in a single processor.
+- **Data Level Parallelism:** The same operation/task is performed on multiple data values concurrently in multiple processing units.
+- **Task Level Parallelism:** Independent processors ("cores") perform different sets of independent tasks concurrently in the same *multicore processor*.
 
 ## Power Consumption
 ### Dynamic Power Consumption

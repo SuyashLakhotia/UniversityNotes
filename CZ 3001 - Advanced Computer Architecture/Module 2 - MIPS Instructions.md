@@ -48,6 +48,8 @@
 - `sra $rd, $rt, s` = Shift Right Arithmetic
 - `slt $rd, $rs, $rt` = Set on Less Than
 
+**Note:** `s` stands for the number of bit locations to be shifted.
+
 **Note:** `srl` sets the MSB to 0 while `sra` duplicates the sign bit onto the MSB.
 
 **Note:** `slt` sets $rd to 1 if $rs is less than $rt, else, it sets $rd to 0.
@@ -71,7 +73,7 @@
 
 **Note:** `beq $rs, $rt, L` / `bne $rs, $rt, L` → [PC] = nPC + (L &times; 4), nPC = PC + 4
 
-**Note:** `jal L` stores the current PC value i.e. nPC into $ra and performs jump by L words.
+**Note:** `jal L` stores the current PC value i.e. nPC into $ra and performs a jump by L words like `beq` or `bne`.
 
 ### Adv. Arithmetic
 - `mult $rs, $rt`
@@ -79,16 +81,17 @@
 
 **Note:** `mult` results in a 64-bit product, which is stored in the special *Acc* register.
 
-**Note:** `div` results in the quotient and the remainder. The quotient is stored in the lower half of *Acc* i.e. LO and the remainder is stored in the upper half of *Acc* i.e. HI.
+**Note:** `div` results in a quotient and a remainder. The quotient is stored in the lower half of *Acc* i.e. LO and the remainder is stored in the upper half of *Acc* i.e. HI.
 
 ### Register to Register Data Transfer
 - `mfhi $rd` = Move from HI
 - `mflo $rd` = Move from LO
 - `mthi $rs` = Move to HI
-- `mtlo $rs` = Move to LOW
+- `mtlo $rs` = Move to LO
 
 ### MIPS Procedure Calls
-- When executing a procedure, the values of callee-saved registers (and $ra) must first be pushed to stack and popped back to the original destinations at the end of execution before returning the control back to the caller.
+- When executing a procedure, the values of callee-saved registers (and $ra) must first be pushed to stack.
+- The values must be popped back to their respective original registers at the end of the procedure before returning the control back to the caller.
 
 ```
 addi $sp, $sp, -8	# creates stack for two values
@@ -104,4 +107,4 @@ addi $sp, $sp, 8	# restores stack
 JR $ra
 ```
 
-**Note:** The contents of $ra needs to be saved into the stack if the procedure is a non-leaf or recursive procedure. 
+**Note:** The value of $ra needs to be saved into the stack only if the procedure is a non-leaf or recursive procedure. 

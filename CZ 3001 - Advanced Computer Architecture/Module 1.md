@@ -23,7 +23,7 @@
 	- Memory-Wall Problem
 - Reduction of Instruction Count
 	- Complexity of Instructions Increases &rArr; Clock Period Increases
-	- *SIMD, Vector Processors*
+	- SIMD, Vector Processors
 - Reduction of CPI
 	- Instruction Pipelining
 	- Multi-issue Processors (VLIW, Superscalar Processors)
@@ -35,8 +35,8 @@
 	- If *x%* of an application cannot be enhanced, then the speedup is limited to *100/x*.
 
 #### Speedup
-Speedup of Computer B over Computer A:
-Exec. Time in Comp A / Exec. Time in Comp B
+Speedup of Computer B over Computer A =
+Exec. Time in Comp A &divide; Exec. Time in Comp B
 
 ### Other Metrics
 - MIPS (Millions of Instructions per Second)
@@ -64,27 +64,25 @@ Exec. Time in Comp A / Exec. Time in Comp B
 - f: clock frequency
 
 ### Static Power Consumption
-- Consumed when the processor powered-on (even if no instructions are executed).
-- Independent of clock frequency but increases with the temperature of the processor.
-- Mainly due to leakage current.
+- Consumed when the processor is powered-on (even if no instructions are executed).
+- Independent of clock frequency.
+- Proportional to leakage current, which increases with temperature and vice-versa.
+- Increase in temperature also reduces the processor's reliability.
 
 #### Formula
 **P<sub>static</sub> = VI<sub>leak</sub>**
 
-- Leakage current increases with temperature and vice-versa.
-
 ### Reducing Power Consumption
 - **Maximum Operating Frequency:** f<sub>max</sub> &prop; (V - V<sub>th</sub>)<sup>2</sup> / V
-- Voltage reduction can result in considerable saving of power, however, performance is linearly degraded with voltage reduction.
-- If performance degrades, clock period increases, increasing total energy consumed.
+- Voltage reduction can result in considerable saving of power, however, performance is almost linearly degraded with voltage reduction.
+- If performance degrades, the clock period increases, increasing the total energy consumed.
 
-#### Energy Delay Product
-- **Energy Delay Product = Energy &times; Computation Time**
+#### Energy & Energy Delay Product
+- Since battery life & net heat dissipation depend on energy consumption (and not power consumption), a better metric for power efficiency is **energy (in Joules/instruction)**.
+- However, energy can also be reduced by reducing the voltage that may subsequently degrade the speed performance.
+- Hence, **Energy Delay Product = Energy &times; Computation Time** is a better metric than power and energy to compare the power efficiency of processors.
 - How to reduce EDP?
 	- Either increase the performance or reduce the energy dissipation without significantly deteriorating the other.
 		- Parallel Processing & Pipelining.
 	- Voltage-Frequency Scaling
 		- If a system is designed to provide more than required performance at a given voltage, then the operating voltage and frequency can be scaled down to provide needed performance with lower power dissipation.
-
-### Notes
-- Power dissipation makes the device hotter, which reduces the reliability of the processor.

@@ -326,7 +326,7 @@ FOREIGN KEY attr REFERENCES OtherRelation(attr)
 attr type CHECK (<condition>)
 ```
 
-- `<condition>` can be a subquery like `(attr IN (SELECT x FROM y))`
+- `<condition>` can be a *boolean* subquery like `(attr IN (SELECT x FROM y))` or a simple check like `(attr >= val AND attr < val)` or `(attr IN (val, val, val))`.
 - The condition is checked only during an `INSERT` or `UPDATE`.
 
 ### Tuple-Based Checks

@@ -96,7 +96,7 @@ WHERE attr = (SELECT attr FROM Relation WHERE condition);
 
 ### Table Subquery
 ```
-SELECT *
+SELECT attr
 FROM Relation
 WHERE attr IN (SELECT attr FROM Relation WHERE condition);
 ```
@@ -729,10 +729,12 @@ Connection myCon = DriverManager.getConnection(<URL>, <user name>, <password>); 
 - `PreparedStatement`: An object that has an associated SQL statement that is ready to execute.
 
 #### Executing SQL Statements
-- JDBC distinguishes queries from modifications, which it calls "updates".- `Statement` and `PreparedStatement` each have methods `executeQuery()` and `executeUpdate()`.
+- JDBC distinguishes queries from modifications, which it calls "updates".
+- `Statement` and `PreparedStatement` each have methods `executeQuery()` and `executeUpdate()`.
 
 ##### executeQuery()
-- `executeQuery(Q)`: Takes in a query statement and returns a ResultSet object.- `executeQuery()`: Applied to `PreparedStatement` and returns a `ResultSet` object.
+- `executeQuery(Q)`: Takes in a query statement and returns a ResultSet object.
+- `executeQuery()`: Applied to `PreparedStatement` and returns a `ResultSet` object.
 
 ```
 Statement stat1 = myCon.createStatement();
@@ -744,7 +746,8 @@ ResultSet res = stat2.executeQuery();
 ```
 
 ##### executeUpdate()
-- `executeUpdate(U)`: Takes a non-query statement and executes it.- `executeUpdate()`: Applied to `PreparedStatement`.
+- `executeUpdate(U)`: Takes a non-query statement and executes it.
+- `executeUpdate()`: Applied to `PreparedStatement`.
 
 ```
 stat1.executeUpdate("INSERT INTO Relation VALUES (x, y)");

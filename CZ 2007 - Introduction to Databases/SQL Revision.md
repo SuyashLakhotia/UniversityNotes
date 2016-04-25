@@ -274,7 +274,7 @@ DROP TABLE name;
 ## Database Modifications
 ```
 /* Insertion */
-INSERT INTO Relation VALUES (val, val val);
+INSERT INTO Relation VALUES (val, val, val);
 INSERT INTO Relation(attr, attr) VALUES (val, val);
 INSERT INTO Relation (subquery);
 

@@ -95,13 +95,13 @@
 
 ```
 addi $sp, $sp, -8	# creates stack for two values
-sw <reg>, 8($sp)
-sw <reg>, 4($sp)
+sw <reg1>, 8($sp)
+sw <reg2>, 4($sp)
 
 < Procedure Body >
 
-lw <reg>, 4($sp)
-lw <reg>, 8($sp)
+lw <reg2>, 4($sp)
+lw <reg1>, 8($sp)
 addi $sp, $sp, 8	# restores stack
 
 JR $ra

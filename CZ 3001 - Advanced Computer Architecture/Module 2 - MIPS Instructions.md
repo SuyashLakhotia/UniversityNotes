@@ -89,6 +89,13 @@
 - `mthi $rs` = Move to HI
 - `mtlo $rs` = Move to LO
 
+### Loading 32 Bits Into a Register
+In order to put `0x00aa0bb0` into $t0:
+
+1. `lui $t0, 0x00aa` = $t1 ← (imm << 16)
+2. `ori $t0, 0x0bb0`
+	- **Note:** `0x0bb0` is zero-extended to 32 bits.
+
 ### MIPS Procedure Calls
 - When executing a procedure, the values of callee-saved registers (and $ra) must first be pushed to stack.
 - The values must be popped back to their respective original registers at the end of the procedure before returning the control back to the caller.

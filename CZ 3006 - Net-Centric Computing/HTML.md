@@ -71,8 +71,8 @@
 	</tr>
 </table>
 ```
-```
-<form action="">
+```HTML
+<form method="POST" action="process.php">
 	<input type="text" name="" size="30" maxlength="20" />
 	
 	<textarea name="" rows="4" cols="10" />

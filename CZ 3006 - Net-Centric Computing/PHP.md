@@ -41,22 +41,25 @@ $string = 'It takes $val';	// It takes $val
 - When a double is rounded to an integer, the rounding is always towards zero.
 
 ### Some Arithmetic Functions
-- `floor`
-- `ceil`
-- `round`
-- `abs`
-- `min`
-- `max`
-- `rand`
+- `floor(x)`
+- `ceil(x)`
+- `round(x)`
+- `abs(x)`
+- `min(x, y, z)`
+- `max(x, y, z)`
+- `rand()` or `rand(x, y)`
 
 ### String Operations & Functions
 - The only operator is `.`, for concatenation.
 - Indexing: `$str{3}`
-- `strlen`, `strcmp`, `strpos`, `substr`
-- `strtolower`, `strtoupper`
-- `chop` - Removes whitespace from the right end.
-- `trim` - Removes whitespace from both ends.
-- `ltrim` - Removes whitespace from the left end.
+- `strlen($str)` - Returns the length of the string.
+- `strcmp($str, $str)` - Returns 0 if the two strings are same.
+- `strpos($haystack, $needle)` - Returns the position of the first occurrence of a substring in a string.
+- `substr($str, $start [, $end])` - Returns the a part of the string from the $start index.
+- `trim($str)` - Removes whitespace from both ends.
+- `chop($str)` - Removes whitespace from the right end.
+- `ltrim($str)` - Removes whitespace from the left end.
+- `strtolower($str)`, `strtoupper($str)`
 
 ### Scalar Type Conversions
 - Explicit Conversions or Casts
@@ -67,19 +70,6 @@ $string = 'It takes $val';	// It takes $val
 - The type of the variable can be returned by:
 	- `gettype($total)`
 	- `is_integer($total)`
-
-## Output
-- The output from a PHP script is an HTML document that is sent to the browser.
-- The PHP processor has two modes: **Copy** (HTML) & **Interpret** (PHP).
-
-```php
-<html>	<head><title>PHP Example</title></head>	<body>		<?php			print "Welcome to my Web site!";		?>	</body></html>
-```- HTML is produced through standard output &mdash; `print` or `printf`.
-
-```php
-print "<p>This is a paragraph.</p>";
-printf("There are %d humans.", $num);
-```
 
 ## Control Statements
 ```php
@@ -213,6 +203,19 @@ preg_match("/^PHP/", $str);
 - `preg_match()` returns the number of times the pattern matches. This will be either 0 or 1 because `preg_match()` will stop searching after the first match.
 - `preg_match_all()` will continue until it reaches the end of `$str`.
 
+## Output
+- The output from a PHP script is an HTML document that is sent to the browser.
+- The PHP processor has two modes: **Copy** (HTML) & **Interpret** (PHP).
+
+```HTML
+<html>	<head><title>PHP Example</title></head>	<body>		<?php			print "Welcome to my Web site!";		?>	</body></html>
+```- HTML is produced through standard output &mdash; `print` or `printf`.
+
+```php
+print "<p>This is a paragraph.</p>";
+printf("There are %d humans.", $num);
+```
+
 ## Form Handling
 - PHP builds an array of the form values.
 - `$_POST` for the POST method. Keys are the widget *names*.
@@ -224,7 +227,7 @@ preg_match("/^PHP/", $str);
 
 ```php
 $filename = '/path/to/file.txt';
-$fptr = fopen($filename, <mode>) or exit("Unable to open $filename.");
+$fptr = fopen($filename, "<mode>") or exit("Unable to open $filename.");
 fclose($fptr);
 ```
 ```php
@@ -242,10 +245,10 @@ file_exists($filename); // returns boolean
 
 ### Reading Files
 ```php
-$str = fread($fptr, <num of bytes>);
+$str = fread($fptr, $num_bytes);
 $str = fread($fptr, filesize($filename));
 
-$line = fgets($fptr);
+$line = fgets($fptr [, $num_bytes]);
 
 $ch = fgetc($fptr);
 
@@ -257,6 +260,11 @@ $lines_arr = file($filename); // no need to open/close
 ### Writing to Files
 ```php
 $bytes_written = fwrite($fptr, $str);
+```
+
+### Truncating Files
+```php
+$ftruncate($fptr);
 ```
 
 ### Locking Files
@@ -322,6 +330,6 @@ Set-Cookie: JSESSIONID=3E4897823HKJHDKS978KDJ
 
 - Option 2: The action URLs for forms can be rewritten to include the session tracking ID as a GET parameter.
 
-```
+```HTML
 <form name="form" method="post" action="login.php?jsessionid=3E4897823HKJHDKS978KDJ>
 ```

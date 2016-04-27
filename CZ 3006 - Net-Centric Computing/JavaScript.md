@@ -3,15 +3,15 @@
 ## Basics
 - JavaScript scripts are embedded in HTML documents. A browser uses its JavaScript interpreter to *execute* the script.
 
-```
+```HTML
 <script type="text/JavaScript">
 	--- JavaScript Script ---
 </script>
 ```
-```
+```HTML
 <script type="text/JavaScript" src="myScript.js"></script>
 ```
-```
+```HTML
 <!--
 	--- JavaScript Script ---
 //-->
@@ -45,68 +45,6 @@ today = false;
 	- Coercion:
 		- `7 * "3"` (String to Number)
 		- `"August" + 1977` (Number to String)
-
-## Objects
-- JS is **NOT** an object-oriented programming language.
-	- It is an object-based language.
-	- JS does not have classes.
-	- Without classes, JS does not support class-based inheritance.
-- JS Objects
-	- JS objects are collections of properties, which are like the members of classes in Java and C++.
-		- Each property is either a data property or a method.
-	- All JS objects are accessed through references.
-
-**The Number Object**
-
-```js
-var price = 427;
-var strPrice = price.toString();
-```
-
-**The String Object**
-
-```js
-var str = "Hello";
-
-str.length;				// 5
-str.charAt(2);			// 'l'
-str.indexOf('e');		// 1
-str.substring(1, 3);	// 'ell'
-str.toLowerCase();		// 'hello'
-str.toUpperCase();		// 'HELLO'
-```
-
-**The Math Object**
-
-```js
-Math.floor(x);
-Math.round(x);
-Math.max(x, y);
-Math.min(x, y);
-Math.pow(x, y);
-Math.sin(x);
-Math.cos(x);
-```
-
-## Screen Output
-- The model for the browser display window is the `Window` object.
-	- The `Window` object provides the largest enclosing referencing environment for JS scripts.
-	- The `Window` object has two properties, `document` and `window`, which refer to the `Document` and `Window` objects respectively.
-	- The `Document` object represents the displayed XHTML document.
-
-### Dialog Boxes
-- The `Window` object has three methods for creating dialog boxes:
-
-```js
-alert("Hey!");
-confirm("Do you want to continue?");			// returns boolean
-prompt("What is your name?", "Type name here");	// returns input
-```
-
-### Writing to Document
-- The `Document` object has a method, `write`, which dynamically creates content.```js
-document.write("<p>Answer: " + result + "</p>");
-```
 
 ## Control Statements
 ```js
@@ -151,6 +89,48 @@ do {
 "3" === 3	// false
 ```
 
+## Objects
+- JS is **NOT** an object-oriented programming language.
+	- It is an object-based language.
+	- JS does not have classes.
+	- Without classes, JS does not support class-based inheritance.
+- JS Objects
+	- JS objects are collections of properties, which are like the members of classes in Java and C++.
+		- Each property is either a data property or a method.
+	- All JS objects are accessed through references.
+
+**The Number Object**
+
+```js
+var price = 427;
+var strPrice = price.toString();
+```
+
+**The String Object**
+
+```js
+var str = "Hello";
+
+str.length;				// 5
+str.charAt(2);			// 'l'
+str.indexOf('e');		// 1
+str.substring(1, 3);	// 'ell'
+str.toLowerCase();		// 'hello'
+str.toUpperCase();		// 'HELLO'
+```
+
+**The Math Object**
+
+```js
+Math.floor(x);
+Math.round(x);
+Math.max(x, y);
+Math.min(x, y);
+Math.pow(x, y);
+Math.sin(x);
+Math.cos(x);
+```
+
 ## Object Creation & Modification
 - Objects can be created with `new` expression.
 	- The most basic object can be made with the `Object` constructor.
@@ -193,7 +173,7 @@ delete myAirplane.model;
 ```js
 var myList = new Array(24, "bread", true);
 var myList2 = [24, "bread", true];
-var myList3 = new Array(100);	// creates a new array of length 100
+var myList3 = new Array(100); // creates a new array of length 100
 ```
 
 - The length of an array is dynamic.
@@ -330,6 +310,26 @@ var str = "grapes:apples:oranges";
 str.split(":");	// ["grapes", "apples", "oranges"]
 ```
 
+## Screen Output
+- The model for the browser display window is the `Window` object.
+	- The `Window` object provides the largest enclosing referencing environment for JS scripts.
+	- The `Window` object has two properties, `document` and `window`, which refer to the `Document` and `Window` objects respectively.
+	- The `Document` object represents the displayed XHTML document.
+
+### Dialog Boxes
+- The `Window` object has three methods for creating dialog boxes:
+
+```js
+alert("Hey!");
+confirm("Do you want to continue?");			// returns boolean
+prompt("What is your name?", "Type name here");	// returns input
+```
+
+### Writing to Document
+- The `Document` object has a method, `write`, which dynamically creates content.```js
+document.write("<p>Answer: " + result + "</p>");
+```
+
 # JavaScript & HTML
 ## The Document Object Model
 - The **Document Object Model (DOM)** is an abstract model that defines the interface between HTML documents and application programs.
@@ -354,7 +354,7 @@ str.split(":");	// ["grapes", "apples", "oranges"]
 </form>
 ```
 
-**DOM Address**
+**1. DOM Address**
 
 ```js
 document.forms[0].elements[0]
@@ -362,7 +362,7 @@ document.forms[0].elements[0]
 
 - The document can change. Thus, the address is not always constant.
 
-**Element Names**
+**2. Element Names**
 
 ```js
 document.myForm.pushMe
@@ -371,13 +371,25 @@ document.myForm.pushMe
 - Requires the element and all of its ancestors (except body) to have *name* attributes.
 - Error-prone and inefficient for deeply nested elements.
 
-**getElementById**
+**3. getElementById**
 
 ```js
 document.getElementById("pushMe")
 ```
 
 - Because an element's identifier is unique in the document, this approach is the best.
+
+### Textboxes & Textareas
+- The input entered into text boxes and textareas can be pulled and processed on client-side using JavaScript.
+
+```HTML
+<input type="text" id="myText" />
+```
+
+```js
+var textbox = document.getElementById("myText");
+var val = textbox.value;
+```
 
 ### Checkboxes & Radio Buttons
 - Checkboxes & Radio Buttons have implicit arrays with the same name as the group *name*.
@@ -407,7 +419,7 @@ document.getElementById("myButton").onclick = myHandler;
 ```
 
 - Must follow the handler function and the HTML form specification so that JavaScript has seen both before assigning the property.
-- Only the name of the handler function is assigned to the property. It is neither a string nor a call to the function.**Common Tag Attributes:**
+- Only the name of the handler function is assigned to the property. It is neither a string nor a call to the function.**Common Event Attributes:**
 
 - `onblur`
 - `onfocus`

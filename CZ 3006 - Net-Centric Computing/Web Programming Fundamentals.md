@@ -5,18 +5,18 @@
 	- At the lowest level, all connections use TCP/IP.
 	- Every node has a unique numeric address i.e. IP Address.
 - **The Web** is a collection of software and protocols on the Internet (e.g. HTTP, TELNET, FTP).
-- **Client-Server Programming** involves clients requesting resources from a server through a browser and servers responding with requested resources.
+- **Client-Server Programming** involves clients requesting resources from a server through a browser and servers responding with the requested resources.
 - **Domain Names** are textual names of computers on the Internet.
-	- The fully qualified domain name is the host name and all the domain names.
+	- The fully qualified domain name is the host name and all the domain names i.e. `host-name.domain-names`.
 	- DNS Servers convert fully qualified domain names to IP addresses.
 - **Unformed Resource Locators (URLs)** are addresses to specific resources.
 	- General Form: `scheme:object-address`
-		- The `scheme` is often a communication protocol like http, telnet, ftp etc.
+		- The `scheme` is often a communication protocol like `http`, `telnet`, `ftp` etc.
 	- URLs cannot include spaces or any of a collection of other special characters (semicolons, colons etc.).
 	- If the doc-path ends with a `/`, it's a directory.
 - **Web Servers** provide responses to browser requests.
 	- Responses can be existing documents or dynamically built documents.
-	- Web servers run as background processes in the operating system, monitoring a communication port.
+	- Web servers run as background processes in the operating system, monitoring a communication port and accepting HTTP requests as they appear.
 
 ## HTTP (Hyper Text Transfer Protocol)
 
@@ -47,7 +47,7 @@ GET /pub/WWW/TheProject.html HTTP/1.1
 - `Content-Length: <number of bytes>` (for POST request)
 - `Content-Type: text/html` (for POST request)
 
-##### Some Type Specifications
+##### Some Document Type Specifications
 - `text/plain`
 - `text/html`
 - `text/*`
@@ -57,15 +57,10 @@ GET /pub/WWW/TheProject.html HTTP/1.1
 ### HTTP Response
 #### General Form:
 ```
-Status Line
+HTTP-Version Status-Code Explanation
 Response Header Fields
 Blank Line
 Response Body (Optional)
-```
-
-#### Status Line Format:
-```
-HTTP-Version Status-Code Explanation
 ```
 
 - The status code is a three digit number.
@@ -79,7 +74,7 @@ HTTP-Version Status-Code Explanation
 
 ## Web Programmer's Toolbox
 - **HTML & XHTML**
-	- To describe the general form and layout of documents.	- An HTML document is a mixture of content and controls.		- Controls are specified by tags and their attributes.	- XHTML is nothing more than HTML with stronger syntactic rules.- **JavaScript**
+	- To describe the general form and layout of documents.	- An HTML document is a mixture of content and controls.		- Controls are specified by tags and their attributes.	- XHTML is HTML with stronger syntactic rules.- **JavaScript**
 	- A client-side HTML-embedded scripting language.	- Provides a way to access elements of HTML documents and dynamically change them.
 - **PHP**
 	- A server-side scripting language.

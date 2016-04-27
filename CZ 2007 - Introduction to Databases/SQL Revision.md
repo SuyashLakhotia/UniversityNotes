@@ -121,8 +121,8 @@ WHERE condition
 
 SELECT R1.attr1
 FROM Relation R1
-WHERE EXISTS	(SELECT * FROM Relation R2
-				WHERE R2.attr1 = R1.attr1 AND R1.attr2 <> R2.attr2);
+WHERE EXISTS (SELECT * FROM Relation R2
+              WHERE R2.attr1 = R1.attr1 AND R1.attr2 <> R2.attr2);
 ```
 
 ### Correlated & Uncorrelated Subqueries
@@ -237,7 +237,7 @@ HAVING COUNT(attr1) >= 2 AND EVERY (attr2 < value);
 ```
 SELECT			<attribute list>
 FROM			<table list>
-[WHERE			(condition)]
+[WHERE			<condition>]
 [GROUP BY		<grouping attributes>]
 [HAVING			<group condition>]
 [ORDER BY		<attribute list>];
@@ -369,10 +369,9 @@ CREATE VIEW <name> AS <query>;
 - Makes the logic simpler to follow and permits a view definition to be used multiple times in a query.
 
 ```
-WITH ViewName(attr1, attr2) AS
-	SELECT attr1, attr2
-	FROM Relation1, Relation2
-	WHERE condition
+WITH ViewName(attr1, attr2) AS SELECT attr1, attr2
+                               FROM Relation1, Relation2
+                               WHERE condition
 SELECT attr1
 FROM ViewName
 WHERE condition;
@@ -465,8 +464,8 @@ CREATE [OR REPLACE] TRIGGER triggerName
 ## SQL in Server Environment
 - So far, the SQL statements have been executed via some sort of terminal onto the DBMS directly. However, in real-world applications, conventional programs have to interact with SQL.
 - Embedded SQL in Host Language (e.g. C)
-- Connection Tools (e.g. JDBC)
 - Code in a Specialised Language Stored in the Database (e.g. PSM)
+- Connection Tools (e.g. JDBC)
 
 ## Embedded SQL
 - SQL statements can be embedded in a host language (e.g. C).
@@ -496,8 +495,7 @@ void function() {
 	
 	/* Application Logic */
 	
-	EXEC SQL INSERT INTO Relation(attr, attr)
-	VALUES(:varName, :varName);
+	EXEC SQL INSERT INTO Relation(attr, attr) VALUES(:varName, :varName);
 ```
 
 ### SELECT-FROM-WHERE Queries
@@ -511,9 +509,9 @@ void function() {
 
 ```
 EXEC SQL SELECT attr
-	INTO :sharedVar
-	FROM Relation
-	WHERE attr = :sharedVar;
+         INTO :sharedVar
+         FROM Relation
+         WHERE attr = :sharedVar;
 ```
 
 ### SQLSTATE
@@ -665,10 +663,10 @@ IF...THEN..ELSEIF...ELSEIF...ELSE...END IF;
 
 ##### LOOP
 ```
-loopName:	LOOP
-				<statement(s)>
-				LEAVE loopName;
-			END LOOP;
+loopName: LOOP
+			  <statement(s)>
+			  LEAVE loopName;
+		  END LOOP;
 ```
 
 ### Invoking a Procedure
@@ -700,14 +698,14 @@ SELECT attr INTO varName FROM Relation WHERE condition;
 ```
 ```
 DECLARE NotFound CONDITION FOR SQLSTATE '02000';
-DECLARE cursorName CURSOR FOR (<query);
+DECLARE cursorName CURSOR FOR (<query>);
 ...
 OPEN cursorName;
-loopResults:	LOOP
-					FETCH cursorName INTO varName, varName;
-					IF NotFound THEN LEAVE loopResults END IF;
-					<statement(s)>
-				END LOOP;
+loopResults: LOOP
+				FETCH cursorName INTO varName, varName;
+				IF NotFound THEN LEAVE loopResults END IF;
+				<statement(s)>
+			 END LOOP;
 CLOSE cursorName;
 ```
 

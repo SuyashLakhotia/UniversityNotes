@@ -49,7 +49,7 @@
 	- Soundness: An inference algorithm is sound if it derives only sentences that are entailed by the KB.
 	- Completeness: An inference algorithm is complete if it can derive any sentence that is entailed by the KB.
 	- Proof Theory: A set of rules for deducing the entailments of sentences.
-- **Valid** Sentence (Tautology): iff TRUE under all possible interpretations in all possible worlds. e.g. S &or; &not;S.
+- **Valid** Sentence (Tautology): iff TRUE under all possible interpretations in all possible worlds. e.g. S &or; &not;S is valid.
 - **Satisfiable** Sentence: iff there is some interpretation in some world for which it is TRUE. e.g. S &and; &not;S is unsatisfiable.
 
 **Deductive Inference:**
@@ -71,7 +71,7 @@ X &rArr; Y, Y &#8866; X
 	- Symbols represent propositions (facts).
 	- Boolean connectives combine symbols.
 - **First-Order Logic:**
-	- Objects and predicates (unary, binary or n-ary) representing properties of and relations between objects.
+	- Objects and predicates (unary, binary or n-ary) represent properties of and relations between objects.
 	- Variables, boolean connectives and quantifiers.
 - **Temporal Logic:**
 	- World ordered by a set of time points/intervals.
@@ -83,8 +83,8 @@ X &rArr; Y, Y &#8866; X
 - **Symbols:**
 	- Logical Constants: TRUE, FALSE
 	- Propositional Symbols: P, Q, R etc.
-	- Logical Connectives: &and;, &or;, &not;, &not;, &rArr;, &hArr;
-	- Parentheses: ()
+	- Logical Connectives: &and;, &or;, &not;, &rArr;, &hArr;
+	- Parentheses: ( )
 - **Sentences:**
 	- Atomic sentences combined with connectives or wrapped in parentheses.
 
@@ -102,7 +102,7 @@ X &rArr; Y, Y &#8866; X
 - Sound inference can be checked by building a truth-table for *Premises &rArr; Conclusion*.
 
 ### Inference Rules
-**Implication-Elimination or *****Modus Ponens*****:**
+**Implication-Elimination or** ***Modus Ponens*****:**
 > &alpha; &rArr; &beta;,&nbsp; &alpha; &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &beta;
 
 **And-Elimination:**
@@ -145,17 +145,17 @@ X &rArr; Y, Y &#8866; X
 **Conjunctive Normal Form:**
 > A &rArr; B &nbsp;&nbsp; &hArr; &nbsp;&nbsp; &not;A &or; B
 
-> A &hArr; B &nbsp;&nbsp; &hArr; &nbsp;&nbsp; (A &or; &not;B) &and; (&not;A &or; B)
+> A &hArr; B &nbsp;&nbsp; &hArr; &nbsp;&nbsp; (&not;A &or; B) &and; (A &or; &not;B)
 
 ### Complexity of Inference
 - Proof by truth-table is complete but has exponential time complexity.
-- Inferring new sentences using various inference rules and proving thus.
+- Inferring new sentences using various inference rules and proving thus is more efficient.
+- Using a logic programming language like Prolog, which uses horn clauses and *Modus Ponens*, inference can be achieved in polynomial time complexity.
 	- **Horn Clauses:** A disjunction of literals with at most one unnegated literal.
 		- Definite Clause:
 			- &not;P &or; &not;Q &or; ... &or; &not;T &or; U
 			- P &and; Q &and; ... &and; T &rArr; U
 		- Fact: U
-- Using a logic programming language like Prolog, which uses horn clauses and Modus Ponens, inference can be achieved in polynomial time complexity.
 
 ### Limits of Propositional Logic
 Propositional logic is a **weak logic**.
@@ -166,9 +166,9 @@ Propositional logic is a **weak logic**.
 ## First Order Logic
 - In first-order logic, the world is seen as objects with properties (about each object) and relations (between objects).
 - **Sentences** are built from quantifiers, predicate symbols and terms.
-- **Constant Symbols** refer to the *name* of the particular objects. e.g. `John`.
-- **Predicate Symbols** refer to particular relations on objects. e.g. `Brother(John, Richard)` -> T or F.
-- **Function Symbols** refer to functional relations on objects. e.g. `BrotherOf(John)` -> a person.
+- **Constant Symbols** refer to the *name* of particular objects. e.g. `John`.
+- **Predicate Symbols** refer to particular relations on objects. e.g. `Brother(John, Richard)` → T or F.
+- **Function Symbols** refer to functional relations on objects. e.g. `BrotherOf(John)` → a person.
 - **Variables** refer to any object of the world and can be substituted by a constant symbol. e.g. x, y.
 - **Terms** are logical expressions referring to objects that may include function symbols, constant symbols and variables. e.g. `LeftLegOf(John)` to refer to the leg without naming it.
 
@@ -194,16 +194,16 @@ Propositional logic is a **weak logic**.
 - &and; is the natural connective to use with &exist;.
 
 #### Connections between Quantifiers
-> &forall;x P(x) &hArr; &not;&exist;x &not;P(x)
+> &forall;x P(x) &nbsp; &hArr; &nbsp; &not;&exist;x &not;P(x)
 
-> &forall;x &not;P(x) &hArr; &not;&exist;x P(x)
+> &forall;x &not;P(x) &nbsp; &hArr; &nbsp; &not;&exist;x P(x)
 
-> &not;&forall;x P(x) &hArr; &exist;x &not;P(x)
+> &not;&forall;x P(x) &nbsp; &hArr; &nbsp; &exist;x &not;P(x)
 
-> &not;&forall;x &not;P(x) &hArr; &exist;x P(x)
+> &not;&forall;x &not;P(x) &nbsp; &hArr; &nbsp; &exist;x P(x)
 
 #### Notes
-- Remember that the semantics depends on the quantifiers ordering if more than one is used.
+- Remember that the semantics depends on the ordering of the quantifiers if more than one is used.
 
 ### Equality Predicate Symbol
 - States that two terms refer to the same object.
@@ -242,7 +242,7 @@ Propositional logic is a **weak logic**.
 > &alpha; &#8872; &exist;x SUBST({x / g}, &alpha;) &nbsp;&nbsp;&nbsp; where `g` is a ground term
 
 #### Skolemization
-Existential quantifiers (&exist;) can be eliminated by replacing the corresponding variable with a Skolem function. The arguments of a Skolem function include all the universally quantified variables that are bound by universal quantifiers whose scopes include the scope of the existential quantifier being eliminated. If a Skolem function has no arguments, it's just a Skolem constant.
+Existential quantifiers (&exist;) can be eliminated by replacing the corresponding variable with a Skolem function. The arguments of a Skolem function include all the universally quantified variables that are bound by universal quantifiers whose scopes include the scope of the existential quantifier being eliminated. If a Skolem function has no arguments, it's known as a Skolem constant.
 
 - &forall;x &exist;y P(x, y) becomes &forall;x P(x, S(x))
 - &exist;y &forall;x P(x, y) becomes &forall;x P(x, S)
@@ -257,7 +257,7 @@ Existential quantifiers (&exist;) can be eliminated by replacing the correspondi
 - The MGU is a unifier that makes the least commitments about the bindings of the variables. UNIFY always returns the MGU.
 
 #### Composition of Substitutions
-> SUBST(Compose(&theta;<sub>1</sub>, &theta;<sub>2</sub>), &alpha;) = SUBST(&theta;<sub>2</sub>, SUBST(&theta;<sub>1</sub>, &alpha;)
+> SUBST(Compose(&theta;<sub>1</sub>, &theta;<sub>2</sub>), &alpha;) = SUBST(&theta;<sub>2</sub>, SUBST(&theta;<sub>1</sub>, &alpha;))
 
 ### Proof as a Search Problem
 - Proof procedure is a sequence of inference rules applied to the KB.
@@ -279,8 +279,8 @@ Owns(Nono, M1),<br>
 Every fact (&gamma;<sub>i</sub>) must have a corresponding antecedent (&alpha;<sub>i</sub>) in the rule for GMP.
 
 ### Forward & Backward Chaining
-- **Forward Chaining (data-driven) -** Start with the KB and generate new sentences given a particular event (&alpha;). KB, &alpha; &#8872; ?.
-- **Backward Chaining (goal-driven) -** Start with a sentence not in the KB and attempt to establish its premises. KB &#8872; &beta;?
+- **Forward Chaining (data-driven) &mdash;** Start with the KB and generate new sentences given a particular event (&alpha;). KB, &alpha; &#8872; ?.
+- **Backward Chaining (goal-driven) &mdash;** Start with a sentence not in the KB (&beta;) and attempt to establish its premises. KB &#8872; &beta;?
 
 #### Forward Chaining
 **Idea:** Inferring new consequences.
@@ -337,6 +337,8 @@ Every fact (&gamma;<sub>i</sub>) must have a corresponding antecedent (&alpha;<s
 #### Refutation
 - Resolution by refutation is proof by contradiction.
 	- To prove P to be true, assume it to be false and prove a contradiction.
+	- Infer sentences using this new refuted sentence. If a sentence &alpha; is inferred when &not;&alpha; has already been proven or exists in the KB, there is contradiction.
+	- Hence, P is not false.
 - Resolution by refutation is simple, sound and complete.
 - Resolution with refutation is guaranteed to find a solution.
 

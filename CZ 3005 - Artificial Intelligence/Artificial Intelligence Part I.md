@@ -60,8 +60,8 @@
 ### Well-Defined Formulation
 - Definition of a Problem	- The information used by an agent to decide what to do.- Specification	- Initial State	- Action Set i.e. available actions (successor functions)
 	- State Space i.e. states reachable from the initial state		- Solution Path: sequence of actions from one state to another
-	- Goal Test Predicate		- Single state, enumerated list of states, abstract properties
-	- Cost Function		- Path cost *g(n)*, sum of all (action) step costs along the path.
+	- Goal Test Predicate		- single state, enumerated list of states, abstract properties
+	- Cost Function		- Path Cost *g(n)* i.e. sum of all (action) step costs along the path
 - Solution	- A path (a sequence of operators leading) from the *Initial State* to a state that satisfies the *Goal Test*.
 - Search Cost
 	- Does the agent find a solution?
@@ -75,13 +75,13 @@
 ## Search
 - A **search algorithm** explores the state space by generating successors of already-explored states i.e. expanding the states.
 - A **search strategy** is defined by picking the order of node expansion. Performance of strategies are evaluated by the following metrics:
-	- **Completeness:** Does it always find a solution if one exists?
 	- **Time Complexity:** How long does it take to find a solution?
 	- **Space Complexity:** How much memory is needed to perform the search?
+	- **Completeness:** Does it always find a solution if one exists?
 	- **Optimality:** Does it always find the best (least-cost) solution?
 
 ### Performance Evaluation
-- Measuring difficulty in AI problem:
+- Measuring difficulty of an AI problem:
 	- Branching Factor (number of successors of a node)
 	- Avg. Branching Factor (Total Branches &divide; Num of Non-Leaf Nodes)
 	- Depth of Shallowest Goal Node
@@ -113,9 +113,9 @@
 ### Breadth-First Search
 - Expand shallowest unexpanded node.
 	- Can be implemented using a FIFO queue.
-- Complete: Yes
 - Time: *1 + b + b<sup>2</sup> + b<sup>3</sup> + ... + b<sup>d</sup> = O(b<sup>d</sup>)*
 - Space: Assuming every node is kept in memory, *O(b<sup>d</sup>)*.
+- Complete: Yes
 - Optimal: Yes, when all steps cost equally
 
 ### Uniform-Cost Search
@@ -130,26 +130,26 @@
 - Expand deepest unexpanded node.
 	- Can be implemented using a LIFO stack.
 	- Backtrack only when no more expansion is possible.
+- Time: *O(b<sup>m</sup>)*
+- Space: *O(bm)*
 - Complete:
 	- Infinite-depth Spaces: No
 	- Finite-depth Spaces w/ Loops: No
 	- Finite-depth Spaces w/o Loops: Yes
-- Time: *O(b<sup>m</sup>)*
-- Space: *O(bm)*
 - Optimal: No
 
 ### Depth-Limited Search
 - To avoid infinite searching, DFS with a cutoff on a max. depth *l* of a path.
-- Complete: Yes, if *l* &ge; *d*
 - Time: *O(b<sup>l</sup>)*
 - Space: *O(bl)*
+- Complete: Yes, if *l* &ge; *d*
 - Optimal: No
 
 ### Iterative Deepening Search
 - Improvement on Depth-Limited Search. Iteratively estimate the max. depth *l* of DLS one-by-one.
-- Complete: Yes
 - Time: *O(b<sup>d</sup>)*
 - Space: *O(bd)*
+- Complete: Yes
 - Optimal: Yes
 
 ## Informed Search
@@ -163,11 +163,11 @@
 	- The choice of *f* determines the search strategy.
 
 #### Heuristic Function
-- **Path Cost Function*****g(n)*****:**
+- **Path Cost Function** ***g(n)*****:**
 	- Cost from initial state to current state *n*.
 	- No information on the cost towards the goal.
 	- Need to estimate the cost to the closest goal.
-- **Heuristic Function*****h(n)*****:**
+- **Heuristic Function** ***h(n)*****:**
 	- Estimated cost of the cheapest path from the state at node *n* to a goal state.
 		- Exact cost cannot be determined.
 	- Depends only on the state at that node.
@@ -179,9 +179,9 @@
 - Expands the node that appears to be closest to the goal.	- Evaluation Function: *f(n) = h(n)*	- Objective: Quick Solution (but may be suboptimal)
 - The cost is estimated using problem-specific knowledge.
 - Useful but potentially fallible.
-- Complete: No
 - Time: *O(b<sup>m</sup>)* (Worst Case)
 - Space: *O(b<sup>m</sup>)* (Worst Case)
+- Complete: No
 - Optimal: No
 - With a good heuristic function, the complexity can be reduced substantially.### A* Search
 - Uniform-Cost Search:
@@ -190,7 +190,7 @@
 - Greedy Best-First Search:
 	- *h(n)*: estimated cost of the cheapest path from node *n* to goal node (Future Cost).
 	- Neither optimal nor complete but relatively more efficient.
-- Combining UCS & GBFS:
+- Combining UCS & GBFS, A* Search:
 	- *f(n) = g(n) + h(n)*
 	- *f(n)*: Estimated total cost of the cheapest path through node *n* from start node to goal.
 	- Optimal & Complete when *h(n)* satisfies certain conditions.
@@ -206,8 +206,8 @@
 
 ### Heuristics
 #### Admissible Heuristic
-- *h\*(n)*: True cost from node *n* to goal.
-- A heuristic is admissible if ***h(n) &le; h\*(n)*** for all *n*.
+- *h&ast;(n)*: True cost from node *n* to goal.
+- A heuristic is admissible if ***h(n) &le; h&ast;(n)*** for all *n*.
 - An admissible heuristic should never overestimate the cost to reach the goal.
 - i.e. *f(n)* never overestimates the actual cost of a path through node *n* to the goal.
 
@@ -215,7 +215,7 @@
 - *h<sub>2</sub>* dominates *h<sub>1</sub>* if ***h<sub>2</sub>(n) &ge; h<sub>1</sub>(n)*** for all *n*.
 - Domination translates to efficiency.
 - Always better to use a heuristic function with higher values as long as it does not overestimate the cost.
-- If no heuristic dominates, ***h(n) = max(h<sub>1</sub>(n), h<sub>2</sub>(n), ... , h<sub>m</sub>(n)***.
+- If no heuristic dominates, ***h(n) = max(h<sub>1</sub>(n), h<sub>2</sub>(n), ... , h<sub>m</sub>(n))***.
 
 ### Relaxed Problem
 - A problem with fewer restrictions on the actions compared to an original problem is called a relaxed problem.
@@ -259,7 +259,7 @@
 **Most Constraining Variable / Degree Heuristic**
 
 - The variable to be assigned next should be the variable that is involved in the largest number of constraints on unassigned variables.
-- This reduces the branching factor on future choices.
+- This reduces the branching factor for future choices.
 - Useful to optimise the order of variable assignments.
 
 **Most Constrained Variable / Minimum Remaining Values Heuristic**
@@ -274,12 +274,14 @@
 
 **Forward Checking**
 
-- When a variable *X* is assigned, look at each unassigned variable *Y* connected to *X* and delete from *Y* any value that is inconsistent with the value chosen for *X*.
+- When a variable *X* is assigned, look at each unassigned variable *Y* **connected to** *X* and delete from *Y* any value that is inconsistent with the value chosen for *X*.
 
 **Constraint Propagation**
 
 - *Forward Checking* does not look far enough ahead.
-- Constraint propagation involves propagating the implications of a constraint on one variable onto **all** other variables.
+- Constraint propagation involves propagating the implications of an assignment of one variable onto **all** other variables, according to the specified constraints.
+- i.e. eliminate values from domains of variables that can never be part of a consistent solution.
+- Leads to a reduction of the search space.
 
 #### Local Search
 - **Complete-State Formulation:**

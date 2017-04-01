@@ -4,8 +4,8 @@
 
 - Underfitting occurs when the model is too simple, and hence, both training and test error rates are large.
 - Overfitting occurs when the test error rate begins to increase even though the training error rate continues to decrease.
-
-Overfitting results in decision trees that are more complex than necessary. The training error no longer provides a good estimate of how well the tree will perform on previously unseen records. Therefore, there is a need for new ways to estimate the error rate.
+    - Overfitting results in decision trees that are more complex than necessary.
+    - The training error no longer provides a good estimate of how well the tree will perform on previously unseen records. Therefore, there is a need for new ways to estimate the error rate.
 
 ## Generalization Error
 
@@ -25,12 +25,6 @@ e'(T) = e(T) + \Omega(T)
 $$
 
 In a decision tree, we can define a penalty term of $k > 0$ on each leaf node:
-
-$$
-e'(t) = e(t) + \Omega(t) = e(t) + k
-$$
-
-Then,
 
 $$
 e'(T) = e(T) + N \times k

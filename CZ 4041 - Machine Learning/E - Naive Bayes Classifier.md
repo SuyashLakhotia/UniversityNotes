@@ -2,69 +2,69 @@
 
 ## Bayesian Classifiers
 
-Given a vector of features $X$ and a class label $Y = y_k$, $X$ and $Y$ are treated as random variables and their relationship is captured using $P(Y | X)$ using training data.
+Given a vector of features $\boldsymbol{X}$ and a class label $Y = y_k$, $\boldsymbol{X}$ and $Y$ are treated as random variables and their relationship is captured using $P(Y | \boldsymbol{X})$ using training data.
 
-A test record $X = x^*$ or $X^*$ can be classified by finding the class $y_i$ that maximizes the posterior $P(Y | X^*)$
-
-$$
-Y = y_i \text{ if } y_i = \max_k P(Y = y_k | X^*)
-$$
-
-$$
-Y = y_i \text{ if } y_i = \max_k P(X^* | Y = y_k) P(Y = y_k)
-$$
-
-## Independence & Conditional Independence
-
-Let $X$ and $Y$ be two sets of random variables.
-
-The variables in $X$ are said to be **independent** of $Y$ if the following condition holds:
-
-$$
-P(X, Y) = P(X | Y) \times P(Y) = P(X) \times P(Y)
-$$
-
-Let $X$, $Y$ and $Z$ be three sets of random variables.
-
-The variables in $X$ are said to be **conditionally independent** of $Y$, given $Z$, if the following condition holds:
-
-$$
-P(X | Y, Z) = P(X | Z)
-$$
-
-The conditional independence between $X$ and $Y$ given $Z$ can be used to derive the following:
+A test record $\boldsymbol{X} = \boldsymbol{x^*}$ or $\boldsymbol{X^*}$ can be classified by finding the class $y_i$ that maximizes the posterior $P(Y | \boldsymbol{X^*})$. Predict $Y = y_i$ if:
 
 $$
 \begin{split}
-P(X, Y | Z) &= \frac{P(X,Y,Z)}{P(Z)} \\
-            &= \frac{P(X,Y,Z)}{P(Y,Z)} \times \frac{P(Y,Z)}{P(Z)} \\
-            &= P(X | Y, Z) \times P(Y | Z) \\
-            &= P(X | Z) \times P(Y | Z)
+y_i &= \underset{k}{\mathrm{argmax}} \: P(Y = y_k | \boldsymbol{X^*}) \\
+y_i &= \underset{k}{\mathrm{argmax}} \: P(\boldsymbol{X^*} | Y = y_k) P(Y = y_k)
+\end{split}
+$$
+
+## Math Review - Independence & Conditional Independence
+
+Let $\boldsymbol{X}$ and $\boldsymbol{Y}$ be two sets of random variables.
+
+The variables in $\boldsymbol{X}$ are said to be **independent** of $\boldsymbol{Y}$ if the following condition holds:
+
+$$
+P(\boldsymbol{X}, \boldsymbol{Y}) = P(\boldsymbol{X} | \boldsymbol{Y}) \times P(\boldsymbol{Y}) = P(\boldsymbol{X}) \times P(\boldsymbol{Y})
+$$
+
+Let $\boldsymbol{X}$, $\boldsymbol{Y}$ and $\boldsymbol{Z}$ be three sets of random variables.
+
+The variables in $\boldsymbol{X}$ are said to be **conditionally independent** of $\boldsymbol{Y}$, given $\boldsymbol{Z}$, if the following condition holds:
+
+$$
+P(\boldsymbol{X} | \boldsymbol{Y}, \boldsymbol{Z}) = P(\boldsymbol{X} | \boldsymbol{Z})
+$$
+
+The conditional independence between $\boldsymbol{X}$ and $\boldsymbol{Y}$ given $\boldsymbol{Z}$ can be used to derive the following:
+
+$$
+\begin{split}
+P(\boldsymbol{X}, \boldsymbol{Y} | \boldsymbol{Z})
+&= \frac{P(\boldsymbol{X},\boldsymbol{Y},\boldsymbol{Z})}{P(\boldsymbol{Z})} \\
+&= \frac{P(\boldsymbol{X},\boldsymbol{Y},\boldsymbol{Z})}{P(\boldsymbol{Y},\boldsymbol{Z})} \times \frac{P(\boldsymbol{Y},\boldsymbol{Z})}{P(\boldsymbol{Z})} \\
+&= P(\boldsymbol{X} | \boldsymbol{Y}, \boldsymbol{Z}) \times P(\boldsymbol{Y} | \boldsymbol{Z}) \\
+&= P(\boldsymbol{X} | \boldsymbol{Z}) \times P(\boldsymbol{Y} | \boldsymbol{Z})
 \end{split}
 $$
 
 ## Naive Bayes Classifier
 
-Assuming that the features in $X$ are conditionally independent given the class label:
+Assuming that the features in $\boldsymbol{X}$ are conditionally independent given the class label:
 
 $$
-P(X | Y = y_{k}) = \prod_{i = 1}^{d} P(X_{i} | Y = y_{k})
+P(\boldsymbol{X} | Y = y_{k}) = \prod_{i = 1}^{d} P(X_{i} | Y = y_{k})
 $$
 
 $$
 P(X_1, X_2, ... , X_d | Y = y_{k}) = \prod_{i = 1}^{d} P(X_{i} | Y = y_{k})
 $$
 
-To classify a test record $X^*$, the posteriors for each class $y_k$ need to be computed using:
+To classify a test record $\boldsymbol{X^*}$, the posteriors for each class $y_k$ need to be computed using:
 
 $$
-P(Y = y_k | X^*) = \frac{P(Y = y_k)\prod_{i = 1}^{d}P(X_i^* | Y = y_k)}{P(X^*)}
+P(Y = y_k | \boldsymbol{X^*}) = \frac{P(Y = y_k)\prod_{i = 1}^{d}P(X_i^* | Y = y_k)}{P(\boldsymbol{X^*})}
 $$
 
-Since $P(X^*)$ is fixed for each $y_k$, it is sufficient to choose the class that maximises the numerator:
+Since $P(\boldsymbol{X^*})$ is fixed for each $y_k$, it is sufficient to choose the class that maximizes the numerator:
 
 $$
-P(Y = y_k)\prod_{i = 1}^{d}P(X_i^* | Y = y_k)
+\max_k P(Y = y_k)\prod_{i = 1}^{d}P(\boldsymbol{X_i^*} | Y = y_k)
 $$
 
 ### Estimate Priors
@@ -78,7 +78,7 @@ where $N$ is the total number of training examples.
 ### Estimate Conditional Probabilities for Discrete Features
 
 $$
-P(X = x_{ij} | Y = y_k) = \frac{|(X = x_{ij}) \cap (Y = y_k)|}{|Y = y_k|}
+P(X_i = x_{ij} | Y = y_k) = \frac{|(X_i = x_{ij}) \cap (Y = y_k)|}{|Y = y_k|}
 $$
 
 where $x_{ij}$ is the $j$th distinct value of the feature $X_i$.
@@ -99,7 +99,7 @@ If one of the conditional probabilities is zero, then the entire expression beco
 **Laplace Estimate:**
 
 $$
-P(X_i = x_{ij} | Y = y_k) = \frac{|(X = x_{ij}) \cap (Y = y_k) + 1}{|Y = y_k| + n_i}
+P(X_i = x_{ij} | Y = y_k) = \frac{|(X_i = x_{ij}) \cap (Y = y_k)| + 1}{|Y = y_k| + n_i}
 $$
 
 where $n_i$ is the number of possible values for $X_i$.
@@ -107,7 +107,7 @@ where $n_i$ is the number of possible values for $X_i$.
 **M-Estimate:**
 
 $$
-P(X_i = x_{ij} | Y = y_k) = \frac{|(X = x_{ij}) \cap (Y = y_k) + m \times p}{|Y = y_k| + m}
+P(X_i = x_{ij} | Y = y_k) = \frac{|(X_i = x_{ij}) \cap (Y = y_k)| + m \times p}{|Y = y_k| + m}
 $$
 
 where $m$ and $p$ are user-specified parameters based on prior information of $P(X_i = x_{ij} | Y = y_k)$.

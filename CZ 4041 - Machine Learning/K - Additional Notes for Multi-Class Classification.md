@@ -6,7 +6,7 @@ Given a 3-class classification problem &mdash; $C_1$, $C_2$ & $C_3$, the followi
 2. Binary Classification 2: Positive ($C_2$) v.s. Negative ($C_1$ & $C_3$)
 3. Binary Classification 3: Positive ($C_3$) v.s. Negative ($C_1$ & $C_2$)
 
-The results of each binary classification need to be combined for a test instance $\mathbf{x^*}$ to make a final prediction.
+The results of each binary classification need to be combined for a test instance $\boldsymbol{x^*}$ to make a final prediction.
 
 - Case 1: Suppose $f_i$ is a probabilistic model that outputs how likely an instance belongs to class $C_i$.
     - The final prediction will be based on which $f_i$ had the highest probability output.

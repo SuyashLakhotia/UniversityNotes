@@ -2,7 +2,7 @@
 
 ## Linear Regression Model
 
-In a special case where an instance is represented by one input feature, the goal is to learn a linear function $f(x)$ ($x$ is a scalar) in terms of $w$ (also a scalar) from $\{x_i, y_i\}, i = 1, ... , N$ such that the difference (i.e. error) between the predicted values of $f(x_i)^{'}$s and the ground truth values $y_i^{'}$s is as small as possible.
+In a special case where an instance is represented by one input feature, the goal is to learn a linear function $f(x)$ (where $x$ is a scalar) in terms of $w$ (also a scalar) from $\{x_i, y_i\}$ such that the difference (i.e. error) between the predicted values of $f(x_i)^{'}$s and the ground truth values $y_i^{'}$s is as small as possible.
 
 $$
 f(x) = x \times w
@@ -20,7 +20,7 @@ $$
 The linear model is learnt in terms of $w$ by minimizing the error:
 
 $$
-w^* = \min_w E(w)
+w^* = \underset{w}{\mathrm{argmin}} \: E(w)
 $$
 
 ### Linear Regression Model Learning
@@ -44,73 +44,73 @@ $$
 
 ### Matrix Transformation
 
-If a matrix/vector $\mathbf{X}$ is transposed to $\mathbf{X}^T$, each element in the matrix/vector switches from $\text{el}_{ij}$ to $\text{el}_{ji}$ where $i$ is the original row number and $j$ is the original column number of the element.
+If a matrix/vector $\boldsymbol{X}$ is transposed to $\boldsymbol{X}^T$, each element in the matrix/vector switches from $e_{ij}$ to $e_{ji}$ where $i$ is the original row number and $j$ is the original column number of the element.
 
-- If $\mathbf{X}$ is a **square matrix**, its number of rows and columns is the same.
-- If $\mathbf{X}$ is a **symmetric matrix**, it is a square matrix and $\mathbf{X}^T = \mathbf{X}$.
+- If $\boldsymbol{X}$ is a **square matrix**, its number of rows and columns is the same.
+- If $\boldsymbol{X}$ is a **symmetric matrix**, it is a square matrix and $\boldsymbol{X}^T = \boldsymbol{X}$.
 
 $$
 \begin{split}
-\mathbf{XY}^T &= \mathbf{Y}^T\mathbf{X}^T \\
-\mathbf{Xw}^T &= \mathbf{w}^T\mathbf{X}^T \\
-\mathbf{x^Tw}^T &= \mathbf{w}^T\mathbf{x} \\
+\boldsymbol{XY}^T &= \boldsymbol{Y}^T\boldsymbol{X}^T \\
+\boldsymbol{Xw}^T &= \boldsymbol{w}^T\boldsymbol{X}^T \\
+\boldsymbol{x^Tw}^T &= \boldsymbol{w}^T\boldsymbol{x} \\
 x^T &= x
 \end{split}
 $$
 
 ### Identity Matrix
 
-- For a square matrix, if $\mathbf{X}$ is invertible, then $\mathbf{X}\mathbf{X}^{-1} = \mathbf{I}$ where $\mathbf{I}$ is the identity matrix.
-- Any vector (or matrix) $\mathbf{x}$ (or $\mathbf{X}$) times the identity matrix $\mathbf{I}$ equals to the vector (or matrix) itself.
+- For a square matrix, if $\boldsymbol{X}$ is invertible, then $\boldsymbol{X}\boldsymbol{X}^{-1} = \boldsymbol{I}$, where $\boldsymbol{I}$ is the identity matrix.
+- Any vector (or matrix) $\boldsymbol{x}$ (or $\boldsymbol{X}$) times the identity matrix $\boldsymbol{I}$ equals to the vector (or matrix) itself.
 
 ## Linear Regression Model (cont.)
 
-To learn a linear function $f(\mathbf{x})$ in a more general form in terms of $\mathbf{w}$ and $b$:
+To learn a linear function $f(\boldsymbol{x})$ in a more general form in terms of $\boldsymbol{w}$ and $b$:
 
 $$
-f(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b
+f(\boldsymbol{x}) = \boldsymbol{w} \cdot \boldsymbol{x} + b
 $$
 
-By defining $w_0 = b$ and $X_0 = 1$, $\mathbf{w}$ and $\mathbf{x}$ are of $d + 1$ dimensions:
+By defining $w_0 = b$ and $X_0 = 1$, $\boldsymbol{w}$ and $\boldsymbol{x}$ are of $d + 1$ dimensions:
 
 $$
-f(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x}
+f(\boldsymbol{x}) = \boldsymbol{w} \cdot \boldsymbol{x}
 $$
 
 Suppose sum-of-squares error is used:
 
 $$
 \begin{split}
-E(\mathbf{w}) &= \frac{1}{2} \sum_{i = 1}^N (f(\mathbf{x_i}) - y_i)^2 \\
-              &= \frac{1}{2} \sum_{i = 1}^N (\mathbf{w} \cdot \mathbf{x_i} - y_i)^2
+E(\boldsymbol{w}) &= \frac{1}{2} \sum_{i = 1}^N (f(\boldsymbol{x_i}) - y_i)^2 \\
+                  &= \frac{1}{2} \sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i} - y_i)^2
 \end{split}
 $$
 
-Learn the linear model using in terms of $\mathbf{w}$ by minimizing the error:
+Learn the linear model using in terms of $\boldsymbol{w}$ by minimizing the error:
 
 $$
-\mathbf{w^*} = \min_{\mathbf{w}} E(\mathbf{w}) + \frac{\lambda}{2} ||\mathbf{w}||_2^2
+\boldsymbol{w^*} = \underset{\boldsymbol{w}}{\mathrm{argmin}} E(\boldsymbol{w}) + \frac{\lambda}{2} ||\boldsymbol{w}||_2^2
 $$
 
-where $\lambda$ is a positive tradeoff parameter and $||\mathbf{w}||_2^2$ is a regularization term to control the complexity of the model.
+where $\lambda$ is a positive tradeoff parameter and $||\boldsymbol{w}||_2^2$ is a regularization term to control the complexity of the model.
 
 ### Linear Regression Model Learning
 
-To solve the unconstrained minimization problem, the derivate of $E(\mathbf{w})$ with respect to $\mathbf{w}$ can be set to zero.
+To solve the unconstrained minimization problem, the derivate of $E(\boldsymbol{w})$ with respect to $\boldsymbol{w}$ can be set to zero.
 
 $$
 \begin{split}
-\frac{\partial \bigg(E(\mathbf{w}) + \frac{\lambda}{2} ||\mathbf{w}||_2^2 \bigg)}{\partial \mathbf{w}} &= 0 \\
-\frac{\partial \Bigg(\frac{1}{2} \sum_{i = 1}^N (\mathbf{w} \cdot \mathbf{x_i} - y_i)^2 + \frac{\lambda}{2} \mathbf{w} \cdot \mathbf{w} \Bigg)}{\partial \mathbf{w}} &= 0
+\frac{\partial \bigg(E(\boldsymbol{w}) + \frac{\lambda}{2} ||\boldsymbol{w}||_2^2 \bigg)}{\partial \boldsymbol{w}} &= 0 \\
+\frac{\partial \Bigg(\frac{1}{2} \sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i} - y_i)^2 + \frac{\lambda}{2} \boldsymbol{w} \cdot \boldsymbol{w} \Bigg)}{\partial \boldsymbol{w}} &= 0
 \end{split}
 $$
 
 A closed-form solution for the above can be obtained.
 
-Denoting $\mathbf{X} = (\mathbf{x_1}, \mathbf{x_2}, ... , \mathbf{x_N})^T$:
+Denoting $\boldsymbol{X} = (\boldsymbol{x_1}, \boldsymbol{x_2}, ... , \boldsymbol{x_N})^T$:
 
 $$
-\mathbf{X} =
+\boldsymbol{X} =
 \begin{pmatrix}
     x_{10} & \dots & x_{N0} \\
     \vdots & \ddots & \vdots \\
@@ -124,10 +124,10 @@ $$
 \end{pmatrix}
 $$
 
-And $\mathbf{y}$:
+And $\boldsymbol{y}$:
 
 $$
-\mathbf{y} =
+\boldsymbol{y} =
 \begin{pmatrix}
     y_1 \\
     \vdots \\
@@ -139,40 +139,40 @@ Solving the minimization problem:
 
 $$
 \begin{split}
-\frac{\partial \Bigg(\frac{1}{2} \sum_{i = 1}^N (\mathbf{w} \cdot \mathbf{x_i} - y_i)^2 + \frac{\lambda}{2} \mathbf{w} \cdot \mathbf{w} \Bigg)}{\partial \mathbf{w}} &= 0 \\
-\sum_{i = 1}^N (\mathbf{w} \cdot \mathbf{x_i} - y_i)\mathbf{x_i} + \lambda\mathbf{w} &= 0 \\
-\sum_{i = 1}^N (\mathbf{w} \cdot \mathbf{x_i})\mathbf{x_i} - \sum_{i = 1}^N y_i\mathbf{x_i} + \lambda\mathbf{w} &= 0 \\
-(\mathbf{X}^T\mathbf{X})\mathbf{w} - \mathbf{X}^T\mathbf{y} + \lambda\mathbf{I}\mathbf{w} &= 0 \\
-(\mathbf{X}^T\mathbf{X} + \lambda\mathbf{I})\mathbf{w} &= \mathbf{X}^T\mathbf{y}
+\frac{\partial \Bigg(\frac{1}{2} \sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i} - y_i)^2 + \frac{\lambda}{2} \boldsymbol{w} \cdot \boldsymbol{w} \Bigg)}{\partial \boldsymbol{w}} &= 0 \\
+\sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i} - y_i)\boldsymbol{x_i} + \lambda\boldsymbol{w} &= 0 \\
+\sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i})\boldsymbol{x_i} - \sum_{i = 1}^N y_i\boldsymbol{x_i} + \lambda\boldsymbol{w} &= 0 \\
+(\boldsymbol{X}^T\boldsymbol{X})\boldsymbol{w} - \boldsymbol{X}^T\boldsymbol{y} + \lambda\boldsymbol{I}\boldsymbol{w} &= 0 \\
+(\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})\boldsymbol{w} &= \boldsymbol{X}^T\boldsymbol{y}
 \end{split}
 $$
 
 $$
-\mathbf{w} = (\mathbf{X}^T\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^T\mathbf{y}
+\boldsymbol{w} = (\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})^{-1}\boldsymbol{X}^T\boldsymbol{y}
 $$
 
-As long as $\lambda$ is positive, $(\mathbf{X}^T\mathbf{X} + \lambda\mathbf{I})$ is always invertible.
+As long as $\lambda$ is positive, $(\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})$ is always invertible.
 
 ## Linear Basis Function Models
 
-Linear basis function models can be used for non-linear fitting. The linear function $f(\mathbf{x})$ in terms of a set of basis functions is written as:
+Linear basis function models can be used for non-linear fitting. The linear function $f(\boldsymbol{x})$ in terms of a set of basis functions is written as:
 
 $$
-f(\mathbf{x}) = \mathbf{w} \cdot \mathbf{\phi}(\mathbf{x})
+f(\boldsymbol{x}) = \boldsymbol{w} \cdot \boldsymbol{\phi}(\boldsymbol{x})
 $$
 
-where $\mathbf{\phi}(\mathbf{x}) = (\mathbf{\phi}_0(\mathbf{x}), \mathbf{\phi}_1(\mathbf{x}), ... , \mathbf{\phi}_m(\mathbf{x}))$ and each $\mathbf{\phi}_i(\mathbf{x})$ maps the instance $\mathbf{x}$ to a scalar.
+where $\boldsymbol{\phi}(\boldsymbol{x}) = (\boldsymbol{\phi}_0(\boldsymbol{x}), \boldsymbol{\phi}_1(\boldsymbol{x}), ... , \boldsymbol{\phi}_m(\boldsymbol{x}))$ and each $\boldsymbol{\phi}_i(\boldsymbol{x})$ maps the instance $\boldsymbol{x}$ to a scalar.
 
-Typically, $\mathbf{\phi}_0(\mathbf{x}) = 1$, then $w_0$ acts as a bias.
+Typically, $\boldsymbol{\phi}_0(\boldsymbol{x}) = 1$, then $w_0$ acts as a bias.
 
-In the simplest case ($d = m$ and $\mathbf{\phi}_i(\mathbf{x}) = x_i$), it is reduced to a standard linear model.
+In the simplest case (if $d = m$ and $\boldsymbol{\phi}_i(\boldsymbol{x}) = x_i$), it is reduced to a standard linear model.
 
 ### Examples of Basis Functions
 
 **Polynomial Basis Functions:**
 
 $$
-\phi_j(\mathbf{x}) = ||\mathbf{x}||_2^j
+\phi_j(\boldsymbol{x}) = ||\boldsymbol{x}||_2^j
 $$
 
 In a special case $x$ with one input feature:
@@ -184,19 +184,19 @@ $$
 Then, the polynomial curve will be:
 
 $$
-f(\mathbf{x}) = \sum_{i = 0}^m w_i x^i
+f(\boldsymbol{x}) = \sum_{i = 0}^m w_i x^i
 $$
 
 **Gaussian Basis Functions:**
 
 $$
-\phi_j(\mathbf{x}) = \text{exp}\Big(- \frac{||mathbf{x} - \mathbf{u}_j||_2^2}{2\sigma^2} \Big)
+\phi_j(\boldsymbol{x}) = \text{exp}\Big(- \frac{||\boldsymbol{x} - \boldsymbol{u}_j||_2^2}{2\sigma^2} \Big)
 $$
 
 **Sigmoid Basis Functions:**
 
 $$
-\phi_j(\mathbf{x}) = g\Big(\frac{||\mathbf{x} - \mathbf{u}_j||^2}{\sigma} \Big)
+\phi_j(\boldsymbol{x}) = g\Big(\frac{||\boldsymbol{x} - \boldsymbol{u}_j||^2}{\sigma} \Big)
 $$
 
 where:
@@ -205,47 +205,47 @@ $$
 g(a) = \frac{1}{1 - \text{exp}(-a)}
 $$
 
-where $\mathbf{u}_j$ and $\sigma$ control location and scale (width).
+where $\boldsymbol{u}_j$ and $\sigma$ control location and scale (width).
 
 ### Linear Basis Function Learning
 
 The goal is to minimize the following error:
 
 $$
-E(\mathbf{w}) = \frac{1}{2} \sum_{i = 1}^N (\mathbf{w} \cdot \phi(\mathbf{x_i}) - y_i)^2 + \frac{\lambda}{2} ||\mathbf{w}||_2^2
+E(\boldsymbol{w}) = \frac{1}{2} \sum_{i = 1}^N (\boldsymbol{w} \cdot \phi(\boldsymbol{x_i}) - y_i)^2 + \frac{\lambda}{2} ||\boldsymbol{w}||_2^2
 $$
 
-A closed-form solution for $\mathbf{w}$ can be obtained:
+A closed-form solution for $\boldsymbol{w}$ can be obtained:
 
-Denoting $\mathbf{\Phi} = (\mathbf{\phi}(\mathbf{x_1}), \mathbf{\phi}(\mathbf{x_1}), ... , \mathbf{\phi}(\mathbf{x_N})^T$:
+Denoting $\boldsymbol{\Phi} = (\boldsymbol{\phi}(\boldsymbol{x_1}), \boldsymbol{\phi}(\boldsymbol{x_1}), ... , \boldsymbol{\phi}(\boldsymbol{x_N}))^T$:
 
 $$
 \begin{split}
-\mathbf{\Phi} &=
+\boldsymbol{\Phi} &=
 \begin{pmatrix}
-    \phi_0(\mathbf{x_1}) & \dots & \phi_0(\mathbf{x_N}) \\
+    \phi_0(\boldsymbol{x_1}) & \dots & \phi_0(\boldsymbol{x_N}) \\
     \vdots & \ddots & \vdots \\
-    \phi_m(\mathbf{x_1}) & \dots & \phi_m(\mathbf{x_N})
+    \phi_m(\boldsymbol{x_1}) & \dots & \phi_m(\boldsymbol{x_N})
 \end{pmatrix}^T \\
 &=
 \begin{pmatrix}
-    \phi_0(\mathbf{x_1}) & \dots & \phi_m(\mathbf{x_1}) \\
+    \phi_0(\boldsymbol{x_1}) & \dots & \phi_m(\boldsymbol{x_1}) \\
     \vdots & \ddots & \vdots \\
-    \phi_0(\mathbf{x_N}) & \dots & \phi_m(\mathbf{x_N})
+    \phi_0(\boldsymbol{x_N}) & \dots & \phi_m(\boldsymbol{x_N})
 \end{pmatrix}
 \end{split}
 $$
 
-The closed-form solution for $\mathbf{w}$ can be written as:
+The closed-form solution for $\boldsymbol{w}$ can be written as:
 
 $$
-\mathbf{w} = (\mathbf{\Phi}^T\mathbf{\Phi} + \lambda\mathbf{I})^{-1} \mathbf{\Phi}^T \mathbf{y}
+\boldsymbol{w} = (\boldsymbol{\Phi}^T\boldsymbol{\Phi} + \lambda\boldsymbol{I})^{-1} \boldsymbol{\Phi}^T \boldsymbol{y}
 $$
 
 where:
 
 $$
-\mathbf{y} =
+\boldsymbol{y} =
 \begin{pmatrix}
     y_1 \\
     \vdots \\
@@ -264,8 +264,8 @@ By using the kernel trick $k(x_i, x_j) = \phi(x_i) \cdot \phi(x_j)$:
 
 $$
 \begin{split}
-f(\mathbf{x}) &= \mathbf{w} \cdot \mathbf{\phi}(\mathbf{x}) \\
-f(\mathbf{x}) &= \mathbf{k}(\mathbf{x})(\mathbf{K} + \lambda \mathbf{I})^{-1} \mathbf{y}
+f(\boldsymbol{x}) &= \boldsymbol{w} \cdot \boldsymbol{\phi}(\boldsymbol{x}) \\
+f(\boldsymbol{x}) &= \boldsymbol{k}(\boldsymbol{x})(\boldsymbol{K} + \lambda \boldsymbol{I})^{-1} \boldsymbol{y}
 \end{split}
 $$
 
@@ -273,17 +273,17 @@ where:
 
 $$
 \begin{split}
-\mathbf{K} &=
+\boldsymbol{K} &=
 \begin{pmatrix}
-    k(\mathbf{x_1}, \mathbf{x_1}) & \dots & k(\mathbf{x_1}, \mathbf{x_N}) \\
+    k(\boldsymbol{x_1}, \boldsymbol{x_1}) & \dots & k(\boldsymbol{x_1}, \boldsymbol{x_N}) \\
     \vdots & \ddots & \vdots \\
-    k(\mathbf{x_N}, \mathbf{x_1}) & \dots & k(\mathbf{x_N}, \mathbf{x_N})
+    k(\boldsymbol{x_N}, \boldsymbol{x_1}) & \dots & k(\boldsymbol{x_N}, \boldsymbol{x_N})
 \end{pmatrix} \\
 &=
 \begin{pmatrix}
-    \phi(\mathbf{x_1}) \cdot \phi(\mathbf{x_1}) & \dots & \phi(\mathbf{x_1}) \cdot \phi(\mathbf{x_N}) \\
+    \phi(\boldsymbol{x_1}) \cdot \phi(\boldsymbol{x_1}) & \dots & \phi(\boldsymbol{x_1}) \cdot \phi(\boldsymbol{x_N}) \\
     \vdots & \ddots & \vdots \\
-    \phi(\mathbf{x_N}) \cdot \phi(\mathbf{x_1}) & \dots & \phi(\mathbf{x_N}) \cdot \phi(\mathbf{x_N})
+    \phi(\boldsymbol{x_N}) \cdot \phi(\boldsymbol{x_1}) & \dots & \phi(\boldsymbol{x_N}) \cdot \phi(\boldsymbol{x_N})
 \end{pmatrix}
 \end{split}
 $$
@@ -293,11 +293,11 @@ $$
 **Root Mean Square Error (RMSE):**
 
 $$
-\sqrt{\frac{1}{N} \sum_{i = 1}^N (f(\mathbf{x_i}) - y_i)^2}
+\sqrt{\frac{1}{N} \sum_{i = 1}^N (f(\boldsymbol{x_i}) - y_i)^2}
 $$
 
 **Mean Absolute Error (MAE):**
 
 $$
-\frac{1}{N} \sum_{i = 1}^N |f(\mathbf{x_i}) - y_i|
+\frac{1}{N} \sum_{i = 1}^N |f(\boldsymbol{x_i}) - y_i|
 $$

@@ -1,10 +1,10 @@
 # Decision Tree
 
-A decision tree is used to query particular features at particular points in the tree to come to a decision about the classification of the current $X$. It has to be *induced* from the training data and can then be used to *deduce* classifications.
+A decision tree is used to query particular features at particular points in the tree to come to a decision about the classification of the current $\boldsymbol{X}$. The tree has to be *induced* from the training data and can then be used to *deduce* classifications.
 
 ## Induction Algorithms
 
-A tree can be learned by splitting training data into subsets based on outcomes of a feature test. This process is recursively applied on each derived subset until the subset at a node has all the same values of the target variable or there is no improvement for prediction.
+A tree can be learned by splitting training data into subsets based on outcomes of a feature test. This process is recursively applied on each derived subset until the subset at a node has the same value for the target variable or there is no improvement for prediction.
 
 ## Hunt's Algorithm
 
@@ -35,10 +35,10 @@ Intuitive Idea: Nodes with **homogeneous** class distribution is preferred.
 A split criterion can be defined in terms of the difference in degrees of node impurity before and after splitting. This impurity can be measured using the entropy at a given node $t$:
 
 $$
-\text{Entropy}(t) = - \sum_{y_k} P(Y = y_k | t) log_2 P(Y = y_k | t)
+\text{Entropy}(t) = - \sum_{y_k} P(Y = y_k | t) \log_2 P(Y = y_k | t)
 $$
 
-- Maximum: $log_2 K$ where $K$ is the total number of all possible values of $Y$ i.e. records are equally distributed among all classes i.e. least information.
+- Maximum: $\log_2 K$ where $K$ is the total number of all possible values of $Y$ i.e. records are equally distributed among all classes i.e. least information.
 - Minimum: $0$ i.e. when all records belong to one class i.e. most information.
 
 ### Best Split on Information Gain
@@ -46,7 +46,7 @@ $$
 Suppose a parent node $t$ is split into $P$ partitions, the information gain:
 
 $$
-\delta_{\text{info}} = \text{Entropy}(t) - \sum_{i = 1}^{k} \frac{n_i}{n}\text{Entropy}(i)
+\delta_{\text{info}} = \text{Entropy}(t) - \sum_{j = 1}^{k} \frac{n_j}{n}\text{Entropy}(i)
 $$
 
 where $n_j$ represents the number of examples at child $j$ and $n$ represents the number of examples at node $t$.
@@ -62,7 +62,7 @@ $$
 $$
 
 $$
-\text{SplitINFO} = - \sum_{i = 1}^{k} \frac{n_i}{n}log_2 \frac{n_i}{n}
+\text{SplitINFO} = - \sum_{i = 1}^{k} \frac{n_i}{n} \log_2 \frac{n_i}{n}
 $$
 
 where $n$ is total number of records in the parent node $t$ and $n_i$ is the number of records in partition $i$.
@@ -73,7 +73,7 @@ By using the gain ratio to adjust information gain, higher entropy partitioning 
 
 - Stop expanding a node when all the records belong to the same class.
 - Stop expanding a node when all the records have similar attribute values.
-- Early termination.
+- Use early termination.
 
 ## Notes
 

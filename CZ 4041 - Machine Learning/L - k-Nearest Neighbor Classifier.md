@@ -17,13 +17,13 @@ To classify an unknown instance:
 One way to compute the distance between two points is by computing the Euclidean distance:
 
 $$
-d(\mathbf{x_i}, \mathbf{x_j}) = \sqrt{\sum_{k = 1}^d (x_{ik} - x_{jk})^2}
+d(\boldsymbol{x_i}, \boldsymbol{x_j}) = \sqrt{\sum_{k = 1}^d (x_{ik} - x_{jk})^2}
 $$
 
 To determine the class from the nearest neighbor list, a majority vote of class labels among the $k$-nearest neighbors can be used.
 
 $$
-y^* = \max_y \sum_{(\mathbf{x_i},y_i) \in N_{\mathbf{x^*}}} I(y = y_i)
+y^* = \underset{k}{\mathrm{argmax}} \: \sum_{(\boldsymbol{x_i},y_i) \in N_{\boldsymbol{x^*}}} I(y = y_i)
 $$
 
 ## Value of $k$
@@ -36,13 +36,13 @@ $$
 In simple majority voting, every neighbor has the same impact on the classification which makes the algorithm sensitive to the choice of $k$. The solution is to implement **distance-weight voting**:
 
 $$
-y^* = \max_y \sum_{(\mathbf{x_i},y_i) \in N_{\mathbf{x^*}}} w_i \times I(y = y_i)
+y^* = \underset{k}{\mathrm{argmax}} \: \sum_{(\boldsymbol{x_i},y_i) \in N_{\boldsymbol{x^*}}} w_i \times I(y = y_i)
 $$
 
 where $w_i$ is the weight according to the distance of the nearest neighbor:
 
 $$
-w_i = \frac{1}{d(\mathbf{x^*}, \mathbf{x_1})^2}
+w_i = \frac{1}{d(\boldsymbol{x^*}, \boldsymbol{x_1})^2}
 $$
 
 ## Normalization
@@ -67,7 +67,5 @@ The above results in $\mu_{new} = 0$ and $\sigma_{new} = 1$.
 
 ## Notes
 
-- $k$-NN Classifiers are lazy learners.
-    - It does not build models explicitly.
-- *Training* is very efficient.
-- Classifying unknown test instances is relatively expensive.
+- $k$-NN Classifiers are lazy learners as it does not build models explicitly.
+- *Training* is very efficient but classifying unknown test instances is relatively expensive.

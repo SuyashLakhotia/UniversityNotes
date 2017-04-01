@@ -16,168 +16,170 @@ The assumption is that larger margins imply better generalization errors. Since 
 
 ### Direction of Vectors
 
-![$\mathbf{a} + \mathbf{b}$](img/Direction%20of%20Vectors%20(1).png){height=160px}
+![$\boldsymbol{a} + \boldsymbol{b}$](img/Direction%20of%20Vectors%20(1).png){height=160px}
 
-![$\mathbf{a} - \mathbf{b}$](img/Direction%20of%20Vectors%20(2).png){height=160px}
+![$\boldsymbol{a} - \boldsymbol{b}$](img/Direction%20of%20Vectors%20(2).png){height=160px}
 
 ### Inner Product
 
-The inner product of two vectors, $\mathbf{u}$ and $\mathbf{v}$ of $d$ dimensions is defined as:
+The inner product of two vectors, $\boldsymbol{u}$ and $\boldsymbol{v}$ of $d$ dimensions is defined as:
 
 $$
-\mathbf{u} \cdot \mathbf{v} = \sum_{i = 1}^{d} (u_i \times v_i)
+\boldsymbol{u} \cdot \boldsymbol{v} = \sum_{i = 1}^{d} (u_i \times v_i)
 $$
 
 From a geometry viewpoint:
 
-![$\mathbf{u}$ & $\mathbf{v}$](img/Inner%20Product%20Vectors.png){height=150px}
+![$\boldsymbol{u}$ & $\boldsymbol{v}$](img/Inner%20Product%20Vectors.png){height=150px}
 
 $$
-\mathbf{u} \cdot \mathbf{v} = ||\mathbf{u}||_2 \times ||\mathbf{v}||_2 \times \cos(\theta)
+\boldsymbol{u} \cdot \boldsymbol{v} = ||\boldsymbol{u}||_2 \times ||\boldsymbol{v}||_2 \times \cos(\theta)
 $$
 
 $$
-||\mathbf{u}||_2^2 = \mathbf{u} \cdot \mathbf{u} = \sum_{i = 1}^d (u_i \times u_i)
+||\boldsymbol{u}||_2^2 = \boldsymbol{u} \cdot \boldsymbol{u} = \sum_{i = 1}^d (u_i \times u_i)
 $$
 
-Thus, when $\mathbf{u} \cdot \mathbf{v} = 0$, $\theta = 90^{\circ}$ i.e. $\mathbf{u}$ and $\mathbf{v}$ are orthogonal.
+Thus, when $\boldsymbol{u} \cdot \boldsymbol{v} = 0$, $\theta = 90^{\circ}$ i.e. $\boldsymbol{u}$ and $\boldsymbol{v}$ are orthogonal.
+
+The value of $v_u$ can be derived using the inner product:
 
 $$
 \begin{split}
-\mathbf{u} \cdot \mathbf{v} &= ||\mathbf{u}||_2 \times ||\mathbf{v}||_2 \times \cos(\theta) \\
-                            &= ||\mathbf{u}||_2 \times (||\mathbf{v}||_2 \times \cos(\theta)) \\
-                            &= ||\mathbf{u}||_2 \times v_u
+\boldsymbol{u} \cdot \boldsymbol{v} &= ||\boldsymbol{u}||_2 \times ||\boldsymbol{v}||_2 \times \cos(\theta) \\
+                                    &= ||\boldsymbol{u}||_2 \times (||\boldsymbol{v}||_2 \times \cos(\theta)) \\
+                                    &= ||\boldsymbol{u}||_2 \times v_u
 \end{split}
 $$
 
-where $v_u$ represents the length of $\mathbf{v}$ in the direction of $\mathbf{u}$.
+where $v_u$ represents the length of $\boldsymbol{v}$ in the direction of $\boldsymbol{u}$.
 
 ## Linear SVM: Separable Case
 
 Given a binary classification task, denoting $y_i = +1$ as the circle class and $y_i = -1$ as the square class, the decision boundary is defined as:
 
 $$
-\mathbf{w} \cdot \mathbf{x} + b = 0
+\boldsymbol{w} \cdot \boldsymbol{x} + b = 0
 $$
 
-For any test example $\mathbf{x}^*$:
+For any test example $\boldsymbol{x}^*$:
 
 $$
-\mathbf{x}^*:
+\boldsymbol{x}^*:
 \begin{cases}
-f(\mathbf{x}^*) = +1 & \text{if } \mathbf{w} \cdot \mathbf{x} + b \geq 0 \\
-f(\mathbf{x}^*) = -1 & \text{if } \mathbf{w} \cdot \mathbf{x} + b < 0
+f(\boldsymbol{x}^*) = +1 & \text{if } \boldsymbol{w} \cdot \boldsymbol{x} + b \geq 0 \\
+f(\boldsymbol{x}^*) = -1 & \text{if } \boldsymbol{w} \cdot \boldsymbol{x} + b < 0
 \end{cases}
 $$
 
-### Direction of $\mathbf{w}$
+### Direction of $\boldsymbol{w}$
 
-Suppose $\mathbf{x_a}$ and $\mathbf{x_b}$ are two points on the decision boundary:
+Suppose $\boldsymbol{x_a}$ and $\boldsymbol{x_b}$ are two points on the decision boundary:
 
 $$
 \begin{split}
-\mathbf{w} \cdot \mathbf{x_a} + b &= 0 \\
-\mathbf{w} \cdot \mathbf{x_b} + b &= 0
+\boldsymbol{w} \cdot \boldsymbol{x_a} + b &= 0 \\
+\boldsymbol{w} \cdot \boldsymbol{x_b} + b &= 0
 \end{split}
 $$
 
 $$
-\mathbf{w} \cdot (\mathbf{x_a} - \mathbf{x_b}) = 0
+\boldsymbol{w} \cdot (\boldsymbol{x_a} - \boldsymbol{x_b}) = 0
 $$
 
-Since $(\mathbf{x_a} - \mathbf{x_b})$ is a vector on the decision boundary, based on the definition of inner product, the direction of $\mathbf{w}$ is orthogonal to the decision boundary.
+Since $(\boldsymbol{x_a} - \boldsymbol{x_b})$ is a vector on the decision boundary, based on the definition of inner product, the direction of $\boldsymbol{w}$ is orthogonal to the decision boundary.
 
 ### Equations for Parallel Hyperplanes (i.e. Support Vectors)
 
-For any circle $\mathbf{x_c}$ located above the decision boundary:
+For any circle $\boldsymbol{x_c}$ located above the decision boundary:
 
 $$
-\mathbf{w} \cdot \mathbf{x_c} + b = k\text{, where } k > 0
+\boldsymbol{w} \cdot \boldsymbol{x_c} + b = k\text{, where } k > 0
 $$
 
-For any square $\mathbf{x_s}$ located below the decision boundary:
+For any square $\boldsymbol{x_s}$ located below the decision boundary:
 
 $$
-\mathbf{w} \cdot \mathbf{x_s} + b = k'\text{, where } k' < 0
+\boldsymbol{w} \cdot \boldsymbol{x_s} + b = k'\text{, where } k' < 0
 $$
 
 The two parallel hyperplanes passing the closest circle(s) and square(s) can be written as:
 
 $$
 \begin{gathered}
-\mathbf{w} \cdot \mathbf{x} + b = \bar{k} \\
-\mathbf{w} \cdot \mathbf{x} + b = -\bar{k} \\
+\boldsymbol{w} \cdot \boldsymbol{x_c} + b = \bar{k} \\
+\boldsymbol{w} \cdot \boldsymbol{x_s} + b = -\bar{k} \\
 \text{where } \bar{k} > 0
 \end{gathered}
 $$
 
-After rescaling $\mathbf{w}$ and $b$, the two parallel hyperplanes can be further rewritten as:
+After rescaling $\boldsymbol{w}$ and $b$, the two parallel hyperplanes can be further rewritten as:
 
 $$
 \begin{split}
-\mathbf{w} \cdot \mathbf{x} + b &= +1 \\
-\mathbf{w} \cdot \mathbf{x} + b &= -1
+\boldsymbol{w} \cdot \boldsymbol{x_c} + b &= +1 \\
+\boldsymbol{w} \cdot \boldsymbol{x_s} + b &= -1
 \end{split}
 $$
 
 ### Deriving the Margin
 
-Let $\mathbf{x_1}$ be a point on $b_11$ and $\mathbf{x_2}$ be a point on $b_12$:
-
-![Deriving the Margin](img/Linear%20SVM%20Margin.png)
+Let $\boldsymbol{x_1}$ be a point on $b_{11}$ and $\boldsymbol{x_2}$ be a point on $b_{12}$:
 
 $$
 \begin{split}
-b_{11}: \mathbf{w} \cdot \mathbf{x_1} + b &= +1 \\
-b_{12}: \mathbf{w} \cdot \mathbf{x_2} + b &= -1
+b_{11}: \boldsymbol{w} \cdot \boldsymbol{x_1} + b &= +1 \\
+b_{12}: \boldsymbol{w} \cdot \boldsymbol{x_2} + b &= -1
 \end{split}
 $$
 
 $$
-\mathbf{w} \cdot (\mathbf{x_1} - \mathbf{x_2}) = 2
+\boldsymbol{w} \cdot (\boldsymbol{x_1} - \boldsymbol{x_2}) = 2
 $$
 
 Based on the definition of inner product:
 
 $$
-||\mathbf{w}||_2 \times d = 2
+||\boldsymbol{w}||_2 \times d = 2
 $$
 
 $$
-d = \frac{2}{||\mathbf{w}||_2}
+d = \frac{2}{||\boldsymbol{w}||_2}
 $$
 
-where $d$ represents the margin i.e. $(||\mathbf{x_1} - \mathbf{x_2}||_2 \times \cos(\theta))$.
+where $d$ represents the margin i.e. $(||\boldsymbol{x_1} - \boldsymbol{x_2}||_2 \times \cos(\theta))$.
+
+![Deriving the Margin](img/Linear%20SVM%20Margin.png)
 
 ### Learning in Linear SVM
 
 The goal is to maximize the margin $d$, or in other words, minimize the following:
 
 $$
-\frac{||\mathbf{w}||_2^2}{2}
+\min_{\boldsymbol{w}} \frac{||\boldsymbol{w}||_2^2}{2}
 $$
 
 Given the following constraints:
 
 $$
 \begin{split}
-\mathbf{w} \cdot \mathbf{x_i} + b \geq +1 & \text{, if} y_i = 1 \\
-\mathbf{w} \cdot \mathbf{x_i} + b \leq -1 & \text{, if} y_i = -1
+\boldsymbol{w} \cdot \boldsymbol{x_i} + b \geq +1 & \text{, if } y_i = 1 \\
+\boldsymbol{w} \cdot \boldsymbol{x_i} + b \leq -1 & \text{, if } y_i = -1
 \end{split}
 $$
 
 Or, in other words:
 
 $$
-y_i \times (\mathbf{w} \cdot \mathbf{x_i} + b) \geq 1
+y_i \times (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1
 $$
 
 Thus, the optimization problem of linear SVM is:
 
 $$
 \begin{gathered}
-\min_w \frac{||\mathbf{w}||_2^2}{2} \\
-\text{s.t. } y_i \times (\mathbf{w} \cdot \mathbf{x_i} + b) \geq 1 \text{, } i = 1, ... , N
+\min_{\boldsymbol{w}} \frac{||\boldsymbol{w}||_2^2}{2} \\
+\text{s.t. } y_i \times (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 \text{, } i = 1, ... , N
 \end{gathered}
 $$
 
@@ -189,21 +191,21 @@ In seperable cases, there is no training data within the margin. However, in non
 
 $$
 \begin{split}
-\mathbf{w} \cdot \mathbf{x_i} + b \geq +1 - \xi_i & \text{, if} y_i = 1 \\
-\mathbf{w} \cdot \mathbf{x_i} + b \leq -1 + \xi_i & \text{, if} y_i = -1
+\boldsymbol{w} \cdot \boldsymbol{x_i} + b \geq +1 - \xi_i & \text{, if } y_i = 1 \\
+\boldsymbol{w} \cdot \boldsymbol{x_i} + b \leq -1 + \xi_i & \text{, if } y_i = -1
 \end{split}
 $$
 
 Or, in other words:
 
 $$
-y_i \times (\mathbf{w} \cdot \mathbf{x_i} + b) \geq 1 - \xi_i
+y_i \times (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 - \xi_i
 $$
 
-- If $\xi_i = 0$, there is no problem with $\mathbf{x_i}$.
-- If $0 < \xi_i < 1$, $\mathbf{x_i}$ is correctly classified but in the margin.
-- If $\xi_i = 1$, $\mathbf{x_i}$ is on the decision boundary (random guess).
-- If $\xi_i > 1$, $\mathbf{x_i}$ is misclassified.
+- If $\xi_i = 0$, there is no problem with $\boldsymbol{x_i}$.
+- If $0 < \xi_i < 1$, $\boldsymbol{x_i}$ is correctly classified but in the margin.
+- If $\xi_i = 1$, $\boldsymbol{x_i}$ is on the decision boundary (random guess).
+- If $\xi_i > 1$, $\boldsymbol{x_i}$ is misclassified.
 
 ### Soft Error
 
@@ -220,19 +222,19 @@ Learning with soft errors:
 
 $$
 \begin{gathered}
-\min_w \frac{||\mathbf{w}||_2^2}{2} + C \Bigg(\sum_{i = 1}^N \xi_i \Bigg) \\
-\text{s.t. } y_i (\mathbf{w} \cdot \mathbf{x_i} + b) \geq 1 - \xi_i \text{, } i = 1, ... , N, \xi_i \geq 0
+\min_w \frac{||\boldsymbol{w}||_2^2}{2} + C \Bigg(\sum_{i = 1}^N \xi_i \Bigg) \\
+\text{s.t. } y_i (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 - \xi_i \text{, } i = 1, ... , N, \xi_i \geq 0
 \end{gathered}
 $$
 
-where $C \geq 0$ is a parameter to tradeoff the impact of margin maximization and tolerable errors and a nonnegative $\xi_i$ provides an estimate of the error of the decision boundary on the training example $\mathbf{x_i}$.
+where $C \geq 0$ is a parameter to tradeoff the impact of margin maximization and tolerable errors and a nonnegative $\xi_i$ provides an estimate of the error of the decision boundary on the training example $\boldsymbol{x_i}$.
 
 ## Non-linear SVM
 
-To generalize linear decision boundary to become non-linear, $\mathbf{x_i}$ has to be transformed to a higher dimensional space using a function $\varphi(\mathbf{x_i})$. The original input space is mapped to a higher dimensional feature space where the training set is separable.
+To generalize linear decision boundary to become non-linear, $\boldsymbol{x_i}$ has to be transformed to a higher dimensional space using a function $\varphi(\boldsymbol{x_i})$. The original input space is mapped to a higher dimensional feature space where the training set is separable.
 
 $$
-\varphi : \mathbf{x} \rightarrow \varphi(\mathbf{x})
+\varphi : \boldsymbol{x} \rightarrow \varphi(\boldsymbol{x})
 $$
 
 The assumption is that in a higher dimensional space, it is easier to find a linear hyperplane to classify the data.
@@ -241,12 +243,12 @@ Optimization problem of non-linear SVM:
 
 $$
 \begin{gathered}
-\min_w \frac{||\mathbf{w}||_2^2}{2} \\
-\text{s.t. } y_i \times (\mathbf{w} \cdot \varphi(\mathbf{x_i}) + b) \geq 1 \text{, } i = 1, ... , N
+\min_w \frac{||\boldsymbol{w}||_2^2}{2} \\
+\text{s.t. } y_i \times (\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) \geq 1 \text{, } i = 1, ... , N
 \end{gathered}
 $$
 
-where $\mathbf{w} \cdot \varphi(\mathbf{x_i}) + b = 0$ is the hyperplane in feature space.
+where $\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b = 0$ is the hyperplane in feature space.
 
 However, computation in the feature space can be costly because it is high dimensional since the feature space is typically very high dimensional.
 
@@ -258,12 +260,13 @@ $$
 \varphi([X_1, X_2]) = [1, \sqrt{2}X_1, \sqrt{2}X_2, X_1^2, X_2^2, \sqrt{2}X_1X_2]
 $$
 
-Given two data instances, $\mathbf{a}$ and $\mathbf{b}$:
+Given two data instances, $\boldsymbol{a}$ and $\boldsymbol{b}$:
 
 $$
 \begin{split}
-\varphi(\mathbf{a}) \cdot \varphi(\mathbf{b}) &= 1 + 2A_1B_1 + 2A_2B_2 + A_1^2B_1^2 + A_2^2B_2^2 + 2A_1A_2B_1B_2 \\
-                                              &= (1 + A_1B_1 + A_2B_2)^2
+\varphi(\boldsymbol{a}) \cdot \varphi(\boldsymbol{b})
+&= 1 + 2A_1B_1 + 2A_2B_2 + A_1^2B_1^2 + A_2^2B_2^2 + 2A_1A_2B_1B_2 \\
+&= (1 + A_1B_1 + A_2B_2)^2
 \end{split}
 $$
 
@@ -271,8 +274,8 @@ So, if we define the kernel function as follows, there is no need to carry out $
 
 $$
 \begin{split}
-k(\mathbf{a}, \mathbf{b}) &= (1 + A_1B_1 + A_2B_2)^2 \\
-                          &= (1 + \mathbf{a} \cdot \mathbf{b})^2
+k(\boldsymbol{a}, \boldsymbol{b}) &= (1 + A_1B_1 + A_2B_2)^2 \\
+                                  &= (1 + \boldsymbol{a} \cdot \boldsymbol{b})^2
 \end{split}
 $$
 
@@ -281,7 +284,7 @@ The use of the kernel function to avoid carrying out $\varphi(\cdot)$ explicitly
 Thus, if $\varphi(\cdot)$ satisfies some conditions, then we can find a function $k(\cdot,\cdot)$ such that:
 
 $$
-k(\mathbf{x_i}, \mathbf{x_j}) = \varphi(\mathbf{x_i}) \cdot \varphi(\mathbf{x_j})
+k(\boldsymbol{x_i}, \boldsymbol{x_j}) = \varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x_j})
 $$
 
 #### Well-Known Kernel Functions
@@ -289,105 +292,105 @@ $$
 Linear Kernel:
 
 $$
-k(\mathbf{x_i}, \mathbf{x_j}) = \mathbf{x_i} \cdot \mathbf{x_j}
+k(\boldsymbol{x_i}, \boldsymbol{x_j}) = \boldsymbol{x_i} \cdot \boldsymbol{x_j}
 $$
 
-Radial Basis Kernel Function w/ Width $sigma$:
+Radial Basis Kernel Function w/ Width $\sigma$:
 
 $$
-k(\mathbf{x_i}, \mathbf{x_j}) = \text{exp}\bigg(-\frac{||\mathbf{x_i} - \mathbf{x_j}||_2^2}{2 \sigma^2}\bigg)
+k(\boldsymbol{x_i}, \boldsymbol{x_j}) = \text{exp}\bigg(-\frac{||\boldsymbol{x_i} - \boldsymbol{x_j}||_2^2}{2 \sigma^2}\bigg)
 $$
 
 Polynomial Kernel Function w/ Degree $d$:
 
 $$
-k(\mathbf{x_i}, \mathbf{x_j}) = (\mathbf{x_i} \cdot \mathbf{x_j} + 1)^d
+k(\boldsymbol{x_i}, \boldsymbol{x_j}) = (\boldsymbol{x_i} \cdot \boldsymbol{x_j} + 1)^d
 $$
 
 ### Lagrange Multiplier Method
 
 In its primal form, it is not possible to solve the optimization problem for non-linear SVMs using the kernel trick as instances in the feature space do not appear in the form of inner products. Thus, its dual form needs to be used.
 
-Using the Lagrange Multiplier Method, we can transform the original optimization problem to its dual form where the mapping function $\varphi(\mathbf{x})$ does not need to computed explicitly.
+Using the Lagrange Multiplier Method, we can transform the original optimization problem to its dual form where the mapping function $\varphi(\boldsymbol{x})$ does not need to computed explicitly.
 
 Given an objective function to be minimized, with a set of inequality constraints:
 
 $$
 \begin{gathered}
-\min_{\mathbf{w}} f(\mathbf{w}) \\
-\text{s.t. } h_i(\mathbf{w}) \leq 0$, $i = 1, 2, ... , q
+\min_{\boldsymbol{w}} f(\boldsymbol{w}) \\
+\text{s.t. } h_i(\boldsymbol{w}) \leq 0$, $i = 1, 2, ... , q
 \end{gathered}
 $$
 
 The Langrangian for the optimization problem will be:
 
 $$
-L(\mathbf{w}, \mathbf{\lambda}) = f(\mathbf{w}) + \sum_{i = 1}^q \lambda_i h_i (\mathbf{w})
+L(\boldsymbol{w}, \boldsymbol{\lambda}) = f(\boldsymbol{w}) + \sum_{i = 1}^q \lambda_i h_i (\boldsymbol{w})
 $$
 
-where $\mathbf{\lambda} = \{\lambda_1, ... , \lambda_q\}$ are the Langrange multipliers.
+where $\boldsymbol{\lambda} = \{\lambda_1, ... , \lambda_q\}$ are the Langrange multipliers.
 
 Thus,
 
 $$
 \begin{gathered}
-\min_w \frac{||\mathbf{w}||_2^2}{2} \\
-\text{s.t. } y_i \times (\mathbf{w} \cdot \varphi(\mathbf{x_i}) + b) \geq 1 \text{, } i = 1, ... , N
+\min_w \frac{||\boldsymbol{w}||_2^2}{2} \\
+\text{s.t. } y_i \times (\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) \geq 1 \text{, } i = 1, ... , N
 \end{gathered}
 $$
 
 can be transformed to its dual form:
 
 $$
-\max_{\mathbf{\lambda}}L_D(\mathbf{\lambda}) = - \Bigg(\frac{1}{2} \sum_{i, j} \lambda_i \lambda_j y_i y_j \big(\varphi(\mathbf{x_i}) \cdot \varphi(\mathbf{x_j})\big) - \sum_{i = 1}^N \lambda_i \Bigg)
+\max_{\boldsymbol{\lambda}}L_D(\boldsymbol{\lambda}) = - \Bigg(\frac{1}{2} \sum_{i, j} \lambda_i \lambda_j y_i y_j \big(\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x_j})\big) - \sum_{i = 1}^N \lambda_i \Bigg)
 $$
 
 #### Dual Optimization Problem
 
 - The dual Langrangian involves only the Langrange multipliers and the training data.
 - The negative sign in the dual Langrangian transforms a minimization problem of the primal form to a maximization problem of the dual form.
-- The objective is to maximize $L_D(\mathbf{\lambda})$.
+- The objective is to maximize $L_D(\boldsymbol{\lambda})$.
     - Can be solved using numerical techniques such as quadratic programming.
 
-Once the $\lambda_i$ values are found, we can obtain the feasible solutions for $\mathbf{w}$ and $b$ from the two equations below:
+Once the $\lambda_i$ values are found, we can obtain the feasible solutions for $\boldsymbol{w}$ and $b$ from the two equations below:
 
 $$
-\mathbf{w} = \sum_{i = 1}^N \lambda_i y_i \varphi(\mathbf{x_i})
+\boldsymbol{w} = \sum_{i = 1}^N \lambda_i y_i \varphi(\boldsymbol{x_i})
 $$
 
 $$
-\lambda_i(y_i(\mathbf{w} \cdot \varphi(\mathbf{x_i}) + b) - 1) = 0
+\lambda_i(y_i(\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) - 1) = 0
 $$
 
 The decision boundary can be expressed as:
 
 $$
 \begin{split}
-\mathbf{w} \cdot \varphi(\mathbf{x_i}) + b &= 0 \\
-\Bigg(\sum_{i = 1}^N \lambda_i y_i \varphi(\mathbf{x_i}) \cdot \varphi(\mathbf{x}) \Bigg) + b &= 0
+\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b &= 0 \\
+\Bigg(\sum_{i = 1}^N \lambda_i y_i \varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x}) \Bigg) + b &= 0
 \end{split}
 $$
 
-A test instance $\mathbf{x^*}$ can be classified using:
+A test instance $\boldsymbol{x^*}$ can be classified using:
 
 $$
-f(\mathbf{x^*}) = sign\Bigg(\sum_{i = 1}^N \lambda_i y_i \varphi(\mathbf{x_i}) \cdot \varphi(\mathbf{x^*}) + b \Bigg)
+f(\boldsymbol{x^*}) = \text{sign}\Bigg(\sum_{i = 1}^N \lambda_i y_i \varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x^*}) + b \Bigg)
 $$
 
-If $\mathbf{x_i}$ is a support vector, then the corresponding $\lambda_i > 0$, otherwise, $\lambda_i = 0$.
+If $\boldsymbol{x_i}$ is a support vector, then the corresponding $\lambda_i > 0$, otherwise, $\lambda_i = 0$.
 
 ### Non-linear SVM via Kernel Trick
 
 Training:
 
 $$
-\max_{\mathbf{\lambda}} \Bigg(\sum_{i = 1}^N \lambda_i - \frac{1}{2} \sum_{i, j} \lambda_i \lambda_j y_i y_j \big(\varphi(\mathbf{x_i}) \cdot \varphi(\mathbf{x_j})\big) \Bigg)
+\max_{\boldsymbol{\lambda}} \Bigg(\sum_{i = 1}^N \lambda_i - \frac{1}{2} \sum_{i, j} \lambda_i \lambda_j y_i y_j \big(\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x_j})\big) \Bigg)
 $$
 
 Decision Boundary:
 
 $$
-\sum_{i = 1}^N \lambda_i y_i \big(\varphi(\mathbf{x_i}) \cdot \varphi(\mathbf{x^*})\big) + b
+\sum_{i = 1}^N \lambda_i y_i \big(\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x^*})\big) + b
 $$
 
 Thus, the data points only appear as inner product in feature space and can be replaced by the kernel function.
@@ -395,13 +398,13 @@ Thus, the data points only appear as inner product in feature space and can be r
 Training:
 
 $$
-\max_{\mathbf{\lambda}} \Bigg(\sum_{i = 1}^N \lambda_i - \frac{1}{2} \sum_{i, j} \lambda_i \lambda_j y_i y_j k(\mathbf{x_i}, \mathbf{x_j}) \Bigg)
+\max_{\boldsymbol{\lambda}} \Bigg(\sum_{i = 1}^N \lambda_i - \frac{1}{2} \sum_{i, j} \lambda_i \lambda_j y_i y_j k(\boldsymbol{x_i}, \boldsymbol{x_j}) \Bigg)
 $$
 
 Decision Boundary:
 
 $$
-\sum_{i = 1}^N \lambda_i y_i k(\mathbf{x_i}, \mathbf{x^*}) + b
+\sum_{i = 1}^N \lambda_i y_i k(\boldsymbol{x_i}, \boldsymbol{x^*}) + b
 $$
 
-If $\mathbf{x_i}$ is a support vector, then the corresponding $\lambda_i > 0$, otherwise, $\lambda_i = 0$.
+If $\boldsymbol{x_i}$ is a support vector, then the corresponding $\lambda_i > 0$, otherwise, $\lambda_i = 0$.

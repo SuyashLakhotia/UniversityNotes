@@ -4,7 +4,7 @@
 
 In many applications, the relationship between the input features and output labels is non-deterministic (i.e. uncertain). Bayesian classifiers aim to model probabilistic relationships between the input features and output class.
 
-## Probability Concepts
+## Math Review - Probability Concepts
 
 Let $X$ and $Y$ be random variables.
 
@@ -34,7 +34,7 @@ $$
 \sum_{y_i} P(Y = y_i | X = x) = 1
 $$
 
-**Sum Rule**
+**Sum Rule** &mdash; The joint and marginal probabilities for $X$ and $Y$ are related.
 
 $$
 P(X = x) = \sum_{y_i} P(X = x , Y = y_i)
@@ -52,7 +52,7 @@ $$
 P(X) = \sum_Z \sum_Y P(X, Y, Z)
 $$
 
-**Product Rule**
+**Product Rule** &mdash; The joint and conditional probabilities for $X$ and $Y$ are related.
 
 $$
 \begin{split}
@@ -67,7 +67,7 @@ $$
 
 ### Decision with Priors
 
-> A decision rule prescribes what action to take based on observed input.
+A decision rule prescribes what action to take based on observed input.
 
 Predict $Y = y_i$ if:
 
@@ -91,19 +91,19 @@ $$
 Predict $Y = y_i$ if:
 
 $$
-P(Y = y_i | X = x) = \max_{k} P(Y = y_k | X = x)
+P(Y = y_i | \boldsymbol{X} = \boldsymbol{x}) = \max_{k} P(Y = y_k | \boldsymbol{X} = \boldsymbol{x})
 $$
 
 Applying Bayes Theorem:
 
 $$
-P(Y = y_i | X = x) = \frac{P(X = x | Y = y_i)P(Y = y_i)}{P(X = x)}
+P(Y = y_k | \boldsymbol{X} = \boldsymbol{x}) = \frac{P(\boldsymbol{X} = \boldsymbol{x} | Y = y_k)P(Y = y_k)}{P(\boldsymbol{X} = \boldsymbol{x})}
 $$
 
-Since $P(X = x)$ is constant w.r.t to different values of $Y$, predict $Y = y_i$ if:
+Since $P(\boldsymbol{X} = \boldsymbol{x})$ is constant w.r.t to different values of $Y$, predict $Y = y_i$ if:
 
 $$
-P(X | Y = y_i) P(Y = y_i) = \max_{k} P(X | Y = y_k)P(Y = y_k)
+P(\boldsymbol{X} | Y = y_i) P(Y = y_i) = \max_{k} P(\boldsymbol{X} | Y = y_k)P(Y = y_k)
 $$
 
 ## Losses & Risks
@@ -169,7 +169,7 @@ where $0 < \theta < 1$ is the loss incurred for choosing the reject action.
 The expected risk of taking the reject action:
 
 $$
-R(a_{K + 1} | X) = \sum_{k = 1}^K \theta P(Y = y_k | X) = \lambda_{[K + 1][k]} = \theta
+R(a_{K + 1} | X) = \sum_{k = 1}^K \theta P(Y = y_k | X) = \theta
 $$
 
 ### Optimal Decision Rule
@@ -181,11 +181,10 @@ The following rules are meaningful if $0 < \theta < 1$. If $\theta = 0$, we will
 Take action $a_i$ if the following conditions are true:
 
 $$
-R(a_{i} | X) < R(a_{k} | X), \forall k | k \ne i
-$$
-
-$$
+\begin{gathered}
+R(a_{i} | X) < R(a_{k} | X), \forall k | k \ne i \\
 R(a_{i} | X) < R(a_{K + 1} | X)
+\end{gathered}
 $$
 
 Choose reject if:
@@ -199,11 +198,10 @@ $$
 Predict $Y = y_i$ if the following conditions are true:
 
 $$
-P(Y = y_i | X) > R(Y = y_k | X), \forall k | k \ne i
-$$
-
-$$
+\begin{gathered}
+P(Y = y_i | X) > R(Y = y_k | X), \forall k | k \ne i \\
 P(Y = y_i | X) > 1 - \theta
+\end{gathered}
 $$
 
 Choose reject otherwise.

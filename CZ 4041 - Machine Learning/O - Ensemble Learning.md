@@ -139,7 +139,7 @@ Boosting takes a different resampling approach than bagging, which maintains a c
 
 Boosting is based on the concept of a "weak learner" (i.e. an algorithm that performs slightly better than chance). An example is a binary classifier with a 50% classification rate. A weak learner can be converted into a strong learner by changing the distribution of the training examples. Boosting can also be used with classifiers that are highly accurate but the benefits in this case will be very small.
 
-A popular variant of boosting is **AdaBoost (Adaptive Boosting)**, which allows the designer to continue adding components until an arbitrarily small error rate is obtained on the training set.
+A popular variant of boosting is AdaBoost (Adaptive Boosting), which allows the designer to continue adding components until an arbitrarily small error rate is obtained on the training set.
 
 ### AdaBoost
 

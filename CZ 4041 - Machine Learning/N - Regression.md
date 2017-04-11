@@ -107,7 +107,7 @@ $$
 
 A closed-form solution for the above can be obtained.
 
-Denoting $\boldsymbol{X} = (\boldsymbol{x_1}, \boldsymbol{x_2}, ... , \boldsymbol{x_N})^T$:
+Denoting $\boldsymbol{X} = (\boldsymbol{x_1}, \boldsymbol{x_2}, \hdots \boldsymbol{x_N})^T$:
 
 $$
 \boldsymbol{X} =
@@ -161,7 +161,7 @@ $$
 f(\boldsymbol{x}) = \boldsymbol{w} \cdot \boldsymbol{\phi}(\boldsymbol{x})
 $$
 
-where $\boldsymbol{\phi}(\boldsymbol{x}) = (\boldsymbol{\phi}_0(\boldsymbol{x}), \boldsymbol{\phi}_1(\boldsymbol{x}), ... , \boldsymbol{\phi}_m(\boldsymbol{x}))$ and each $\boldsymbol{\phi}_i(\boldsymbol{x})$ maps the instance $\boldsymbol{x}$ to a scalar.
+where $\boldsymbol{\phi}(\boldsymbol{x}) = (\boldsymbol{\phi}_0(\boldsymbol{x}), \boldsymbol{\phi}_1(\boldsymbol{x}), \hdots \boldsymbol{\phi}_m(\boldsymbol{x}))$ and each $\boldsymbol{\phi}_i(\boldsymbol{x})$ maps the instance $\boldsymbol{x}$ to a scalar.
 
 Typically, $\boldsymbol{\phi}_0(\boldsymbol{x}) = 1$, then $w_0$ acts as a bias.
 
@@ -217,7 +217,7 @@ $$
 
 A closed-form solution for $\boldsymbol{w}$ can be obtained:
 
-Denoting $\boldsymbol{\Phi} = (\boldsymbol{\phi}(\boldsymbol{x_1}), \boldsymbol{\phi}(\boldsymbol{x_1}), ... , \boldsymbol{\phi}(\boldsymbol{x_N}))^T$:
+Denoting $\boldsymbol{\Phi} = (\boldsymbol{\phi}(\boldsymbol{x_1}), \boldsymbol{\phi}(\boldsymbol{x_1}), \hdots \boldsymbol{\phi}(\boldsymbol{x_N}))^T$:
 
 $$
 \begin{split}

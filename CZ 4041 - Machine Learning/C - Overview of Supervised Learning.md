@@ -2,7 +2,7 @@
 
 - In supervised learning, the examples presented to a computer are pairs of inputs and the corresponding outputs (i.e. labelled training data).
 - The goal is to *learn* a **model** that maps inputs to the correct labels.
-- Given a set of $\{\boldsymbol{x_i}, y_i\}$ (i.e. labelled training data) for $i = 1, ... , N$ where $\boldsymbol{x_i} = [x_{i1}, x_{i2}, ... , x_{im}]$ (i.e. a vector of features) and $y_i$ (i.e. output) is a scalar, the goal is to learn a mapping $f:x \rightarrow y$ (i.e. classifier) by requiring $f(\boldsymbol{x_i}) = y_i$.
+- Given a set of $\{\boldsymbol{x_i}, y_i\}$ (i.e. labelled training data) for $i = 1, 2, \hdots N$ where $\boldsymbol{x_i} = [x_{i1}, x_{i2}, \hdots x_{im}]$ (i.e. a vector of features) and $y_i$ (i.e. output) is a scalar, the goal is to learn a mapping $f:x \rightarrow y$ (i.e. classifier) by requiring $f(\boldsymbol{x_i}) = y_i$.
 - The learned mapping $f$ is expected to be able to make precise predictions on any unseen $\boldsymbol{x^*}$ as $f(\boldsymbol{x^*})$.
 
 ## Classification vs. Regression

@@ -32,7 +32,7 @@ Besides the conditional independence conditions imposed by the network topology,
 
 - If a node $X$ does not have any parents, then the table contains only the prior probability $P(X)$.
 - If a node $X$ has only one parent $Z$, then the table contains the conditional probability $P(X | Z)$.
-- If a node $X$ has multiple parents $\{Z_1, Z_2, ... , Z_k\}$, then the table contains the conditional probability $P(X | Z_1, Z_2, ... , Z_k)$.
+- If a node $X$ has multiple parents $\{Z_1, Z_2, \hdots Z_k\}$, then the table contains the conditional probability $P(X | Z_1, Z_2, \hdots Z_k)$.
 
 ## BNN Model Building
 

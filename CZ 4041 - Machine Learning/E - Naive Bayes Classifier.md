@@ -52,7 +52,7 @@ P(\boldsymbol{X} | Y = y_{k}) = \prod_{i = 1}^{d} P(X_{i} | Y = y_{k})
 $$
 
 $$
-P(X_1, X_2, ... , X_d | Y = y_{k}) = \prod_{i = 1}^{d} P(X_{i} | Y = y_{k})
+P(X_1, X_2, \hdots X_d | Y = y_{k}) = \prod_{i = 1}^{d} P(X_{i} | Y = y_{k})
 $$
 
 To classify a test record $\boldsymbol{X^*}$, the posteriors for each class $y_k$ need to be computed using:

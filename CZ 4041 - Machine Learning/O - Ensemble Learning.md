@@ -94,7 +94,7 @@ In stacked generalization, the output pattern of an ensemble of trained experts 
 Training of this modular ensemble can be performed as follows:
 
 1. From a dataset $X$ with $N$ examples, leave out one test example and train each of the Level-0 experts on the remaining $(N - 1)$ examples.
-2. Generate a prediction for the test example. The output pattern $y = [y_1, y_2, ... , y_K]$ across the Level-0 experts, along with the target $t$ for the test example, becomes a training example for the Level-1 expert.
+2. Generate a prediction for the test example. The output pattern $y = [y_1, y_2, \hdots y_K]$ across the Level-0 experts, along with the target $t$ for the test example, becomes a training example for the Level-1 expert.
 3. Repeat this process in a leave-one-out fashion. This yields a training set $Y$ with $N$ examples, which is used to train the Level-1 expert separately.
 4. To make full use of the training data, re-train all the Level-0 experts one more time using all $N$ examples in $X$.
 

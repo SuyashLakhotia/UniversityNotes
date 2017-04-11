@@ -179,7 +179,7 @@ Thus, the optimization problem of linear SVM is:
 $$
 \begin{gathered}
 \min_{\boldsymbol{w}} \frac{||\boldsymbol{w}||_2^2}{2} \\
-\text{s.t. } y_i \times (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 \text{, } i = 1, ... , N
+\text{s.t. } y_i \times (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 \text{, } i = 1, 2, \hdots N
 \end{gathered}
 $$
 
@@ -223,7 +223,7 @@ Learning with soft errors:
 $$
 \begin{gathered}
 \min_w \frac{||\boldsymbol{w}||_2^2}{2} + C \Bigg(\sum_{i = 1}^N \xi_i \Bigg) \\
-\text{s.t. } y_i (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 - \xi_i \text{, } i = 1, ... , N, \xi_i \geq 0
+\text{s.t. } y_i (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 - \xi_i \text{, } i = 1, 2, \hdots N, \xi_i \geq 0
 \end{gathered}
 $$
 
@@ -244,7 +244,7 @@ Optimization problem of non-linear SVM:
 $$
 \begin{gathered}
 \min_w \frac{||\boldsymbol{w}||_2^2}{2} \\
-\text{s.t. } y_i \times (\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) \geq 1 \text{, } i = 1, ... , N
+\text{s.t. } y_i \times (\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) \geq 1 \text{, } i = 1, 2, \hdots N
 \end{gathered}
 $$
 
@@ -318,7 +318,7 @@ Given an objective function to be minimized, with a set of inequality constraint
 $$
 \begin{gathered}
 \min_{\boldsymbol{w}} f(\boldsymbol{w}) \\
-\text{s.t. } h_i(\boldsymbol{w}) \leq 0$, $i = 1, 2, ... , q
+\text{s.t. } h_i(\boldsymbol{w}) \leq 0$, $i = 1, 2, \hdots q
 \end{gathered}
 $$
 
@@ -328,14 +328,14 @@ $$
 L(\boldsymbol{w}, \boldsymbol{\lambda}) = f(\boldsymbol{w}) + \sum_{i = 1}^q \lambda_i h_i (\boldsymbol{w})
 $$
 
-where $\boldsymbol{\lambda} = \{\lambda_1, ... , \lambda_q\}$ are the Langrange multipliers.
+where $\boldsymbol{\lambda} = \{\lambda_1, \lambda_2, \hdots \lambda_q\}$ are the Langrange multipliers.
 
 Thus,
 
 $$
 \begin{gathered}
 \min_w \frac{||\boldsymbol{w}||_2^2}{2} \\
-\text{s.t. } y_i \times (\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) \geq 1 \text{, } i = 1, ... , N
+\text{s.t. } y_i \times (\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) \geq 1 \text{, } i = 1, 2, \hdots N
 \end{gathered}
 $$
 

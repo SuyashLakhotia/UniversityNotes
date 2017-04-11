@@ -30,8 +30,8 @@ where:
 
 $$
 \begin{gathered}
-\boldsymbol{w} = (w_0, w_1, ... , w_d) \\
-\boldsymbol{x} = (X_0, X_1, ... , X_d) \\
+\boldsymbol{w} = (w_0, w_1, \hdots w_d) \\
+\boldsymbol{x} = (X_0, X_1, \hdots X_d) \\
 w_0 = -\theta \text{ and } X_0 = 1
 \end{gathered}
 $$

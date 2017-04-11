@@ -109,7 +109,7 @@ The key operation is the computation of proximity between two clusters. The diff
 
 #### Inter-Cluster Similarity
 
-1. MIN (Single Linkage): Similarity of two clusters is based on the two most similar (i.e. closest) points in the different clusters. Hence, this inter-cluster similarity is only determined by one pair of pints i.e. by one link in the proximity graph.
+1. MIN (Single Linkage): Similarity of two clusters is based on the two most similar (i.e. closest) points in the different clusters. Hence, this inter-cluster similarity is only determined by one pair of points i.e. by one link in the proximity graph.
 
 $$
 d(A, B) = \min_{a \in A, b \in B} d(a, b)
@@ -121,7 +121,7 @@ $$
 d(A, B) = \max_{a \in A, b \in B} d(a, b)
 $$
 
-3. Group Average: Proximity of two clusters is the average of pairwise proximity between points in the two clusters. There is a need to use average connectivity for scalability since total proximity favors large clusters. This method is less susceptible to noise and outliers but is biased towards globular clusters.
+3. Group Average (Average Linkage): Proximity of two clusters is the average of pairwise proximity between points in the two clusters. There is a need to use average connectivity for scalability since total proximity favors large clusters. This method is less susceptible to noise and outliers but is biased towards spherical clusters.
 
 $$
 d(A, B) = \frac{1}{|A||B|} \sum_{a \in A, b \in B} d(a, b)
@@ -135,5 +135,113 @@ $$
 
 #### Time & Space Complexity
 
-- $O(N^2)$ space complexity due to the proximity matrix (where $N$ is the number of points).
+- $O(N^2)$ space complexity due to the proximity matrix, where $N$ is the number of points.
 - $O(N^3)$ time complexity as there are $N$ steps and at each step, $N^2$ time is needed to search and update the proximity matrix. In some approaches, the time complexity can be reduced to $O(N^2 log(N))$.
+
+## Measures of Cluster Validity
+
+Numerical measures used to judge various aspects of cluster validity are classified into three types:
+
+1. External Index: Used to measure the extent to which cluster labels match externally supplied cluster labels (Entropy, Purity).
+2. Internal Index: Used to measure the goodness of a clustering structure without respect to external information (Sum of Squared Error).
+3. Relative Index: Used to compare two different clusterings or clusters. Often an external or internal index is used for this function.
+
+### Internal Measures
+
+#### Sum of Squared Error (SSE)
+
+Clusters with complicated distributions aren't well separated. SSE is good for comparing two clusterings or two clusters (average SSE) and can also be used to estimate the number of clusters.
+
+$$
+SSE = \sum\limits_{i = 1}^K \sum\limits_{x \in C_i} d(m_i, x)^2
+$$
+
+#### Cohesion & Separation
+
+Cluster Cohesion measures how closely related objects are within a cluster. It can be measured by the within cluster sum of squares:
+
+$$
+WSS = \sum_i \sum_{x \in C_i} d(x, m_i)^2
+$$
+
+Cluster Separation measures how distinct or well-separated a cluster is from other clusters. It can be measured by the between cluster sum of squares:
+
+$$
+BSS = \sum_i |C_i| (m - m_i)^2
+$$
+
+The sum of $WSS$ and $BSS$ will always be a constant.
+
+#### Proximity Graph Approach for Cohesion & Separation
+
+- Cluster Cohesion is the sum of the weight of all links within a cluster.
+- Cluster Separation is the sum of the weights between nodes in the cluster and nodes outside the cluster.
+
+![Cohesion & Separation (Proximity Graph)](img/Cohesion%20&%20Separation%20(Proximity%20Graph).png)
+
+#### Silhouette Coefficient
+
+Silhouette Coefficient combines the ideas of both cohesion and separation, but for individual points as well as clusters and clusterings.
+
+For an individual point $i$:
+
+1. Calculate $a$ = average distance of $i$ to the points in its cluster.
+2. Calculate $b$ = min(average distance of $i$ to points in another cluster).
+3. Silhouette Coefficient $s = 1 - a/b$ if $a < b$ (or $s = b/a - 1$ if $a > b$).
+    a. Typically between 0 and 1. The closer to 1 the better.
+
+- Average silhouette width for a cluster can be calculated by averaging the silhouette coefficients of all the points in the cluster.
+- Average silhouette width for a clustering can be calculated by averaging the average silhouette widths of all the clusters.
+
+### External Measures
+
+#### Entropy & Purity
+
+- Probability that a member of cluster $j$ belongs to class $i$:
+
+$$
+p_{ij} = \frac{m_{ij}}{m_j}
+$$
+
+where $m_j$ is the number of values in cluster $j$ and $m_{ij}$ is the number of values of class $i$ in cluster $j$.
+
+- Entropy of cluster $j$:
+
+$$
+e_j = - \sum\limits_{i = 1}^L p_{ij} \log_2 p_{ij}
+$$
+
+where $L$ is the number of classes.
+
+- Entropy of clustering:
+
+$$
+\boldsymbol{e} = \sum\limits_{j = 1}^K \frac{\boldsymbol{m_j}}{\boldsymbol{m}} \boldsymbol{e_j}
+$$
+
+where $m_j$ is the size of the cluster $j$, $K$ is the number of clusters and $m$ is the total number of data points.
+
+- Purity of cluster $j$:
+
+$$
+\text{purity}_j = \max_i p_{ij}
+$$
+
+- Purity of clustering:
+
+$$
+\text{purity} = \sum_j \frac{m_j}{m} \text{purity}_j
+$$
+
+## Visual Object Classes Challenge
+
+Cluster analysis can be applied in the field of object recognition from images.
+
+1. Every image is converted into a bag of 'words' i.e. image blocks, where each image block represents an independent feature of the object in the image.
+2. The different image blocks are clustered to generate a dictionary of 'codewords', where a codeword is the centroid of a cluster.
+3. Now, each image can be represented using a bag of these codewords by finding the centroid of the cluster each image block belongs to.
+4. Classifiers can use the information about the frequency of codewords in an image to recognize objects.
+
+![Visual Object Classes Challenge](img/Visual%20Object%20Classes%20Challenge.png)
+
+The relationship between each image block / codeword is not needed when using this method.

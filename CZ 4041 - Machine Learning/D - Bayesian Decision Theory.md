@@ -151,7 +151,7 @@ $$
 
 If the automatic system has low certainty of its decision and making a wrong decision may have very high cost, a manual decision is required.
 
-The solution is to define an additional action for *reject* or *doubt*, $a_{K + 1}$, with $a_i$, $i = 1, ... , K$, being the usual actions of predicting on classes $y_i$.
+The solution is to define an additional action for *reject* or *doubt*, $a_{K + 1}$, with $a_i$, $i = 1, 2, \hdots K$, being the usual actions of predicting on classes $y_i$.
 
 The revised 0/1 loss function is now:
 
@@ -190,7 +190,7 @@ $$
 Choose reject if:
 
 $$
-R(a_{K + 1} | X) < R(a_{i} | X), i = 1, ... , K
+R(a_{K + 1} | X) < R(a_{i} | X), i = 1, 2, \hdots K
 $$
 
 #### Decision Rule 2

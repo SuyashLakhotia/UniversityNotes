@@ -135,7 +135,7 @@ Notice that the Parzen window density estimate resembles the histogram, with the
 We can calculate the probability of the original distribution at $x$ by:
 
 $$
-P(x) = p_{\text{KDE}}(x) \times h^d
+p(x) = p_{\text{KDE}}(x) \times h^d
 $$
 
 ### Drawbacks
@@ -171,3 +171,171 @@ The problem of choosing the bandwidth is crucial in the density estimation, for 
 
 - A large bandwidth will over-smooth the density and mask the structure in the data.
 - A small bandwidth will yield a density estimate that is spiky and very hard to interpret.
+
+We would like to find a value of the smoothing parameter that minimizes the error between the estimated density ($p_{\text{KDE}}(x)$) and the true density. A commonly used error metric is the mean square error at the estimation point $x$:
+
+$$
+\begin{split}
+\text{MSE}(p_{\text{KDE}}(x)) &= E[(p_{\text{KDE}}(x) - p(x))^2] \\
+                                     &= (E(p_{\text{KDE}}(x) - p(x)))^2 + \text{Var}(p_{\text{KDE}}(x))
+\end{split}
+$$
+
+where $p_{\text{KDE}}(x)$ is a random variable, however, $p(x)$ is a constant.
+
+This expression is an example of the bias-variance tradeoff. Reducing the bias would increase variance and vice-versa.
+
+- Bias shows the expected difference of the estimation.
+- Variance shows the variance of the estimation.
+
+The bias-variance dilemma applied to bandwidth selection means that:
+
+- A large bandwidth will reduce the differences among the estimates of $p_{\text{KDE}}(x)$ for different datasets (i.e. the variance) but it will increase the bias of $p_{\text{KDE}}(x)$ with respect to the true density $p(x)$.
+- A small bandwidth will reduce the bias of $p_{\text{KDE}}(x)$ at the expense of a larger variance in the estimates of $p_{\text{KDE}}(x)$.
+
+### Subjective Choice
+
+The natural way for choosing the smoothing parameter is to plot out several curves and choose the estimate that is most in accordance with one's prior (subjective) ideas. However, this method is not practical in pattern recognition since we typically have high dimensional data.
+
+### Reference to Standard Distribution
+
+Assume a standard density function and find the value of the bandwidth that minimizes the integral of the square error (MISE):
+
+$$
+\begin{split}
+h_{\text{opt}} &= \underset{h}{\mathrm{argmin}} \{\text{MISE}(p_{\text{KDE}}(x))\} \\
+               &= \underset{h}{\mathrm{argmin}} \Bigg\{E \bigg[\int (p_{\text{KDE}}(x) - p(x))^2 dx \bigg] \Bigg\}
+\end{split}
+$$
+
+If we assume that the true distribution is a Gaussian density and we use a Gaussian kernel, it can be shown that the optimal value of the bandwidth becomes $h_{\text{opt}} = 1.06 \sigma N^{-1/5}$, where $\sigma$ is the sample variance and $N$ is the number of training examples.
+
+### Likelihood Cross-Validation
+
+If we consider the estimation of the bandwidth, $h$, to be a parametric estimation problem, we can use an approach based on cross-validation. The final $h$ is defined as:
+
+$$
+h_{\text{MLCV}} = \underset{h}{\mathrm{argmax}} \bigg\{\frac{1}{N} \sum_{i = 1}^N \log(p_{-i}(x^i))\bigg\}
+$$
+
+where $p_{-n}$ is computed from leave-one-out cross-validation:
+
+$$
+p_{-n}(x) = \frac{1}{(N - 1)h} \sum_{i = 1, i \neq n}^N K \bigg(\frac{x^i - x}{h}\bigg)
+$$
+
+## Multivariate Density Estimation
+
+Till now, for one dimension or high dimensional problems, we use the same equation for $p_{\text{KDE}}(x)$. Thus, it should be noted that the bandwidth $h$ is the same for all axes. Hence, this density estimate will weigh all the axes equally.
+
+$$
+p_{\text{KDE}}(x) = \frac{1}{Nh^d} \sum_{i = 1}^N K\bigg(\frac{x - x^i}{h}\bigg)
+$$
+
+However, if the spread of the data is much greater in one of the coordinate directions than the others, we should use a wider bandwidth for that direction. Thus, the above equation is modified to:
+
+$$
+p_{\text{KDE}}(x) = \frac{1}{N} \sum_{i = 1}^N K(x, x^i, h_1, h_2, \hdots h_d)
+$$
+
+$$
+K(x, x^i, h_1, h_2, \hdots h_d) = \frac{1}{h_1 \hdots h_D} \prod_{r = 1}^d K_1 \bigg(\frac{x(r) - x^i(r)}{h_r} \bigg)
+$$
+
+where $K_1$ is a one-dimensional kernel.
+
+## $k$ Nearest Neighbor
+
+In the $k$NN method, we grow the volume surrounding the estimation point $x$ until it encloses a total of $k$ data points. The density estimate for $k$NN becomes:
+
+$$
+p(x) \approx \frac{k}{NV} = \frac{k}{N \times c_d \times R_k^d(x)}
+$$
+
+where $R_k^d(x)$ is the distance between the estimation point $x$ and its $k$-th closest neighbor in $d$ dimensions, $c_d$ is the volume of the unit sphere in $d$ dimensions.
+
+$$
+c_d = \frac{\pi^{d/2}}{\Gamma(d/2 + 1)}
+$$
+
+$$
+c_d =
+\begin{cases}
+2 & d = 1 \\
+\pi & d = 2 \\
+\frac{4\pi}{3} & d = 3
+\end{cases}
+$$
+
+where $\Gamma(d/2 + 1)$ is called the gamma function defined as:
+
+$$
+\Gamma(m) = 2 \int_0^{\infty} e^{-r^2} r^{2m - 1} dr
+$$
+
+### Disadvantages
+
+In general, the estimates obtained with the $k$NN method are not very satisfactory.
+
+- The estimates are prone to local noise.
+- The method produces estimates with very heavy tails.
+- Since the function $R_k(x)$ is not differentiable, the density estimate will have discontinuities.
+- The resulting density is not a true probability density since its integral over all the sample space diverges.
+
+### Approximation to Bayes Classifier
+
+The main advantage of the $k$NN method is that it leads to a very simple approximation of the (optimal) Bayes classifier.
+
+Assume a dataset of $N$ examples, $N_i$ from class $\omega_i$, and an unknown sample $x_u$ that needs to be classified. By drawing a hypersphere of volume $V$ around $x_u$ that contains a total of $k$ examples, $k_i$ from class $\omega_i$, it is possible to approximate the likelihood functions using the $k$NN method by:
+
+$$
+p(x | \omega_i) = \frac{k_i}{N_i V}
+$$
+
+Similarly, the unconditional density is estimated by:
+
+$$
+p(x) = \frac{k}{NV}
+$$
+
+The priors are approximated by:
+
+$$
+p(\omega_i) = \frac{N_i}{N}
+$$
+
+Therefore,
+
+$$
+\begin{split}
+p(\omega_i | x) &= \frac{p(x | \omega_i) p(\omega_i)}{p(x)} \\
+                &= \frac{\frac{k_i}{N_i V} \frac{N_i}{N}}{\frac{k}{NV}} \\
+                &= \frac{k_i}{k}
+\end{split}
+$$
+
+## Curse of Dimensionality
+
+For high dimensional problems, it is not possible to directly use the non-parametric approach to estimate $p(x | \omega_i)$.
+
+## Naive Bayes Classifier
+
+To simplify the estimation for $p(x | \omega_i)$, Naive Bayes Classifier was developed. It employs the assumption that the features are class-conditionally independent across dimensions i.e.:
+
+$$
+p(x | \omega_i) = \prod_{d = 1}^D p(x(d) | \omega_i)
+$$
+
+Note that this assumption is different from independent features:
+
+$$
+p(x) = \prod_{d = 1}^D p(x(d))
+$$
+
+Therefore, the Bayes decision rule $j = \underset{i}{\mathrm{argmax}} (p(x | \omega_i) p(\omega_i))$ can be rewritten as:
+
+$$
+j = \underset{i}{\mathrm{argmax}} \bigg(\prod_{d = 1}^D p(x(d) | \omega_i) p(\omega_i) \bigg)
+$$
+
+This is the Naive Bayes Classifier.

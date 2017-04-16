@@ -12,6 +12,12 @@
     - If $y$ is nominal but not binary, then it is a multi-class classification problem.
 - In regression problems, $y$ is continuous.
 
+## Types of Features
+
+- Binary: Yes/No, 1/0 etc.
+- Categorical: Single/Married/Divorced, A/B/C/D etc.
+- Continuous: 100.32, 10.87 etc.
+
 ## Typical Learning Procedure
 
 **Inductive Learning** consists of two phases:

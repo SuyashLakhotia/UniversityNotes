@@ -102,7 +102,7 @@ $$
 ## Multilayer Neural Networks
 
 - Multilayer ANNs are feed-forward neural networks i.e. the nodes in one layer are only connected to the nodes in the next layer. Input Layer → Hidden Layer(s) → Output Layer.
-- Each node takes in the inputs and passes it through an **integration function** followed by an **activation function**.
+- Each node in the hidden layer(s) & output layer takes in the inputs and passes it through an **integration function** followed by an **activation function**.
 
 ### Integration Functions
 
@@ -166,9 +166,9 @@ However, in multilayer ANNs, the errors cannot be computed directly for the hidd
 
 ![Multilayer ANN](img/Multilayer%20ANN.png)
 
-After initializing the weights, the training examples are *forward passed* through the neural network to generate outputs.
+After initializing the weights, the training examples are **forward passed** through the neural network to generate outputs. Note that different initializations may lead to different local optima and convergence iterations.
 
-*Backpropagation* involves starting with the output layer to propagate error back to the previous layer in order to update the weights between the two layers. Since it is not possible to calculate the error in the hidden layers, the error is decomposed using the weights and propagated back when a hidden layer is reached.
+**Backpropagation** involves starting with the output layer to propagate error back to the previous layer in order to update the weights between the two layers. Since it is not possible to calculate the error in the hidden layers, the error is decomposed using the weights and propagated back when a hidden layer is reached.
 
 For example, in Figure 8.1, $E_5$ or the error in $n_5$ will be decomposed using the weights and propagated back. Thus, the value of $E_3$ will be $E_5 \times w_{35}$ and the value of $E_4$ will be $E_5 \times w_{45}$.
 
@@ -232,3 +232,20 @@ where $o_i$ is the output of $n_i$.
     - Binary class problem → single node
     - $k$-class problem → $k$ output nodes
 - Training examples with missing values should be removed or replaced with most likely values.
+
+## Addressing Overfitting in ANNs
+
+One way to address overfitting in ANNs is by incorporating model complexity:
+
+$$
+e'(f) = e(f) + \Omega(f)
+$$
+
+$$
+\begin{gathered}
+\Omega(f) = ||\boldsymbol{w}||_2^2 \\
+||\boldsymbol{w}||_2^2 = \sum_{i = 1}^n (w_i \times w_i)
+\end{gathered}
+$$
+
+It can also be addressed using **dropout** i.e. randomly keeping some neurons active and setting others to be inactive. The intuition here is to force the network to be accurate even in the absence of certain information.

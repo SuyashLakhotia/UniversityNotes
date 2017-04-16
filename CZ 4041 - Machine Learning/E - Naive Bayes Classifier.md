@@ -109,6 +109,19 @@ $$
 
 where $m$ and $p$ are user-specified parameters based on prior information of $P(X_i = x_{ij} | Y = y_k)$.
 
+#### Normalizing Probabilities
+
+After using m-estimate to derive the conditional probabilities, it is important to maintain the $\sum_j P(X_i = x_{ij} | Y = y_k) = 1$ property. Thus, the probabilities may have to be normalized.
+
+For example, if the probabilities for $P(A = 0 | Z = 1)$ and $P(A = 1 | Z = 1)$ become $\frac{5}{10}$ and $\frac{6}{10}$ respectively after applying m-estimate, they will have to be normalized:
+
+$$
+\begin{gathered}
+P(A = 0 | Z = 1) = \frac{\frac{5}{10}}{\frac{5}{10} + \frac{6}{10}} = \frac{5}{11} \\
+P(A = 1 | Z = 1) = \frac{\frac{6}{10}}{\frac{5}{10} + \frac{6}{10}} = \frac{6}{11}
+\end{gathered}
+$$
+
 ## Notes
 
 - Naive Bayes Classifier is computationally efficient.

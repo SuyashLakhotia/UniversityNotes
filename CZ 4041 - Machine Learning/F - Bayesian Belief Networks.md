@@ -26,7 +26,7 @@ Considering three random variables $A$, $B$ & $C$, where $A$ and $B$ are indepen
 - A node in a Bayesian network is **conditionally independent** of its non-descendants, if its parents are known.
 - A Naive Bayes Classifier can be represented using a Bayesian network where $Y$ is the parent to all the features in $\boldsymbol{X}$.
 
-## BNN Representation
+## BBN Representation
 
 Besides the conditional independence conditions imposed by the network topology, each node is also associated with a probability table.
 
@@ -34,24 +34,22 @@ Besides the conditional independence conditions imposed by the network topology,
 - If a node $X$ has only one parent $Z$, then the table contains the conditional probability $P(X | Z)$.
 - If a node $X$ has multiple parents $\{Z_1, Z_2, \hdots Z_k\}$, then the table contains the conditional probability $P(X | Z_1, Z_2, \hdots Z_k)$.
 
-## BNN Model Building
+## BBN Model Building
 
 - Step 1: Create the structure of the network.
     - Network topology can be obtained by encoding the subjective knowledge of domain experts;
     - Or can be learned from data (structure learning).
 - Step 2: Estimate the probability values in the table associated with each node.
 
-## Inference from BNN
+## Inference from BBNs
 
 Given a BBN and an inference problem:
 
 1. Translate the problem into a probabilistic expression.
-2. Based on the property on conditional independence, find all dependent variables to the probabilities being estimated.
+2. Based on the property of conditional independence, find all dependent variables to the probabilities being estimated.
 3. If the probabilities to be estimated cannot be obtained directly from the probability tables of the BBN, apply the Sum Rule, Product Rule and/or Bayes Theorem to decompose the probabilities until all decomposed probabilities can be obtained from the tables.
 
 ## Notes
 
 - BBN provides an approach for capturing the prior knowledge of a specific domain using a directed graphical model.
-    - Other Examples of Directed Graphical Models: Hidden Markov Models, Dynamic Bayesian Networks etc.
-    - Other Examples of Undirected Graphical Models: Markov Random Fields, Condition Random Fields etc.
 - Network construction, however, is time consuming as it requires domain knowledge or a system that can learn structure from data.

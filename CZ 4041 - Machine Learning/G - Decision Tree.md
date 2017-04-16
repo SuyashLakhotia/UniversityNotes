@@ -1,6 +1,6 @@
 # Decision Tree
 
-A decision tree is used to query particular features at particular points in the tree to come to a decision about the classification of the current $\boldsymbol{X}$. The tree has to be *induced* from the training data and can then be used to *deduce* classifications.
+A decision tree is used to query particular features at particular points in the tree to come to a decision about the classification of the current $\boldsymbol{X}$. The tree has to be *induced* from the training data and can then be used to *deduce* classifications. There can be more than one tree that fits the same data.
 
 ## Induction Algorithms
 
@@ -16,7 +16,7 @@ Let $D_t$ be the set of training records that reach a node $t$.
 - Else, if $D_t$ is an empty set, then $t$ is a leaf node labelled by the default class $y_d$.
 - Else, if $D_t$ contains records that belong to more than one class of $Y$, then a feature is selected to conduct a conditional test to split the data into smaller subsets.
     - A child node is created for each outcome of the test condition and the records in $D_t$ are distributed to the children based on the outcome.
-    - Recursively apply this procedure to each subset.
+    - This procedure is recursively applied to each subset.
 
 ## Specifying the Split
 
@@ -38,7 +38,7 @@ $$
 \text{Entropy}(t) = - \sum_{y_k} P(Y = y_k | t) \log_2 P(Y = y_k | t)
 $$
 
-- Maximum: $\log_2 K$ where $K$ is the total number of all possible values of $Y$ i.e. records are equally distributed among all classes i.e. least information.
+- Maximum: $\log_2 K$, where $K$ is the total number of all possible values of $Y$ i.e. records are equally distributed among all classes i.e. least information.
 - Minimum: $0$ i.e. when all records belong to one class i.e. most information.
 
 ### Best Split on Information Gain
@@ -46,7 +46,7 @@ $$
 Suppose a parent node $t$ is split into $P$ partitions, the information gain:
 
 $$
-\delta_{\text{info}} = \text{Entropy}(t) - \sum_{j = 1}^{k} \frac{n_j}{n}\text{Entropy}(i)
+\delta_{\text{info}} = \text{Entropy}(t) - \sum_{j = 1}^{k} \frac{n_j}{n}\text{Entropy}(j)
 $$
 
 where $n_j$ represents the number of examples at child $j$ and $n$ represents the number of examples at node $t$.

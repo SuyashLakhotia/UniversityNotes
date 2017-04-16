@@ -26,7 +26,7 @@ $$
 
 - The examples presented to the computer include both labelled data and unlabelled data.
 - The goal is to the utilize the unlabelled data to help supervised learning.
-- More precise `f`.
+- More precise $f$.
 
 ### Active Learning
 
@@ -35,7 +35,7 @@ $$
 
 ### Transfer Learning
 
-- The goal is to adapt the same learning to different tasks or environments.
+- The goal is to adapt the same learning to different tasks, environments or agents.
 
 ### Reinforcement Learning
 

@@ -9,7 +9,7 @@
 
 ## Generalization Error
 
-Generalization error is a measure of how accurately an algorithm is able to predict outcome values of previously unseen data. A model with the ideal complexity is the one that produces the lowest generalization error. Since there is no knowledge of the test data and how well the model will perform, the generalization error of the induced model needs to be estimated.
+Generalization error is a measure of how accurately an algorithm is able to predict outcome values on previously unseen data. A model with the ideal complexity is the one that produces the lowest generalization error. Since there is no knowledge of the test data and how well the model will perform, the generalization error of the induced model needs to be estimated.
 
 ### Occam's Razor
 
@@ -18,7 +18,7 @@ Generalization error is a measure of how accurately an algorithm is able to pred
 
 ### Pessimistic Error Estimate
 
-- Explicitly compute the generalization error as the sum of training error and a penalty term for model complexity.
+Explicitly compute the generalization error as the sum of no. of training errors and a penalty term for model complexity.
 
 $$
 e'(T) = e(T) + \Omega(T)
@@ -53,4 +53,4 @@ where $N$ is the total number of leaf nodes.
 ### Post-Pruning
 
 - Grow decision to its entirety and trim the nodes in a bottom-up fashion.
-- If generalization error improves after trimming, replace sub-tree with a new leaf node. The class label of this leaf node is determined from the majority class of the instances in the sub-tree.
+- If generalization error improves after trimming, replace the sub-tree with a new leaf node. The class label of this leaf node is determined from the majority class of the instances in the sub-tree.

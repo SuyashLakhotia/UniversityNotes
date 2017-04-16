@@ -6,16 +6,13 @@ In many applications, the relationship between the input features and output lab
 
 ## Math Review - Probability Concepts
 
-Let $X$ and $Y$ be random variables.
-
 **Marginal probability** refers to the probability that $Y$ will take on the value $y$.
 
 $$
-P(Y = y)
-$$
-
-$$
+\begin{gathered}
+P(Y = y) \\
 \sum_{y_i} P(Y = y_i) = 1
+\end{gathered}
 $$
 
 **Joint probability** refers to the probability that variable $X$ will take on the value $x$ and variable $Y$ will take on the value $y$.
@@ -27,29 +24,26 @@ $$
 **Conditional probability** refers to the probability that the variable $Y$ will take on the value $y$, given that the variable $X$ is observed to have the value $x$.
 
 $$
-P(Y = y | X = x)
-$$
-
-$$
+\begin{gathered}
+P(Y = y | X = x) \\
 \sum_{y_i} P(Y = y_i | X = x) = 1
+\end{gathered}
 $$
 
 **Sum Rule** &mdash; The joint and marginal probabilities for $X$ and $Y$ are related.
 
 $$
-P(X = x) = \sum_{y_i} P(X = x , Y = y_i)
-$$
-
-$$
+\begin{gathered}
+P(X = x) = \sum_{y_i} P(X = x , Y = y_i) \\
 P(X) = \sum_Y P(X, Y)
+\end{gathered}
 $$
 
 $$
-P(X = x) = \sum_{z_j} \sum_{y_i} P(X = x , Y = y_i, Z = z_j)
-$$
-
-$$
+\begin{gathered}
+P(X = x) = \sum_{z_j} \sum_{y_i} P(X = x , Y = y_i, Z = z_j) \\
 P(X) = \sum_Z \sum_Y P(X, Y, Z)
+\end{gathered}
 $$
 
 **Product Rule** &mdash; The joint and conditional probabilities for $X$ and $Y$ are related.
@@ -115,13 +109,13 @@ So far, the decisions are assumed to be equally good or costly. However, the cos
 - Let $a_i$ be the action of predicting $Y = y_i$.
 - Let $\lambda_{ik}$ be the loss of $a_i$ when the class value is actually $y_k$.
 
-**Expected Risk for Action $a_i$:**
+Expected Risk for Action $a_i$:
 
 $$
 R(a_i | X) = \sum^{K}_{k = 1} \lambda_{ik} P(Y = y_k | X)
 $$
 
-**Choose $a_i$ if:**
+Hence, choose $a_i$ if:
 
 $$
 R(a_i | X) = \min_{k} R(a_k | X)
@@ -149,7 +143,7 @@ $$
 
 ### Reject or Doubt
 
-If the automatic system has low certainty of its decision and making a wrong decision may have very high cost, a manual decision is required.
+If the automatic system has low certainty of its decision and the cost of making a wrong decision may be very high, a manual decision is required.
 
 The solution is to define an additional action for *reject* or *doubt*, $a_{K + 1}$, with $a_i$, $i = 1, 2, \hdots K$, being the usual actions of predicting on classes $y_i$.
 
@@ -190,7 +184,7 @@ $$
 Choose reject if:
 
 $$
-R(a_{K + 1} | X) < R(a_{i} | X), i = 1, 2, \hdots K
+R(a_{K + 1} | X) < R(a_{k} | X), k = 1, 2, \hdots K
 $$
 
 #### Decision Rule 2
@@ -199,7 +193,7 @@ Predict $Y = y_i$ if the following conditions are true:
 
 $$
 \begin{gathered}
-P(Y = y_i | X) > R(Y = y_k | X), \forall k | k \ne i \\
+P(Y = y_i | X) > P(Y = y_k | X), \forall k | k \ne i \\
 P(Y = y_i | X) > 1 - \theta
 \end{gathered}
 $$

@@ -1,12 +1,11 @@
 # Artificial Neural Networks
 
-The human brain is a densely interconnected network of neurons, connected to others via axons. Axons are used to transmit nerve impulses from one neuron to another. The human brain learns by changing the strength of the synaptic connection between neurons. An Artificial Neural Network is composed of an interconnected assembly of nodes and directed links.
+The human brain is a dense network of neurons, connected to each other via axons. Axons are used to transmit nerve impulses from one neuron to another. The human brain learns by changing the strength of the synaptic connection between neurons. Similarly, an Artificial Neural Network is composed of an interconnected assembly of nodes and directed, weighted links.
 
 ## Perceptron
 
 - Every input node is connected via a weighted link to the output node. Weights can be positive, negative or zero (no connection).
-- The model is an assembly of interconnected nodes and weighted links.
-- Output node first sums up each of its input value according to the weights of its links. The weighted sum is compared against some threshold $\theta$ and an output is produced based on the sign of the result.
+- The output node first sums up each of its input values according to the weights of its links. The weighted sum is compared against some threshold $\theta$ (bias factor) and an output is produced based on the sign of the result.
 
 $$
 \text{sign}(z)
@@ -20,7 +19,7 @@ $$
 y = \text{sign}\bigg(\sum_{i=1}^d w_i X_i - \theta\bigg)
 $$
 
-Alternatively,
+Alternatively, it can be defined as the inner product of the weights and the input features:
 
 $$
 y = \text{sign}(\boldsymbol{w} \cdot \boldsymbol{x})
@@ -38,16 +37,16 @@ $$
 
 ### Learning (Gradient Descent Approach)
 
-During training, the weight parameters $\boldsymbol{w}$ are adjusted until the outputs of the perceptron become consistent with the true outputs of the training data. The weight parameters $\boldsymbol{w}$ are updated iteratively with every training example using the gradient descent approach.
+The weight parameters $\boldsymbol{w}$ is initialized with random values. During training, $\boldsymbol{w}$ is adjusted until the outputs of the perceptron become consistent with the true outputs of the training data. $\boldsymbol{w}$ is updated iteratively with every training example using the gradient descent approach.
 
 $$
-\boldsymbol{w}^{(t + 1)} = \boldsymbol{w}^{t} - \lambda \frac{\partial E(\boldsymbol{w})}{\partial \boldsymbol{w}}
+\boldsymbol{w}^{(t + 1)} = \boldsymbol{w}^{(t)} - \lambda \frac{\partial E(\boldsymbol{w})}{\partial \boldsymbol{w}}
 $$
 
 where $\lambda \in (0, 1]$ is the learning rate and $E(\boldsymbol{w})$ is the error function to be minimized.
 
 $$
-\boldsymbol{w}^* = \min_{\boldsymbol{w}} E(\boldsymbol{w})
+\boldsymbol{w}^* = \underset{\boldsymbol{w}}{\mathrm{argmin}} \: E(\boldsymbol{w})
 $$
 
 Let $h_i$ be the predicted output for $\boldsymbol{x}_i$ and consider the loss function for each training example as:
@@ -63,9 +62,9 @@ The weight update rule can be rewritten as:
 
 $$
 \begin{split}
-\boldsymbol{w}^{t + 1}
-&= \boldsymbol{w}^{t} - \lambda \frac{\partial E(\boldsymbol{w})}{\partial \boldsymbol{w}} \\
-&= \boldsymbol{w}^{t} - \lambda \frac{\partial E(h)}{\partial h} \frac{\partial h(z)}{\partial z} \frac{\partial z(\boldsymbol{w})}{\partial \boldsymbol{w}}
+\boldsymbol{w}^{(t + 1)}
+&= \boldsymbol{w}^{(t)} - \lambda \frac{\partial E(\boldsymbol{w})}{\partial \boldsymbol{w}} \\
+&= \boldsymbol{w}^{(t)} - \lambda \frac{\partial E(h)}{\partial h} \frac{\partial h(z)}{\partial z} \frac{\partial z(\boldsymbol{w})}{\partial \boldsymbol{w}}
 \end{split}
 $$
 
@@ -86,13 +85,13 @@ $$
 
 #### Learning Model
 
-- If the prediction is correct, $(y - h) = 0$, then the weight remains unchanged i.e. $\boldsymbol{w}^{(k + 1)} = \boldsymbol{w}^{(k)}$.
+- If the prediction is correct, $(y - h) = 0$, then the weight remains unchanged i.e. $\boldsymbol{w}^{(t + 1)} = \boldsymbol{w}^{(t)}$.
 - If $y = +1$ and $h = -1$, then $(y - h) = 2$.
     - The weights of all links with positive inputs need to be updated by increasing their values.
-    - The weights of all links with negative inputs need to be updated by decreasing their weights.
+    - The weights of all links with negative inputs need to be updated by decreasing their values.
 - If $y = -1$ and $h = +1$, then $(y - h) = -2$.
     - The weights of all links with positive inputs need to be updated by decreasing their values.
-    - The weights of all links with negative inputs need to be updated by increasing their weights.
+    - The weights of all links with negative inputs need to be updated by increasing their values.
 
 ### Notes
 
@@ -102,7 +101,7 @@ $$
 
 ## Multilayer Neural Networks
 
-- Multilayer ANNs are feed-forward neural networks i.e. the nodes in one layer are only connected to the nodes in the next layer.
+- Multilayer ANNs are feed-forward neural networks i.e. the nodes in one layer are only connected to the nodes in the next layer. Input Layer → Hidden Layer(s) → Output Layer.
 - Each node takes in the inputs and passes it through an **integration function** followed by an **activation function**.
 
 ### Integration Functions
@@ -158,7 +157,7 @@ $$
 The objective is to find the weights ${w'}_i$ that minimize the error function:
 
 $$
-\boldsymbol{w}^{(t + 1)} = \boldsymbol{w}^{t} - \lambda \frac{\partial E(\boldsymbol{w})}{\partial \boldsymbol{w}}
+\boldsymbol{w}^{(t + 1)} = \boldsymbol{w}^{(t)} - \lambda \frac{\partial E(\boldsymbol{w})}{\partial \boldsymbol{w}}
 $$
 
 However, in multilayer ANNs, the errors cannot be computed directly for the hidden nodes.
@@ -171,7 +170,7 @@ After initializing the weights, the training examples are *forward passed* throu
 
 *Backpropagation* involves starting with the output layer to propagate error back to the previous layer in order to update the weights between the two layers. Since it is not possible to calculate the error in the hidden layers, the error is decomposed using the weights and propagated back when a hidden layer is reached.
 
-For example, in Figure 8.1, $E_5$ or the error in $n_5$ will be decomposed using the weights and propagated back. Thus, the value of $E_3$ will be $E_5 \times w_35$ and the value of $E_4$ will be $E_5 \times w_45$.
+For example, in Figure 8.1, $E_5$ or the error in $n_5$ will be decomposed using the weights and propagated back. Thus, the value of $E_3$ will be $E_5 \times w_{35}$ and the value of $E_4$ will be $E_5 \times w_{45}$.
 
 Revisiting the gradient descent rule:
 

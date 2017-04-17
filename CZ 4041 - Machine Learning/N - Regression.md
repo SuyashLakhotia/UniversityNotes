@@ -17,7 +17,7 @@ E(w) &= \frac{1}{2} \sum_{i = 1}^N (f(x_i) - y_i)^2 \\
 \end{split}
 $$
 
-The linear model is learnt in terms of $w$ by minimizing the error:
+The linear model is learned in terms of $w$ by minimizing the error:
 
 $$
 w^* = \underset{w}{\mathrm{argmin}} \: E(w)
@@ -266,11 +266,11 @@ By using the kernel trick $k(x_i, x_j) = \phi(x_i) \cdot \phi(x_j)$:
 $$
 \begin{split}
 f(\boldsymbol{x}) &= \boldsymbol{w} \cdot \boldsymbol{\phi}(\boldsymbol{x}) \\
-f(\boldsymbol{x}) &= k(\boldsymbol{x})(\boldsymbol{K} + \lambda \boldsymbol{I})^{-1} \boldsymbol{y}
+f(\boldsymbol{x}) &= \boldsymbol{k}(\boldsymbol{x})^T (\boldsymbol{K} + \lambda \boldsymbol{I})^{-1} \boldsymbol{y}
 \end{split}
 $$
 
-where:
+where $\boldsymbol{k_i}(\boldsymbol{x}) = k(x_i, \boldsymbol{x})$ and:
 
 $$
 \begin{split}

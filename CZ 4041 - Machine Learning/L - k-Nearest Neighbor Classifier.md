@@ -17,8 +17,19 @@ To classify an unknown instance:
 One way to compute the distance between two points is by computing the Euclidean distance:
 
 $$
-d(\boldsymbol{x_i}, \boldsymbol{x_j}) = \sqrt{\sum_{k = 1}^d (x_{ik} - x_{jk})^2}
+\begin{split}
+d(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \sqrt{(\boldsymbol{x_i} - \boldsymbol{x_j})^T (\boldsymbol{x_i} - \boldsymbol{x_j})} \\
+                                      &= \sqrt{\sum_{k = 1}^d (x_{ik} - x_{jk})^2}
+\end{split}
 $$
+
+Another metric is the Mahalanobis Distance:
+
+$$
+d(\boldsymbol{x_i}, \boldsymbol{x_j}) = \sqrt{(\boldsymbol{x_i} - \boldsymbol{x_j})^T \boldsymbol{M} (\boldsymbol{x_i} - \boldsymbol{x_j})}
+$$
+
+where $\boldsymbol{M}$ is a $d \times d$ matrix that is learned from training data i.e. Metric Learning.
 
 To determine the class from the nearest neighbor list, a majority vote of class labels among the $k$-nearest neighbors can be used.
 

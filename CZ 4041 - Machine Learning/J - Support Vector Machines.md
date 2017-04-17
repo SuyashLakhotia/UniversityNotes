@@ -101,7 +101,7 @@ $$
 \boldsymbol{w} \cdot \boldsymbol{x_s} + b = k'\text{, where } k' < 0
 $$
 
-The two parallel hyperplanes passing the closest circle(s) and square(s) can be written as:
+Because the decision boundary is equidistant from both support vectors, the two parallel hyperplanes passing the closest circle(s) and square(s) can be written as:
 
 $$
 \begin{gathered}

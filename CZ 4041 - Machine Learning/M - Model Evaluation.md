@@ -18,11 +18,11 @@ $$
 
 However, this metric has limitations. For example, if the training set has 99 examples of Class 0 and 1 example of Class 1, even if the model predicts everything as Class 0, it has an accuracy of 99%, which is misleading.
 
-In many real-world applications, datasets may have imbalanced class distributions. Since accuracy measure treats every class as equally important, it may not be suitable for analyzing imbalanced datasets, where the rare class is considered more interesting than the majority class.
+In many real-world applications, datasets may have imbalanced class distributions. Since accuracy measure treats every class as equally important, it may not be suitable for analyzing imbalanced datasets, especially where the rare class is considered more interesting than the majority class.
 
 For binary classification, the rare class is often denoted as the positive class while the majority class is denoted as the negative class.
 
-**Precision** and **Recall** are two widely used metrics in applications where successful detection of one of the classes is considered more significant than detection of the other classes. A good model should have both high precision and recall.
+**Precision** and **Recall** are two widely used metrics in applications where successful detection of one of the classes is considered more significant than detection of the other classes. A good model should have both high precision and high recall.
 
 ## Precision
 

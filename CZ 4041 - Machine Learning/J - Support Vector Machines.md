@@ -1,16 +1,16 @@
 # Support Vector Machines
 
-SVMs are based on statistical learning theory that has shown promising empirical results in many practical applications, such as computer vision, sensor networks and text mining. The basic idea behind SVMs is the **maximum margin hyperplane**.
+SVMs are based on statistical learning theory and have shown promising empirical results in many practical applications, such as computer vision, sensor networks and text mining. SVMs are based on the concept of a **maximum margin hyperplane**.
 
 ## Maximum Margin
 
 The goal is to learn a binary classifier by finding a hyperplane (decision boundary) such that all the squares reside on one side of the hyperplane and all the circles reside on the other side. Although there are many hyperplanes that can separate the training examples perfectly, their generalization errors may be different.
 
-![Maximum Margin Example (2)](img/Maximum%20Margin%20Example.png)
+![Maximum Margin Example](img/Maximum%20Margin%20Example.png)
 
 Each decision boundary $B_1$ is associated with a pair of parallel hyperplanes &mdash; $b_{i1}$ and $b_{i2}$. $b_{i1}$ is obtained by moving the hyperplane until it touches the closest circle(s) and $b_{i2}$ is obtained by moving a hyperplane away from the decision boundary until it touches the closest square(s).
 
-The assumption is that larger margins imply better generalization errors. Since the margin of $B_1$ is larger than the margin of $B_2$, $B_1$ is better than $B_2$.
+The distance between the two parallel hyperplanes ($b_{i1}$ & $b_{i2}$) is known as the margin of the classifier. The assumption is that larger margins imply better generalization errors. Since the margin of $B_1$ is larger than the margin of $B_2$, $B_1$ is better than $B_2$.
 
 ## Math Review
 
@@ -41,8 +41,6 @@ $$
 $$
 
 Thus, when $\boldsymbol{u} \cdot \boldsymbol{v} = 0$, $\theta = 90^{\circ}$ i.e. $\boldsymbol{u}$ and $\boldsymbol{v}$ are orthogonal.
-
-The value of $v_u$ can be derived using the inner product:
 
 $$
 \begin{split}
@@ -107,7 +105,7 @@ The two parallel hyperplanes passing the closest circle(s) and square(s) can be 
 
 $$
 \begin{gathered}
-\boldsymbol{w} \cdot \boldsymbol{x_c} + b = \bar{k} \\
+\boldsymbol{w} \cdot \boldsymbol{x_c} + b = +\bar{k} \\
 \boldsymbol{w} \cdot \boldsymbol{x_s} + b = -\bar{k} \\
 \text{where } \bar{k} > 0
 \end{gathered}
@@ -147,7 +145,7 @@ $$
 d = \frac{2}{||\boldsymbol{w}||_2}
 $$
 
-where $d$ represents the margin i.e. $(||\boldsymbol{x_1} - \boldsymbol{x_2}||_2 \times \cos(\theta))$.
+where $d$ represents the margin i.e. $||\boldsymbol{x_1} - \boldsymbol{x_2}||_2 \times \cos(\theta)$.
 
 ![Deriving the Margin](img/Linear%20SVM%20Margin.png)
 
@@ -185,9 +183,9 @@ $$
 
 The optimization is convex and there are many numerical approaches that can be applied to solve it.
 
-## Linear SVM: Nonseperable Case
+## Linear SVM: Non-separable Case
 
-In seperable cases, there is no training data within the margin. However, in nonseperable cases, there may be training data that lies within the margin. Thus, slack variables $\xi \geq 0$ need to be introduced to absorb errors.
+In separable cases, there is no training data within the margin. However, in non-separable cases, there may be training data that lies within the margin. Thus, slack variables $\xi \geq 0$ need to be introduced to absorb errors.
 
 $$
 \begin{split}
@@ -210,7 +208,7 @@ $$
 ### Soft Error
 
 - Number of Misclassifications = #$\{\xi_i > 1\}$
-- Number of Nonseperable Points = #$\{\xi_i > 0\}$
+- Number of Non-separable Points = #$\{\xi_i > 0\}$
 
 Soft Errors:
 
@@ -231,7 +229,7 @@ where $C \geq 0$ is a parameter to tradeoff the impact of margin maximization an
 
 ## Non-linear SVM
 
-To generalize linear decision boundary to become non-linear, $\boldsymbol{x_i}$ has to be transformed to a higher dimensional space using a function $\varphi(\boldsymbol{x_i})$. The original input space is mapped to a higher dimensional feature space where the training set is separable.
+To generalize the linear decision boundary to become non-linear, $\boldsymbol{x_i}$ has to be transformed to a higher dimensional space using a function $\varphi(\boldsymbol{x_i})$. The original input space is mapped to a higher dimensional feature space where the training set is linearly separable.
 
 $$
 \varphi : \boldsymbol{x} \rightarrow \varphi(\boldsymbol{x})
@@ -250,7 +248,7 @@ $$
 
 where $\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b = 0$ is the hyperplane in feature space.
 
-However, computation in the feature space can be costly because it is high dimensional since the feature space is typically very high dimensional.
+However, computation in the feature space can be costly because it is typically very high dimensional.
 
 ### Kernel Trick
 
@@ -349,8 +347,7 @@ $$
 
 - The dual Langrangian involves only the Langrange multipliers and the training data.
 - The negative sign in the dual Langrangian transforms a minimization problem of the primal form to a maximization problem of the dual form.
-- The objective is to maximize $L_D(\boldsymbol{\lambda})$.
-    - Can be solved using numerical techniques such as quadratic programming.
+- The objective is to maximize $L_D(\boldsymbol{\lambda})$, which can be solved using numerical techniques such as quadratic programming.
 
 Once the $\lambda_i$ values are found, we can obtain the feasible solutions for $\boldsymbol{w}$ and $b$ from the two equations below:
 
@@ -371,13 +368,13 @@ $$
 \end{split}
 $$
 
+If $\boldsymbol{x_i}$ is a support vector, then the corresponding $\lambda_i > 0$, otherwise, $\lambda_i = 0$.
+
 A test instance $\boldsymbol{x^*}$ can be classified using:
 
 $$
 f(\boldsymbol{x^*}) = \text{sign}\Bigg(\sum_{i = 1}^N \lambda_i y_i \varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x^*}) + b \Bigg)
 $$
-
-If $\boldsymbol{x_i}$ is a support vector, then the corresponding $\lambda_i > 0$, otherwise, $\lambda_i = 0$.
 
 ### Non-linear SVM via Kernel Trick
 
@@ -393,7 +390,7 @@ $$
 \sum_{i = 1}^N \lambda_i y_i \big(\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x^*})\big) + b
 $$
 
-Thus, the data points only appear as inner product in feature space and can be replaced by the kernel function.
+Thus, the data points only appear as inner products in the feature space and can be replaced by the kernel function.
 
 Training:
 

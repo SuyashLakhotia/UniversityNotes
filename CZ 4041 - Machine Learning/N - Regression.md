@@ -2,7 +2,7 @@
 
 ## Linear Regression Model
 
-In a special case where an instance is represented by one input feature, the goal is to learn a linear function $f(x)$ (where $x$ is a scalar) in terms of $w$ (also a scalar) from $\{x_i, y_i\}$ such that the difference (i.e. error) between the predicted values of $f(x_i)^{'}$s and the ground truth values $y_i^{'}$s is as small as possible.
+In a special case where an instance is represented by one input feature, the goal is to learn a linear function $f(x)$ (where $x$ is a scalar) in terms of $w$ (also a scalar) from $\{x_i, y_i\}$ such that the difference (i.e. error) between the predicted values $f(x_i)$ and the ground truth values $y_i$ is as small as possible.
 
 $$
 f(x) = x \times w
@@ -51,9 +51,9 @@ If a matrix/vector $\boldsymbol{X}$ is transposed to $\boldsymbol{X}^T$, each el
 
 $$
 \begin{split}
-\boldsymbol{XY}^T &= \boldsymbol{Y}^T\boldsymbol{X}^T \\
-\boldsymbol{Xw}^T &= \boldsymbol{w}^T\boldsymbol{X}^T \\
-\boldsymbol{x^Tw}^T &= \boldsymbol{w}^T\boldsymbol{x} \\
+(\boldsymbol{XY})^T &= \boldsymbol{Y}^T\boldsymbol{X}^T \\
+(\boldsymbol{Xw})^T &= \boldsymbol{w}^T\boldsymbol{X}^T \\
+(\boldsymbol{x}^T\boldsymbol{w})^T &= \boldsymbol{w}^T\boldsymbol{x} \\
 x^T &= x
 \end{split}
 $$
@@ -62,6 +62,8 @@ $$
 
 - For a square matrix, if $\boldsymbol{X}$ is invertible, then $\boldsymbol{X}\boldsymbol{X}^{-1} = \boldsymbol{I}$, where $\boldsymbol{I}$ is the identity matrix.
 - Any vector (or matrix) $\boldsymbol{x}$ (or $\boldsymbol{X}$) times the identity matrix $\boldsymbol{I}$ equals to the vector (or matrix) itself.
+    - $\boldsymbol{Ix} = \boldsymbol{x}$ & $\boldsymbol{x}^T \boldsymbol{I} = \boldsymbol{x}^T$
+    - $\boldsymbol{XI} = \boldsymbol{X}$ & $\boldsymbol{IX} = \boldsymbol{X}$
 
 ## Linear Regression Model (cont.)
 
@@ -86,10 +88,10 @@ E(\boldsymbol{w}) &= \frac{1}{2} \sum_{i = 1}^N (f(\boldsymbol{x_i}) - y_i)^2 \\
 \end{split}
 $$
 
-Learn the linear model using in terms of $\boldsymbol{w}$ by minimizing the error:
+Learn the linear model in terms of $\boldsymbol{w}$ by minimizing the error:
 
 $$
-\boldsymbol{w^*} = \underset{\boldsymbol{w}}{\mathrm{argmin}} E(\boldsymbol{w}) + \frac{\lambda}{2} ||\boldsymbol{w}||_2^2
+\boldsymbol{w^*} = \underset{\boldsymbol{w}}{\mathrm{argmin}} \: E(\boldsymbol{w}) + \frac{\lambda}{2} ||\boldsymbol{w}||_2^2
 $$
 
 where $\lambda$ is a positive tradeoff parameter and $||\boldsymbol{w}||_2^2$ is a regularization term to control the complexity of the model.
@@ -142,20 +144,21 @@ $$
 \frac{\partial \Bigg(\frac{1}{2} \sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i} - y_i)^2 + \frac{\lambda}{2} \boldsymbol{w} \cdot \boldsymbol{w} \Bigg)}{\partial \boldsymbol{w}} &= 0 \\
 \sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i} - y_i)\boldsymbol{x_i} + \lambda\boldsymbol{w} &= 0 \\
 \sum_{i = 1}^N (\boldsymbol{w} \cdot \boldsymbol{x_i})\boldsymbol{x_i} - \sum_{i = 1}^N y_i\boldsymbol{x_i} + \lambda\boldsymbol{w} &= 0 \\
+\Bigg(\sum_{i = 1}^N (\boldsymbol{x_i} \boldsymbol{x_i}^T) \Bigg) \boldsymbol{w} - \sum_{i = 1}^N y_i \boldsymbol{x_i} + \lambda \boldsymbol{I} \boldsymbol{w} &= 0 \\
 (\boldsymbol{X}^T\boldsymbol{X})\boldsymbol{w} - \boldsymbol{X}^T\boldsymbol{y} + \lambda\boldsymbol{I}\boldsymbol{w} &= 0 \\
 (\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})\boldsymbol{w} &= \boldsymbol{X}^T\boldsymbol{y}
 \end{split}
 $$
 
 $$
-\boldsymbol{w} = (\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})^{-1}\boldsymbol{X}^T\boldsymbol{y}
+\therefore \: \boldsymbol{w} = (\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})^{-1}\boldsymbol{X}^T\boldsymbol{y}
 $$
 
 As long as $\lambda$ is positive, $(\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})$ is always invertible.
 
 ## Linear Basis Function Models
 
-Linear basis function models can be used for non-linear fitting. The linear function $f(\boldsymbol{x})$ in terms of a set of basis functions is written as:
+Linear basis function models can be used for non-linear fitting. The linear function $f(\boldsymbol{x})$ is written in terms of a set of basis functions:
 
 $$
 f(\boldsymbol{x}) = \boldsymbol{w} \cdot \boldsymbol{\phi}(\boldsymbol{x})
@@ -163,9 +166,7 @@ $$
 
 where $\boldsymbol{\phi}(\boldsymbol{x}) = (\boldsymbol{\phi}_0(\boldsymbol{x}), \boldsymbol{\phi}_1(\boldsymbol{x}), \hdots \boldsymbol{\phi}_m(\boldsymbol{x}))$ and each $\boldsymbol{\phi}_i(\boldsymbol{x})$ maps the instance $\boldsymbol{x}$ to a scalar.
 
-Typically, $\boldsymbol{\phi}_0(\boldsymbol{x}) = 1$, then $w_0$ acts as a bias.
-
-In the simplest case (if $d = m$ and $\boldsymbol{\phi}_i(\boldsymbol{x}) = x_i$), it is reduced to a standard linear model.
+Typically, $\boldsymbol{\phi}_0(\boldsymbol{x}) = 1$, then $w_0$ acts as a bias. In the simplest case, if $d = m$ and $\boldsymbol{\phi}_i(\boldsymbol{x}) = x_i$, it is reduced to a standard linear model.
 
 ### Examples of Basis Functions
 
@@ -190,13 +191,13 @@ $$
 **Gaussian Basis Functions:**
 
 $$
-\phi_j(\boldsymbol{x}) = \text{exp}\Big(- \frac{||\boldsymbol{x} - \boldsymbol{u}_j||_2^2}{2\sigma^2} \Big)
+\phi_j(\boldsymbol{x}) = \text{exp}\Bigg(- \frac{||\boldsymbol{x} - \boldsymbol{u}_j||_2^2}{2\sigma^2} \Bigg)
 $$
 
 **Sigmoid Basis Functions:**
 
 $$
-\phi_j(\boldsymbol{x}) = g\Big(\frac{||\boldsymbol{x} - \boldsymbol{u}_j||^2}{\sigma} \Big)
+\phi_j(\boldsymbol{x}) = g\Bigg(\frac{||\boldsymbol{x} - \boldsymbol{u}_j||^2}{\sigma} \Bigg)
 $$
 
 where:
@@ -265,7 +266,7 @@ By using the kernel trick $k(x_i, x_j) = \phi(x_i) \cdot \phi(x_j)$:
 $$
 \begin{split}
 f(\boldsymbol{x}) &= \boldsymbol{w} \cdot \boldsymbol{\phi}(\boldsymbol{x}) \\
-f(\boldsymbol{x}) &= \boldsymbol{k}(\boldsymbol{x})(\boldsymbol{K} + \lambda \boldsymbol{I})^{-1} \boldsymbol{y}
+f(\boldsymbol{x}) &= k(\boldsymbol{x})(\boldsymbol{K} + \lambda \boldsymbol{I})^{-1} \boldsymbol{y}
 \end{split}
 $$
 

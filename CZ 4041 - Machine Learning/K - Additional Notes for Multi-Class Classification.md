@@ -1,6 +1,6 @@
 # Additional Notes for Multi-Class Classification Problems
 
-Given a 3-class classification problem &mdash; $C_1$, $C_2$ & $C_3$, the following binary classifications are performed:
+Given a 3-class classification problem &mdash; $C_1$, $C_2$ & $C_3$, the following binary classifications can be performed:
 
 1. Binary Classification 1: Positive ($C_1$) v.s. Negative ($C_2$ & $C_3$)
 2. Binary Classification 2: Positive ($C_2$) v.s. Negative ($C_1$ & $C_3$)

@@ -26,6 +26,8 @@ $$
 y^* = \underset{k}{\mathrm{argmax}} \: \sum_{(\boldsymbol{x_i},y_i) \in N_{\boldsymbol{x^*}}} I(y = y_i)
 $$
 
+where $I$ is an indicator function that returns 1 if its input is true and 0 otherwise.
+
 ## Value of $k$
 
 - If $k$ is too small, sensitive to noise points.
@@ -33,7 +35,7 @@ $$
 
 ## Voting Approaches
 
-In simple majority voting, every neighbor has the same impact on the classification which makes the algorithm sensitive to the choice of $k$. The solution is to implement **distance-weight voting**:
+In simple majority voting, every neighbor has the same impact on the classification, which makes the algorithm sensitive to the choice of $k$. The solution is to implement **distance-weight voting**:
 
 $$
 y^* = \underset{k}{\mathrm{argmax}} \: \sum_{(\boldsymbol{x_i},y_i) \in N_{\boldsymbol{x^*}}} w_i \times I(y = y_i)
@@ -47,7 +49,7 @@ $$
 
 ## Normalization
 
-Another issue is that the feature may need to be scaled to prevent the distance from being dominated by some features. For example, the height of a person may vary from 1.5m to 1.8m but the income may vary from $10K to $10M. The solution is to normalize the features on different scales.
+Another issue is that features may need to be scaled to prevent the distance from being dominated by some features. For example, the height of a person may vary from 1.5m to 1.8m but the income may vary from $10K to $10M. The solution is to normalize the features of different scales.
 
 ### Min-Max Normalization
 
@@ -67,5 +69,5 @@ The above results in $\mu_{new} = 0$ and $\sigma_{new} = 1$.
 
 ## Notes
 
-- $k$-NN Classifiers are lazy learners as it does not build models explicitly.
+- $k$-NN Classifiers are lazy learners as they do not explicitly build models.
 - *Training* is very efficient but classifying unknown test instances is relatively expensive.

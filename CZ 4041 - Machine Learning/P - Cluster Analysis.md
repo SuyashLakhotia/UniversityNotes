@@ -23,7 +23,7 @@ where $\bar{x}_m$ is the mean of the $m$ dimension between the two points.
 ### Application of Clustering in Image Segmentation
 
 - There is a need for data reduction i.e. obtaining a compact representation for *interesting* image data in terms of a set of components.
-- The aim is to find components that belong together (form clusters).
+- The aim is to find the components that belong together (i.e. form clusters).
 
 ### Types of Clusterings
 
@@ -54,11 +54,11 @@ Algorithm:
 
 ### Problems with Selecting Initial Points
 
-If there are K 'real' clusters, then the chance of selecting one centroid from each cluster is small. The chance is relatively small when K is large and it is not guaranteed that the centroids will readjust themselves in the right way. To solve this, the following methods can be used:
+If there are K 'real' clusters, then the chance of selecting one centroid from each cluster is small, especially when K is large and because it is not guaranteed that the centroids will readjust themselves in the right way. To solve this, the following methods can be used:
 
 1. Multiple runs.
 2. Use hierarchical clustering to determine initial centroids.
-3. Select more than K initial centroids (that are widely separated) and then select among these initial centroids.
+3. Select more than K initial centroids and then select the most widely separated ones among these initial centroids.
 
 ### Evaluating K-means Clusters
 
@@ -68,7 +68,7 @@ $$
 SSE = \sum\limits_{i = 1}^K \sum\limits_{x \in C_i} d(m_i, x)^2
 $$
 
-where $x$ is a data point in cluster $C_i$ and $m_i$ is the representative point for cluster $C_i$.
+where $x$ is a data point in cluster $C_i$ and $m_i$ is the representative point for cluster $C_i$ (usually the center or mean).
 
 ### Limitations of K-means
 
@@ -80,13 +80,13 @@ K-means has problems when:
 
 ## Hierarchical Clustering
 
-Hierarchical clustering produces a set of nested clusters organized as a hierarchical tree and can be visualized as a dendogram.
+Hierarchical clustering produces a set of nested clusters organized as a hierarchical tree and can be visualized as a dendrogram.
 
 ![Hierarchical Clustering](img/Hierarchical%20Clustering.png)
 
 ### Strengths of Hierarchical Clustering
 
-- There is no assumption about the number of clusters and any desired number of clusters can be obtained by *cutting* the dendogram at the appropriate level.
+- There is no assumption about the number of clusters and any desired number of clusters can be obtained by *cutting* the dendrogram at the appropriate level.
 - The clustering may correspond to meaningful taxonomies (e.g. animal kingdom).
 
 ### Types of Hierarchical Clustering
@@ -142,7 +142,7 @@ $$
 
 Numerical measures used to judge various aspects of cluster validity are classified into three types:
 
-1. External Index: Used to measure the extent to which cluster labels match externally supplied cluster labels (Entropy, Purity).
+1. External Index: Used to measure the extent to which cluster labels match externally supplied class labels (Entropy, Purity).
 2. Internal Index: Used to measure the goodness of a clustering structure without respect to external information (Sum of Squared Error).
 3. Relative Index: Used to compare two different clusterings or clusters. Often an external or internal index is used for this function.
 
@@ -161,7 +161,7 @@ $$
 Cluster Cohesion measures how closely related objects are within a cluster. It can be measured by the within cluster sum of squares:
 
 $$
-WSS = \sum_i \sum_{x \in C_i} d(x, m_i)^2
+WSS = \sum_i \sum_{x \in C_i} (x - m_i)^2
 $$
 
 Cluster Separation measures how distinct or well-separated a cluster is from other clusters. It can be measured by the between cluster sum of squares:
@@ -170,12 +170,16 @@ $$
 BSS = \sum_i |C_i| (m - m_i)^2
 $$
 
-The sum of $WSS$ and $BSS$ will always be a constant.
+Total Sum of Squares or $TSS = WSS + BSS$ is constant with respect to differing values of K.
+
+$$
+TSS = \sum_{i = 1}^K \sum_{x \in C_i} (x - m)^2
+$$
 
 #### Proximity Graph Approach for Cohesion & Separation
 
-- Cluster Cohesion is the sum of the weight of all links within a cluster.
-- Cluster Separation is the sum of the weights between nodes in the cluster and nodes outside the cluster.
+- Cohesion is the sum of the weight of all links within a cluster.
+- Separation is the sum of the weights between nodes in the cluster and nodes outside the cluster.
 
 ![Cohesion & Separation (Proximity Graph)](img/Cohesion%20&%20Separation%20(Proximity%20Graph).png)
 
@@ -216,7 +220,7 @@ where $L$ is the number of classes.
 - Entropy of clustering:
 
 $$
-\boldsymbol{e} = \sum\limits_{j = 1}^K \frac{\boldsymbol{m_j}}{\boldsymbol{m}} \boldsymbol{e_j}
+\boldsymbol{e} = \sum\limits_{j = 1}^K \frac{m_j}{m} e_j
 $$
 
 where $m_j$ is the size of the cluster $j$, $K$ is the number of clusters and $m$ is the total number of data points.
@@ -244,4 +248,4 @@ Cluster analysis can be applied in the field of object recognition from images.
 
 ![Visual Object Classes Challenge](img/Visual%20Object%20Classes%20Challenge.png)
 
-The relationship between each image block / codeword is not needed when using this method.
+An advantage is that the relationship between each image block / codeword is not needed when using this method.

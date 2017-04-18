@@ -12,7 +12,7 @@ Ensemble learning refers to a collection of methods that learn a target function
 
 **When?**
 
-When you can build component classifiers that are more accurate than chance and, more importantly, that are independent from each other.
+When it is possible to build component classifiers that are more accurate than chance and, more importantly, that are independent from each other.
 
 ![Ensemble Learning](img/Ensemble%20Learning.png)
 
@@ -20,31 +20,32 @@ When you can build component classifiers that are more accurate than chance and,
 
 ### Increased Accuracy
 
-If the error of individual classifiers is independent, we can eliminate the error of combined classifier. For example:
+If the error of individual classifiers is independent, we can eliminate the error of combined classifier.
 
-Assume a binary classification problem for which you can train individual classifiers with an error rate of 0.3. Assume that you build an ensemble by combining the prediction of 21 such classifiers with a majority vote. If there are $i$ classifiers out of 21 making an error in prediction, the error of classification is:
-
-$$
-\begin{pmatrix} 21 \\ i \end{pmatrix} 0.3^i (1 - 0.3)^{21 - i}
-$$
-
-where:
+Assume a binary classification problem for which individual classifiers can be trained with an error rate of 0.3. Assume that an ensemble is built by combining the prediction of 21 such classifiers with a majority vote. If there are $i$ classifiers out of 21 making an error in prediction, the error of classification is:
 
 $$
-\begin{pmatrix} 21 \\ i \end{pmatrix} = \frac{21!}{(21 - i)! i!}
+\begin{gathered}
+\begin{pmatrix} 21 \\ i \end{pmatrix} 0.3^i (1 - 0.3)^{21 - i} \\
+\text{where} \, \begin{pmatrix} 21 \\ i \end{pmatrix} = \frac{21!}{(21 - i)! \, i!}
+\end{gathered}
 $$
 
 In order for the ensemble to misclassify an example, 11 or more classifiers have to be in error, or a probability of 0.026.
 
 $$
-\sum_{i = 11}^21 \begin{pmatrix} 21 \\ i \end{pmatrix} 0.3^i (1 - 0.3)^{21 - i} = 0.026
+\sum_{i = 11}^{21} \begin{pmatrix} 21 \\ i \end{pmatrix} 0.3^i (1 - 0.3)^{21 - i} = 0.026
+$$
+
+In general, the probability of an ensemble of $L$ classifiers with an accuracy rate of $p > 0.5$ correctly classifying an example is:
+
+$$
+\sum_{i = \big\lfloor \frac{L}{2} \big\rfloor + 1}^L \begin{pmatrix} L \\ i \end{pmatrix} p^i (1 - p)^{L - 1}
 $$
 
 ### Approximation by Ensemble Averaging
 
-The desired target function may not be implementable with individual classifiers, but may be approximated by ensemble averaging. For example:
-
-Assume that we use a single discriminant function as the classifier, whose decision boundary is linear. However, the true boundary may be non-linear. If we combine many linear discrimination functions, we can approximate the non-linear boundary.
+The desired target function may not be implementable with individual classifiers, but may be approximated by ensemble averaging. For example, if many linear discriminant functions are combined, the true non-linear boundary can be approximated.
 
 ## Methods for Constructing Ensembles
 
@@ -56,7 +57,7 @@ Assume that we use a single discriminant function as the classifier, whose decis
     a. The output targets for C classes are encoded with an L-bit codeword and an individual classifier is built to predict each one of the bits in the codeword.
     b. Additional "auxiliary" targets may be used to differentiate classifiers.
 4. Modifying the learning parameters of the classifier
-    a. A number of classifiers are built with different learning parameters, such as number of neighbors in a $k$-Nearest Neighbor rule, initial weights in a Multi-Layer Perceptron etc.
+    a. A number of classifiers are built with different learning parameters, such as the number of neighbors in a $k$-Nearest Neighbor rule, initial weights in a Multi-Layer Perceptron etc.
 
 ## Structure of Ensemble Classifiers
 
@@ -68,7 +69,7 @@ All the individual classifiers are invoked independently and their results are f
 
 ### Cascading or Hierarchical
 
-Classifiers are invoked in a sequential or tree-structured fashion. For the purpose of efficiency, inaccurate but fast methods are invoked first (maybe using a small subset of the features) and computationally more intensive but accurate methods are left for the latter stages.
+Classifiers are invoked in a sequential or tree-structured fashion. For the purpose of efficiency, inaccurate but fast methods are invoked first (maybe using a small subset of the features) and computationally more intensive but more accurate methods are left for the latter stages.
 
 ![Cascading Ensemble Learning](img/Cascading%20EL.png)
 
@@ -78,7 +79,7 @@ Classifiers are invoked in a sequential or tree-structured fashion. For the purp
 
 ### Static Combiners
 
-The combiner decision rule is independent of the feature vector. Static approaches can be broadly divided into non-trainable and trainable.
+In static combiners, the combiner decision rule is independent of the feature vector. Static approaches can be broadly divided into non-trainable and trainable.
 
 - Non-trainable: The voting is performed independent of the performance of each individual classifier.
     - Voting: used when each classifier produces a single class label. In this case, each classifier "votes" for a particular class and the class with the majority vote on the ensemble wins.
@@ -102,9 +103,9 @@ Training of this modular ensemble can be performed as follows:
 
 ### Adaptive Combiners
 
-The combiner is a function that depends on the input feature vector. Thus, the ensemble implements a function that is local to each region in the feature space.
+An adaptive combiner is a function that depends on the input feature vector. Thus, the ensemble implements a function that is local to each region in the feature space.
 
-This divide-and-conquer approach leads to modular ensembles where relatively simple classifiers specialize in different parts of the input-output space. In contrast with static-combiner ensembles, the individual experts here do not need to perform well for all inputs, only in their region of expertise.
+This divide-and-conquer approach leads to modular ensembles where relatively simple classifiers specialize in different parts of the input-output space. In contrast with static combiner ensembles, the individual experts here do not need to perform well for all inputs, only in their region of expertise.
 
 Representative examples of this approach are Mixture of Experts (ME) and Hierarchical ME.
 
@@ -120,16 +121,16 @@ Representative examples of this approach are Mixture of Experts (ME) and Hierarc
 
 ## Bagging
 
-This method is also known as "arcing" (adaptive re-weigthing and combining). One of the simplest is "bagging" (bootstrap aggregation).
+"Bagging" (bootstrap aggregation) is one of the simplest examples of "arcing" (adaptive re-weighting and combining).
 
 **Algorithm:**
 
-1. Given $N$ labeled data points $\{x_i\}$, use random sampling (with replacement) to create $K$ new data sets, each with $N’ < N$.
+1. Given $N$ labeled data points $\{x_i\}$, use random sampling (with replacement) to create $K$ new data sets, each with $N’ < N$ data points.
 2. Learn a classifier (of whatever type) based on each of the $K$ data sets giving $K$ classifiers.
 3. Classify a new point $x$ based on a majority vote among the $K$ classifiers.
 
 - The perturbation in the training set due to the bootstrap resampling causes different hypotheses to be built, particularly if the classifier is unstable.
-    - A classifier is said to be unstable if a small change in the training data (e.g. order of presentation of examples) can lead to a radically different hypothesis. This is the case of decision trees and, arguably, neural networks.
+    - A classifier is said to be unstable if a small change in the training data (e.g. order of presentation of examples) can lead to a radically different hypothesis. This is the case of decision trees and (arguably) neural networks.
 - Bagging can be expected to improve accuracy if the induced classifiers are uncorrelated.
     - In some cases, such as $k$-Nearest Neighbors, bagging has been shown to degrade performance as compared to individual classifiers as a result of an effectively smaller training set.
 
@@ -137,9 +138,13 @@ This method is also known as "arcing" (adaptive re-weigthing and combining). One
 
 Boosting takes a different resampling approach than bagging, which maintains a constant probability of $1 / N$ for selecting each individual example. In boosting, this probability is adapted over time based on performance. The component classifiers are built sequentially and examples that are mislabeled by previous components are chosen more often than those that are correctly classified.
 
-Boosting is based on the concept of a "weak learner" (i.e. an algorithm that performs slightly better than chance). An example is a binary classifier with a 50% classification rate. A weak learner can be converted into a strong learner by changing the distribution of the training examples. Boosting can also be used with classifiers that are highly accurate but the benefits in this case will be very small.
+Boosting is based on the concept of a "weak learner" (i.e. an algorithm that performs slightly better than chance). An example is a binary classifier with a 50% classification rate. A weak learner can be converted into a strong learner by changing the distribution of the training examples. While boosting can also be used with classifiers that are highly accurate, the benefits in this case will be very small.
 
 A popular variant of boosting is AdaBoost (Adaptive Boosting), which allows the designer to continue adding components until an arbitrarily small error rate is obtained on the training set.
+
+![Illustration of Re-Weighting Concept](img/Illustration%20of%20Re-Weighting%20Concept.png)
+
+\vfill\eject
 
 ### AdaBoost
 

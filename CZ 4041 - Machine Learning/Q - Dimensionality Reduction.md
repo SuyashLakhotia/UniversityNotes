@@ -2,16 +2,15 @@
 
 **Why?**
 
-- Reduces time complexity (less computation)
-- Reduces space complexity (fewer parameters)
+- Reduces time complexity (less computation).
+- Reduces space complexity (fewer parameters).
 - Saves the cost of observing the feature.
 - Simpler models are more robust on small datasets.
-- More interpretable (simpler explanation).
 - Data visualization is easier if plotted in 2 or 3 dimensions.
 
 **Feature Selection vs Extraction**
 
-Feature selection involves choosing $k < d$ important features, ignoring the remaining $d - k$ features. E.g. Subset selection algorithms.
+Feature selection involves choosing $k < d$ important features, ignoring the remaining $d - k$ features. E.g. subset selection algorithms.
 
 Feature extraction involves projecting the original $d$ dimensions to new $k < d$ dimensions.
 
@@ -43,21 +42,22 @@ $$
 (\boldsymbol{A} - \lambda\boldsymbol{I})\boldsymbol{x} = 0
 $$
 
-The above equation has a non-zero solution for $\boldsymbol{x}$ if and only if:
+The above equation has a non-zero solution for $\boldsymbol{x}$ if:
 
 $$
 |\boldsymbol{A} - \lambda\boldsymbol{I}| = 0
 $$
 
-$$
-|\boldsymbol{A}| = \begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc
-$$
-
-$$
-|\boldsymbol{A}| = \begin{vmatrix} a & b & c \\ d & e & f \\ g & h & i \end{vmatrix} = a\,\begin{vmatrix} e & f \\ h & i \end{vmatrix} - b\,\begin{vmatrix} d & f \\ g & i \end{vmatrix} + c\,\begin{vmatrix} d & e \\ g & h \end{vmatrix}
-$$
-
 The eigenvalue is obtained by solving the characteristic equation above.
+
+### Matrix Determinant
+
+$$
+\begin{gathered}
+|\boldsymbol{A}| = \begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc \\
+|\boldsymbol{A}| = \begin{vmatrix} a & b & c \\ d & e & f \\ g & h & i \end{vmatrix} = a\,\begin{vmatrix} e & f \\ h & i \end{vmatrix} - b\,\begin{vmatrix} d & f \\ g & i \end{vmatrix} + c\,\begin{vmatrix} d & e \\ g & h \end{vmatrix}
+\end{gathered}
+$$
 
 ## Principal Component Analysis (PCA)
 
@@ -72,7 +72,7 @@ $$
 \end{gathered}
 $$
 
-Given a set of patterns $\boldsymbol{x}_p$ where $p = 1, 2, \hdots P$, the goal is to find the unit vector $\boldsymbol{w}$ that maximizes the covariance $\text{cov}(z)$.
+Given a set of patterns $\boldsymbol{x}_p$ where $p = 1, 2, \hdots P$, the goal is to find unit vectors $\boldsymbol{w}$ that maximize the covariance $\text{cov}(z)$.
 
 $$
 \begin{split}
@@ -88,7 +88,7 @@ $$
 $\boldsymbol{C_{xx}}$ represents the covariance matrix and the aim of PCA is to find the $\boldsymbol{w}$ that satisfies:
 
 $$
-\max_{\boldsymbol{w}} \boldsymbol{w}^T \boldsymbol{C_{xx}} \boldsymbol{w} \text{ such that } ||\boldsymbol{w}|| = 1
+\max_{\boldsymbol{w}} \boldsymbol{w}^T \boldsymbol{C_{xx}} \boldsymbol{w} \:\: \text{such that} \:\: ||\boldsymbol{w}|| = 1
 $$
 
 This can be done by minimizing the cost:
@@ -110,7 +110,7 @@ Thus, the projection vectors are given by the eigenvectors of the covariance mat
 
 Given a matrix of size $n \times n$, there are $n$ eigenvectors and $n$ corresponding eigenvalues. Let $\boldsymbol{u}_1, \boldsymbol{u}_2 \hdots \boldsymbol{u}_n$ be the eigenvectors and $\lambda_1, \lambda_2 \hdots \lambda_n$ be the corresponding eigenvalues in decreasing order. Thus, $\boldsymbol{u}_1$ is the first principal eigenvector and the second principal eigenvector is $\boldsymbol{u}_2$ and so on.
 
-Eigenmatrix $\boldsymbol{U}$ contains the eigenvectors as columns with the principal eigenvector first, the second principal eigenvector next and so on:
+Eigenmatrix $\boldsymbol{U}$ contains the eigenvectors as columns with the top principal eigenvector first, the second principal eigenvector next and so on:
 
 $$
 \boldsymbol{U} = \begin{pmatrix} \boldsymbol{u}_1 & \boldsymbol{u}_2 & \hdots & \boldsymbol{u}_n \end{pmatrix}
@@ -118,7 +118,7 @@ $$
 
 ### Projecting the Data
 
-The data can now be represented in eigenspace by rotating the mean-corrected data by eigenvectors. A given data point $\boldsymbol{x}$ will be represented in eigenspace by $\boldsymbol{z}$:
+The data can now be represented in eigenspace by rotating the mean-corrected data by the eigenvectors. A given data point $\boldsymbol{x}$ will be represented in eigenspace by $\boldsymbol{z}$:
 
 $$
 \boldsymbol{z} = \boldsymbol{U}^T (\boldsymbol{x} - \boldsymbol{\mu})
@@ -131,14 +131,14 @@ Since the eigenmatrix is orthogonal (i.e. $\boldsymbol{U}^T \boldsymbol{U} = \bo
 $$
 \begin{split}
 \boldsymbol{U} \boldsymbol{z} &= \boldsymbol{U} \boldsymbol{U}^T (\boldsymbol{x} - \boldsymbol{\mu}) \\
-                              &= \boldsymbol{x} - \boldsymbol{\mu} \\
+\boldsymbol{U} \boldsymbol{z} &= \boldsymbol{x} - \boldsymbol{\mu} \\
                \boldsymbol{x} &= \boldsymbol{U} \boldsymbol{z} + \boldsymbol{\mu}
 \end{split}
 $$
 
 ### Dimensionality Reduction
 
-The first principal component of the data carries most of the variance (information) of the data, the second principal component carries the next and so on. We can represent data in a lower $k$ dimensional space loosing the least amount of information by using the top $k$ principal components of the data.
+The first principal component of the data carries most of the variance (information) of the data, the second principal component carries the next most and so on. We can represent data in a lower $k$ dimensional space loosing the least amount of information by using the top $k$ principal components of the data.
 
 Let $\boldsymbol{\tilde{z}} = (z_1, z_2, \hdots z_k)^T$ be the data in the $k < n$ dimensional space and $\boldsymbol{U_k}$ be the eigenmatrix with the top $k$ eigenvectors:
 
@@ -146,7 +146,7 @@ $$
 \boldsymbol{\tilde{z}} = \boldsymbol{U_k}^T (\boldsymbol{x} - \boldsymbol{\mu})
 $$
 
-By transforming data into a lower dimensional space, we inevitably loose information. The reduced dimensional data can be projected back to the original space:
+By transforming data into a lower dimensional space, we inevitably loose information. The reduced dimensional data can be projected back to the original space using:
 
 $$
 \boldsymbol{\hat{x}} = \boldsymbol{U_k} \boldsymbol{\tilde{z}} + \boldsymbol{\mu}
@@ -176,18 +176,18 @@ When $\boldsymbol{X}$ is the mean-corrected data matrix, $\boldsymbol{S}$ is pro
 
 ## Feature Embedding
 
-When $\boldsymbol{X}$ is the $N \times d$ data matrix:
+When $\boldsymbol{X}$ is a $N \times d$ data matrix:
 
-- $\boldsymbol{X}^T \boldsymbol{X}$ is the $d \times d$ matrix (covariance of features if mean-centered)
-- $\boldsymbol{X} \boldsymbol{X}^T$ is the $N \times N$ matrix (pairwise similarities between instances)
+- $\boldsymbol{X}^T \boldsymbol{X}$ is a $d \times d$ matrix (covariance of features if mean-centered)
+- $\boldsymbol{X} \boldsymbol{X}^T$ is a $N \times N$ matrix (pairwise similarities between instances)
 
-PCA uses eigenvectors of $\boldsymbol{X}^T \boldsymbol{X}$ which are $d$-dimensional and can be used for projection. Feature embedding uses the eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$ which are $N$-dimensional and which give the coordinates after projection directly (without a projection vector).
+PCA uses eigenvectors of $\boldsymbol{X}^T \boldsymbol{X}$ which are $d$-dimensional and can be used for projection. Feature embedding uses the eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$ which are $N$-dimensional and give the coordinates after projection directly (without a projection vector).
 
 Sometimes, it is possible to define pairwise similarities (or distances) between instances and use feature embedding without needing to represent the instances as vectors.
 
 By spectral decomposition, $\boldsymbol{X} \boldsymbol{X}^T = \boldsymbol{V} \boldsymbol{E} \boldsymbol{V}^T$, where $\boldsymbol{V}$ has eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$ as columns.
 
-Feature embedding uses the significant eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$ as features &mdash; $k < N$. Feature embedding is preferred when $N < d$.
+Feature embedding uses the significant eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$ as features ($k < N$). Feature embedding is preferred when $N < d$.
 
 ## Math Review - Singular Value Decomposition
 
@@ -195,7 +195,7 @@ $$
 \boldsymbol{X} = \boldsymbol{V} \boldsymbol{A} \boldsymbol{U}^T
 $$
 
-where $\boldsymbol{V}$ is $N \times N$ and contains the eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$, $\boldsymbol{U}$ is $d \times d$ and contains the eigenvectors of $\boldsymbol{X}^T \boldsymbol{X}$ and $\boldsymbol{A}$ is $N \times d$ and contains singular values on its first $k$ diagonal. Singular values are square roots of eigenvalues.
+where $\boldsymbol{V}$ is $N \times N$ and contains the eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$, $\boldsymbol{U}$ is $d \times d$ and contains the eigenvectors of $\boldsymbol{X}^T \boldsymbol{X}$ and $\boldsymbol{A}$ is $N \times d$ and contains singular values on its first $k$ diagonal. The singular values are square roots of eigenvalues.
 
 $$
 \boldsymbol{X} = \boldsymbol{v_1}a_1\boldsymbol{u_1}^T + \hdots + \boldsymbol{v_k}a_k\boldsymbol{u_k}^T
@@ -223,7 +223,7 @@ The goal is to find a low-dimensional space such that when $\boldsymbol{x}$ is p
 
 #### $K$ = 2 Classes
 
-![Linear Discriminant Analysis](img/Linear%20Discriminant%20Analysis.png)
+![Linear Discriminant Analysis](img/Linear%20Discriminant%20Analysis.png){height=220px}
 
 Find $\boldsymbol{w}$ that maximizes the objective function (Fisher Ratio):
 
@@ -258,10 +258,10 @@ $$
 J(\boldsymbol{w}) = \frac{\boldsymbol{w}^T \boldsymbol{S}_B \boldsymbol{w}}{\boldsymbol{w}^T \boldsymbol{S}_W \boldsymbol{w}} = \frac{|\boldsymbol{w}^T (\boldsymbol{m_1} - \boldsymbol{m_2})|^2}{\boldsymbol{w}^T \boldsymbol{S}_W \boldsymbol{w}}
 $$
 
-Thus, the LDA solution, $\boldsymbol{w}$ (i.e. Fisher's linear discriminant line), is given by:
+Thus, the LDA solution, $\boldsymbol{w}$ (i.e. Fisher's linear discriminant line) is given by:
 
 $$
-\boldsymbol{w} = c \cdot \boldsymbol{S}_W^{-1} (\boldsymbol{m_1} - \boldsymbol{m_2})
+\boldsymbol{w} = c \cdot {\boldsymbol{S}_W}^{-1} (\boldsymbol{m_1} - \boldsymbol{m_2})
 $$
 
 where $c = 1.0$ is a constant.
@@ -274,7 +274,7 @@ $$
 \boldsymbol{S}_B = \sum_{k = 1}^K |C_k| (\boldsymbol{m_k} - \boldsymbol{m})(\boldsymbol{m_k} - \boldsymbol{m})^T
 $$
 
-where $\boldsymbol{m} = \frac{1}{K} \sum_{k = 1}^K \boldsymbol{m_k}$.
+where $\boldsymbol{m}$ is the grand mean.
 
 The within-class scatter $\boldsymbol{S}_W$:
 
@@ -288,7 +288,51 @@ $$
 J(\boldsymbol{W}) =  \frac{|\boldsymbol{W}^T \boldsymbol{S}_B \boldsymbol{W}|}{|\boldsymbol{W}^T \boldsymbol{S}_W \boldsymbol{W}|}
 $$
 
-The largest eigenvectors $\boldsymbol{S}_W^{-1} \boldsymbol{S}_B$ gives the solution.
+The largest eigenvectors of ${\boldsymbol{S}_W}^{-1} \boldsymbol{S}_B$ gives the solution.
+
+## Math Review - Inverse of Matrix
+
+$$
+\begin{gathered}
+\boldsymbol{A} = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \\
+\boldsymbol{A}^{-1} = \frac{1}{|\boldsymbol{A}|} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+\end{gathered}
+$$
+
+$$
+\begin{gathered}
+\boldsymbol{A} =
+\begin{pmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+\end{pmatrix} \\
+\boldsymbol{A}^{-1} = \frac{1}{|\boldsymbol{A}|}
+\begin{pmatrix}
+    \begin{vmatrix} a_{22} & a_{23} \\ a_{32} & a_{33} \end{vmatrix} &
+    \begin{vmatrix} a_{13} & a_{12} \\ a_{33} & a_{32} \end{vmatrix} &
+    \begin{vmatrix} a_{12} & a_{13} \\ a_{22} & a_{23} \end{vmatrix} \\
+    & & \\
+    \begin{vmatrix} a_{23} & a_{21} \\ a_{33} & a_{31} \end{vmatrix} &
+    \begin{vmatrix} a_{11} & a_{13} \\ a_{31} & a_{33} \end{vmatrix} &
+    \begin{vmatrix} a_{13} & a_{11} \\ a_{23} & a_{21} \end{vmatrix} \\
+    & & \\
+    \begin{vmatrix} a_{21} & a_{22} \\ a_{31} & a_{32} \end{vmatrix} &
+    \begin{vmatrix} a_{12} & a_{11} \\ a_{32} & a_{31} \end{vmatrix} &
+    \begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix}
+\end{pmatrix} \\
+\text{i.e.} \:
+\begin{pmatrix}
+    a_{22} a_{33} - a_{23} a_{32} & a_{13} a_{32} - a_{12} a_{33} & a_{12} a_{23} - a_{13} a_{22} \\
+    a_{23} a_{31} - a_{21} a_{33} & a_{11} a_{33} - a_{13} a_{31} & a_{13} a_{21} - a_{11} a_{23} \\
+    a_{21} a_{32} - a_{22} a_{31} & a_{12} a_{31} - a_{11} a_{32} & a_{11} a_{22} - a_{12} a_{21}
+\end{pmatrix}
+\end{gathered}
+$$
+
+$$
+\boldsymbol{A} \boldsymbol{A}^{-1} = \boldsymbol{I}
+$$
 
 ## Notes
 

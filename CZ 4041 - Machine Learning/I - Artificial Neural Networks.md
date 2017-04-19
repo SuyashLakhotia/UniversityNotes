@@ -19,7 +19,7 @@ $$
 y = \text{sign}\bigg(\sum_{i=1}^d w_i X_i - \theta\bigg)
 $$
 
-Alternatively, it can be defined as the inner product of the weights and the input features:
+Alternatively, it can be defined as the inner product (Section 9.2.2) of the weights and the input features:
 
 $$
 y = \text{sign}(\boldsymbol{w} \cdot \boldsymbol{x})
@@ -37,7 +37,7 @@ $$
 
 ### Learning (Gradient Descent Approach)
 
-The weight parameters $\boldsymbol{w}$ is initialized with random values. During training, $\boldsymbol{w}$ is adjusted until the outputs of the perceptron become consistent with the true outputs of the training data. $\boldsymbol{w}$ is updated iteratively with every training example using the gradient descent approach.
+The weight parameter $\boldsymbol{w}$ is initialized with random values. During training, $\boldsymbol{w}$ is adjusted until the outputs of the perceptron become consistent with the true outputs of the training data. $\boldsymbol{w}$ is updated iteratively with every training example using the gradient descent approach.
 
 $$
 \boldsymbol{w}^{(t + 1)} = \boldsymbol{w}^{(t)} - \lambda \frac{\partial E(\boldsymbol{w})}{\partial \boldsymbol{w}}
@@ -96,7 +96,7 @@ $$
 ### Notes
 
 - The decision boundary of a perceptron is a linear hyperplane.
-- The perceptron learning algorithm is guaranteed to converge to an optimal solution for linear classification problems.
+- The perceptron learning algorithm is guaranteed to converge to an optimal solution for linear classification problems. (See: Lecture 4b, Slide 15)
 - However, if the problem is not linearly separable, the algorithm fails to converge.
 
 ## Multilayer Neural Networks

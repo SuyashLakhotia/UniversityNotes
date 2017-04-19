@@ -220,7 +220,7 @@ Learning with soft errors:
 
 $$
 \begin{gathered}
-\min_w \frac{||\boldsymbol{w}||_2^2}{2} + C \Bigg(\sum_{i = 1}^N \xi_i \Bigg) \\
+\min_{\boldsymbol{w}} \frac{||\boldsymbol{w}||_2^2}{2} + C \Bigg(\sum_{i = 1}^N \xi_i \Bigg) \\
 \text{s.t. } y_i (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 - \xi_i \text{, } i = 1, 2, \hdots N, \xi_i \geq 0
 \end{gathered}
 $$
@@ -405,3 +405,35 @@ $$
 $$
 
 If $\boldsymbol{x_i}$ is a support vector, then the corresponding $\lambda_i > 0$, otherwise, $\lambda_i = 0$.
+
+### Soft Margin Dual Form
+
+$$
+\begin{gathered}
+\min_{\boldsymbol{w}} \frac{||\boldsymbol{w}||_2^2}{2} + C \Bigg(\sum_{i = 1}^N \xi_i \Bigg) \\
+\text{s.t. } y_i (\boldsymbol{w} \cdot \varphi(\boldsymbol{x_i}) + b) \geq 1 - \xi_i \text{, } i = 1, 2, \hdots N, \xi_i \geq 0
+\end{gathered}
+$$
+
+The optimization problem can be transformed to its dual form using Lagrangian multipliers:
+
+$$
+\begin{gathered}
+\min_{\boldsymbol{\lambda}} L_D(\boldsymbol{\lambda}) = - \Bigg(\frac{1}{2} \sum_{i, j} \lambda_i \lambda_j y_i y_j (\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x_j})) - \sum_{i = 1}^N \lambda_i \Bigg) \\
+\text{s.t. } 0 \leq \lambda_i \leq C
+\end{gathered}
+$$
+
+The decision boundary is given by:
+
+$$
+\boldsymbol{w} \cdot \varphi(\boldsymbol{x}) + b = \Bigg(\sum_{i = 1}^N \lambda_i y_i (\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x})) \Bigg) + b = 0
+$$
+
+The kernel trick can be applied to the inner products in the equations above.
+
+A test instance $\boldsymbol{x^*}$ can be classified using:
+
+$$
+f(\boldsymbol{x^*}) = \text{sign}\Bigg(\sum_{i = 1}^N \lambda_i y_i (\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x^*})) + b \Bigg)
+$$

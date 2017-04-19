@@ -2,6 +2,7 @@
 
 ## Underfitting & Overfitting
 
+- See Lecture 4a.1, Slides 2 - 5 for graphical example.
 - Underfitting occurs when the model is too simple, and hence, both training and test error rates are large.
 - Overfitting occurs when the test error rate begins to increase even though the training error rate continues to decrease.
     - Overfitting results in decision trees that are more complex than necessary.

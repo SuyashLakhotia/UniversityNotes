@@ -64,6 +64,8 @@ $$
 
 A tail-to-tail node $X$ blocks the path from $Y$ to $Z$ if it is observed i.e. $Y, Z$ become independent.
 
+\vfill\eject
+
 ### Head-to-Tail Node (Causal Effect)
 
 ![Head-to-Tail](img/Head-to-Tail.png){height=50px}
@@ -73,7 +75,7 @@ If $Y$ is unobserved:
 $$
 \begin{split}
 P(X, Z) &= \sum_Y P(X, Y, Z) \\
-        &= \sum_Y P(X) P(Y | X) P(Z | Y) \\
+        &= \sum_Y P(Y) P(X | Y) P(Z | Y) \\
         &\neq P(X) P(Z)
 \end{split}
 $$
@@ -129,10 +131,15 @@ Consider $n$ binary variables $(X_1, \hdots X_n)$.
 
 ## d-Separation
 
-Given an arbitrary subset of nodes, $A$, $B$ and $C$, a path from nodes in $A$ to nodes in $B$ is blocked (d-separated) by nodes in $C$ if one of the following conditions is satisfied:
+Given an arbitrary subset of nodes, $A$, $B$ and $C$, a path from a node in $A$ to a node in $B$ is blocked (d-separated) by a node in $C$ if one of the following conditions is satisfied:
 
-1. The directions of edges meet head-to-tail and the node is in $C$.
-2. The directions of edges meet tail-to-tail and the node is in $C$.
-3. The directions of edges meet head-to-head and neither that node or any of its descendants is in $C$.
+1. The directions of edges meet head-to-tail at a node in $C$.
+2. The directions of edges meet tail-to-tail at a node in $C$.
+3. The directions of edges meet head-to-head at a node that is neither in $C$ nor are any of its descendants in $C$.
 
 If all paths are blocked, $A$ and $B$ are d-separated (i.e. conditionally independent) given $C$.
+
+## Missing Topics
+- Constructing Bayesian Networks
+- Generative Models (Classification, Naive Bayes' Classifier, Linear Regression)
+- Belief Propagation

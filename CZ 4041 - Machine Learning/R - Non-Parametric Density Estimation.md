@@ -20,7 +20,7 @@ $$
 \int P_H dx = \sum P_H (x_c) \times P_W = 1
 $$
 
-where $P_H(x_c)$ is the height of each bin and $P_W$ is the width.
+where $x_c$ is the center of each bin, $P_H(x_c)$ is the height of each bin and $P_W$ is the width.
 
 ### Pros/Cons
 
@@ -42,7 +42,7 @@ where $P_H(x_c)$ is the height of each bin and $P_W$ is the width.
 The probability that a vector $x$, drawn from a distribution $p(x)$, will fall in a given region $R$ of the same space is:
 
 $$
-P = \int_{R_{\text{lower}}}^{R_{\text{upper}}} p(u) du
+P = \int_{R_{\text{lower}}}^{R_{\text{upper}}} p(x) dx
 $$
 
 Assume that we have $N$ sample points $x_1, x_2, \hdots x_N$ from the distribution that we want to estimate. The probability that $k$ of these $N$ sample points fall in $R$ is given by the binomial distribution:
@@ -114,20 +114,20 @@ K(u) =
 \end{cases}
 $$
 
-The kernel, which corresponds to a unit hypercube centered at the origin is knows as Parzen window or the naive estimator.
+The kernel, which corresponds to a unit hypercube centered at the origin is known as Parzen window or the naive estimator.
 
-Then, $K((x - x^i) / h)$ is equal to one if $|(x - x^i)| < h / 2$. In other words, the point $x^i$ is inside a hypercube of side $h$ centered on $x$.
+Then, $K((x - x_i) / h)$ is equal to 1 if $|(x - x_i)| < h / 2$. In other words, the point $x_i$ is inside a hypercube of side $h$ centered on $x$.
 
 The total number of points at $x$ inside the hypercube is:
 
 $$
-k = \sum_{i = 1}^N K\bigg(\frac{x - x^i}{h}\bigg)
+k = \sum_{i = 1}^N K\bigg(\frac{x - x_i}{h}\bigg)
 $$
 
 Now that we know $k$, $V$ & $N$:
 
 $$
-p_{\text{KDE}}(x) = \frac{1}{Nh^d} \sum_{i = 1}^N K\bigg(\frac{x - x^i}{h}\bigg)
+p_{\text{KDE}}(x) = \frac{1}{Nh^d} \sum_{i = 1}^N K\bigg(\frac{x - x_i}{h}\bigg)
 $$
 
 Notice that the Parzen window density estimate resembles the histogram, with the exception that the bin locations are determined by the data points.
@@ -157,17 +157,17 @@ Usually, the selected kernel function fulfills the following conditions:
 - Symmetric
 - Unimodal
 
-Therefore, the multivariate Gaussian density function can be used:
+The multivariate Gaussian density function can be used:
 
 $$
 K(x) = \frac{1}{(2 \pi)^{d / 2}} \text{exp}\bigg(-\frac{1}{2} x^T x \bigg)
 $$
 
-The Parzen window approach can be considered as a sum of boxes centered at the observations while the smooth kernel approach can be considered as a sum of *bumps* placed at the data points. The shape of the bumps is determined by the kernel function. The parameter $h$, also called the smoothing parameter or bandwidth determines the width.
+The Parzen window approach can be considered as a sum of boxes centered at the observations while the smooth kernel approach can be considered as a sum of *bumps* placed at the data points. The shape of the bumps is determined by the kernel function. The parameter $h$, also called the smoothing parameter or bandwidth determines their width.
 
 ## Bandwidth Selection
 
-The problem of choosing the bandwidth is crucial in the density estimation, for smooth kernel functions and histograms alike.
+The problem of choosing the bandwidth is crucial in the density estimation, for Parzen windows and histograms alike.
 
 - A large bandwidth will over-smooth the density and mask the structure in the data.
 - A small bandwidth will yield a density estimate that is spiky and very hard to interpret.
@@ -176,8 +176,8 @@ We would like to find a value of the smoothing parameter that minimizes the erro
 
 $$
 \begin{split}
-\text{MSE}(p_{\text{KDE}}(x)) &= E[(p_{\text{KDE}}(x) - p(x))^2] \\
-                                     &= (E(p_{\text{KDE}}(x) - p(x)))^2 + \text{Var}(p_{\text{KDE}}(x))
+\text{MSE}(p_{\text{KDE}}(x)) &= E\big[(p_{\text{KDE}}(x) - p(x))^2\big] \\
+                              &= \big(E(p_{\text{KDE}}(x) - p(x))\big)^2 + \text{Var}(p_{\text{KDE}}(x))
 \end{split}
 $$
 
@@ -218,7 +218,7 @@ $$
 h_{\text{MLCV}} = \underset{h}{\mathrm{argmax}} \bigg\{\frac{1}{N} \sum_{i = 1}^N \log(p_{-i}(x^i))\bigg\}
 $$
 
-where $p_{-n}$ is computed from leave-one-out cross-validation:
+where $p_{-n}$ is computed using leave-one-out cross-validation:
 
 $$
 p_{-n}(x) = \frac{1}{(N - 1)h} \sum_{i = 1, i \neq n}^N K \bigg(\frac{x^i - x}{h}\bigg)
@@ -229,17 +229,17 @@ $$
 Till now, for one dimension or high dimensional problems, we use the same equation for $p_{\text{KDE}}(x)$. Thus, it should be noted that the bandwidth $h$ is the same for all axes. Hence, this density estimate will weigh all the axes equally.
 
 $$
-p_{\text{KDE}}(x) = \frac{1}{Nh^d} \sum_{i = 1}^N K\bigg(\frac{x - x^i}{h}\bigg)
+p_{\text{KDE}}(x) = \frac{1}{Nh^d} \sum_{i = 1}^N K\bigg(\frac{x - x_i}{h}\bigg)
 $$
 
 However, if the spread of the data is much greater in one of the coordinate directions than the others, we should use a wider bandwidth for that direction. Thus, the above equation is modified to:
 
 $$
-p_{\text{KDE}}(x) = \frac{1}{N} \sum_{i = 1}^N K(x, x^i, h_1, h_2, \hdots h_d)
+p_{\text{KDE}}(x) = \frac{1}{N} \sum_{i = 1}^N K(x, x_i, h_1, h_2, \hdots h_d)
 $$
 
 $$
-K(x, x^i, h_1, h_2, \hdots h_d) = \frac{1}{h_1 \hdots h_D} \prod_{r = 1}^d K_1 \bigg(\frac{x(r) - x^i(r)}{h_r} \bigg)
+K(x, x_i, h_1, h_2, \hdots h_d) = \frac{1}{h_1 \hdots h_D} \prod_{r = 1}^d K_1 \bigg(\frac{x(r) - x_i(r)}{h_r} \bigg)
 $$
 
 where $K_1$ is a one-dimensional kernel.
@@ -335,7 +335,7 @@ $$
 Therefore, the Bayes decision rule $j = \underset{i}{\mathrm{argmax}} (p(x | \omega_i) p(\omega_i))$ can be rewritten as:
 
 $$
-j = \underset{i}{\mathrm{argmax}} \bigg(\prod_{d = 1}^D p(x(d) | \omega_i) p(\omega_i) \bigg)
+j = \underset{i}{\mathrm{argmax}} \Bigg(\prod_{d = 1}^D p(x(d) | \omega_i) p(\omega_i) \Bigg)
 $$
 
 This is the Naive Bayes Classifier.

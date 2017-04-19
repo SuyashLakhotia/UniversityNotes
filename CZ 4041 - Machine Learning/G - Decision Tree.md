@@ -41,6 +41,12 @@ $$
 - Maximum: $\log_2 K$, where $K$ is the total number of all possible values of $Y$ i.e. records are equally distributed among all classes i.e. least information.
 - Minimum: $0$ i.e. when all records belong to one class i.e. most information.
 
+\vfill
+\begin{center}
+P.T.O
+\end{center}
+\vfill
+
 ### Best Split on Information Gain
 
 Suppose a parent node $t$ is split into $P$ partitions, the information gain:

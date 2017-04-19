@@ -292,6 +292,8 @@ $$
 p(x | \omega_i) = \frac{k_i}{N_i V}
 $$
 
+\vfill\eject
+
 Similarly, the unconditional density is estimated by:
 
 $$

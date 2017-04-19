@@ -120,6 +120,12 @@ $$
 \end{split}
 $$
 
+\vfill
+\begin{center}
+P.T.O
+\end{center}
+\vfill
+
 ### Deriving the Margin
 
 Let $\boldsymbol{x_1}$ be a point on $b_{11}$ and $\boldsymbol{x_2}$ be a point on $b_{12}$:
@@ -180,8 +186,6 @@ $$
 \text{s.t. } y_i \times (\boldsymbol{w} \cdot \boldsymbol{x_i} + b) \geq 1 \text{, } i = 1, 2, \hdots N
 \end{gathered}
 $$
-
-The optimization is convex and there are many numerical approaches that can be applied to solve it.
 
 ## Linear SVM: Non-separable Case
 
@@ -430,7 +434,7 @@ $$
 \boldsymbol{w} \cdot \varphi(\boldsymbol{x}) + b = \Bigg(\sum_{i = 1}^N \lambda_i y_i (\varphi(\boldsymbol{x_i}) \cdot \varphi(\boldsymbol{x})) \Bigg) + b = 0
 $$
 
-The kernel trick can be applied to the inner products in the equations above.
+The kernel trick can be applied to the inner products in the training & decision boundary equations above.
 
 A test instance $\boldsymbol{x^*}$ can be classified using:
 

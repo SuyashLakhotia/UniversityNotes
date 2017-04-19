@@ -191,6 +191,7 @@ For an individual point $i$:
 
 1. Calculate $a$ = average distance of $i$ to the points in its cluster.
 2. Calculate $b$ = min(average distance of $i$ to points in another cluster).
+\vfill\eject
 3. Silhouette Coefficient $s = 1 - a/b$ if $a < b$ (or $s = b/a - 1$ if $a > b$).
     a. Typically between 0 and 1. The closer to 1 the better.
 
@@ -236,6 +237,8 @@ $$
 $$
 \text{purity} = \sum_j \frac{m_j}{m} \text{purity}_j
 $$
+
+\vfill\eject
 
 ## Visual Object Classes Challenge
 

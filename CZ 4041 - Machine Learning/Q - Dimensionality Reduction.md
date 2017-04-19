@@ -72,6 +72,12 @@ $$
 \end{gathered}
 $$
 
+\vfill
+\begin{center}
+P.T.O
+\end{center}
+\vfill
+
 Given a set of patterns $\boldsymbol{x}_p$ where $p = 1, 2, \hdots P$, the goal is to find unit vectors $\boldsymbol{w}$ that maximize the covariance $\text{cov}(z)$.
 
 $$
@@ -196,6 +202,8 @@ $$
 $$
 
 where $\boldsymbol{V}$ is $N \times N$ and contains the eigenvectors of $\boldsymbol{X} \boldsymbol{X}^T$, $\boldsymbol{U}$ is $d \times d$ and contains the eigenvectors of $\boldsymbol{X}^T \boldsymbol{X}$ and $\boldsymbol{A}$ is $N \times d$ and contains singular values on its first $k$ diagonal. The singular values are square roots of eigenvalues.
+
+\vfill\eject
 
 $$
 \boldsymbol{X} = \boldsymbol{v_1}a_1\boldsymbol{u_1}^T + \hdots + \boldsymbol{v_k}a_k\boldsymbol{u_k}^T

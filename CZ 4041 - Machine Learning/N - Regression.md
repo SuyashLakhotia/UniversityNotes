@@ -37,7 +37,7 @@ w \sum_{i = 1}^N x_i^2 \sum_{i = 1}^N y_i \times x_i &= 0
 $$
 
 $$
-w = \frac{\sum_{i = 1}^N y_i \times x_i}{\sum_{i = 1}^N x_i^2}
+\therefore w = \frac{\sum_{i = 1}^N y_i \times x_i}{\sum_{i = 1}^N x_i^2}
 $$
 
 ## Math Review
@@ -64,6 +64,12 @@ $$
 - Any vector (or matrix) $\boldsymbol{x}$ (or $\boldsymbol{X}$) times the identity matrix $\boldsymbol{I}$ equals to the vector (or matrix) itself.
     - $\boldsymbol{Ix} = \boldsymbol{x}$ & $\boldsymbol{x}^T \boldsymbol{I} = \boldsymbol{x}^T$
     - $\boldsymbol{XI} = \boldsymbol{X}$ & $\boldsymbol{IX} = \boldsymbol{X}$
+
+\vfill
+\begin{center}
+P.T.O
+\end{center}
+\vfill
 
 ## Linear Regression Model (cont.)
 
@@ -126,6 +132,8 @@ $$
 \end{pmatrix}
 $$
 
+\vfill\eject
+
 And $\boldsymbol{y}$:
 
 $$
@@ -167,6 +175,12 @@ $$
 where $\boldsymbol{\phi}(\boldsymbol{x}) = (\boldsymbol{\phi}_0(\boldsymbol{x}), \boldsymbol{\phi}_1(\boldsymbol{x}), \hdots \boldsymbol{\phi}_m(\boldsymbol{x}))$ and each $\boldsymbol{\phi}_i(\boldsymbol{x})$ maps the instance $\boldsymbol{x}$ to a scalar.
 
 Typically, $\boldsymbol{\phi}_0(\boldsymbol{x}) = 1$, then $w_0$ acts as a bias. In the simplest case, if $d = m$ and $\boldsymbol{\phi}_i(\boldsymbol{x}) = x_i$, it is reduced to a standard linear model.
+
+\vfill
+\begin{center}
+P.T.O
+\end{center}
+\vfill
 
 ### Examples of Basis Functions
 

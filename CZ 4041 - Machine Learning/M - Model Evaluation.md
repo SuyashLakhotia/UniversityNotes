@@ -50,6 +50,12 @@ $$
 
 A high value of $F_1$-measure ensures that precision and recall are reasonably high.
 
+\vfill
+\begin{center}
+P.T.O
+\end{center}
+\vfill
+
 ## Receiver Operating Characteristic (ROC)
 
 ROC is a graphical approach to displaying the tradeoff between true positive rate and false positive rate of a classifier.
@@ -64,8 +70,6 @@ $$
 
 The ROC curve graphs (FPR, TPR).
 
-![ROC Curve](img/ROC%20Curve.png)
-
 - A value of (0, 0) declares everything to be negative class.
 - A value of (1, 1) declares everything to be positive class.
 - A value of (0, 1) is ideal.
@@ -73,3 +77,7 @@ The ROC curve graphs (FPR, TPR).
 - A value below the diagonal means the prediction is the opposite of the true class.
 
 To compare two classifiers using the ROC, the area under the ROC curve must be compared as no classifier consistently outperforms the other. The area under the ROC curve should ideally be 1.
+
+\vfill\eject
+
+![ROC Curve](img/ROC%20Curve.png)

@@ -8,7 +8,7 @@ Ensemble learning refers to a collection of methods that learn a target function
 
 - Accuracy: a more reliable mapping can be obtained by combining the output of multiple *experts* (i.e. classifiers).
 - Efficiency: a complex problem can be decomposed into multiple sub-problems that are easier to understand and solve (divide-and-conquer approach).
-- Multiple representations and multiple models: There is not a single model that works for all pattern recognition problems!
+- Multiple Representations & Multiple Models: There is not a single model that works for all pattern recognition problems!
 
 **When?**
 
@@ -20,7 +20,7 @@ When it is possible to build component classifiers that are more accurate than c
 
 ### Increased Accuracy
 
-If the error of individual classifiers is independent, we can eliminate the error of combined classifier.
+If the error of individual classifiers is independent, we can eliminate the error of the combined classifier.
 
 Assume a binary classification problem for which individual classifiers can be trained with an error rate of 0.3. Assume that an ensemble is built by combining the prediction of 21 such classifiers with a majority vote. If there are $i$ classifiers out of 21 making an error in prediction, the error of classification is:
 
@@ -138,7 +138,7 @@ Representative examples of this approach are Mixture of Experts (ME) and Hierarc
 
 Boosting takes a different resampling approach than bagging, which maintains a constant probability of $1 / N$ for selecting each individual example. In boosting, this probability is adapted over time based on performance. The component classifiers are built sequentially and examples that are mislabeled by previous components are chosen more often than those that are correctly classified.
 
-Boosting is based on the concept of a "weak learner" (i.e. an algorithm that performs slightly better than chance). An example is a binary classifier with a 50% classification rate. A weak learner can be converted into a strong learner by changing the distribution of the training examples. While boosting can also be used with classifiers that are highly accurate, the benefits in this case will be very small.
+Boosting is based on the concept of a "weak learner" (i.e. an algorithm that performs slightly better than chance, for e.g., a binary classifier with a >50% classification rate). A weak learner can be converted into a strong learner by changing the distribution of the training examples. While boosting can also be used with classifiers that are highly accurate, the benefits in this case will be very small.
 
 A popular variant of boosting is AdaBoost (Adaptive Boosting), which allows the designer to continue adding components until an arbitrarily small error rate is obtained on the training set.
 

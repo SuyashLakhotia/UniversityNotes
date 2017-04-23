@@ -36,7 +36,7 @@ A **clustering** is a set of clusters. There are two main types of clusterings:
 
 K-means clustering is a partitional clustering approach, where each cluster is associated with a centroid (i.e. center point). Each point is assigned to the cluster with the closest centroid and the number of clusters (i.e. K) must be specified.
 
-Algorithm:
+**Algorithm:**
 
 1. Select K points as the initial centroids.
 2. Repeat:
@@ -96,7 +96,7 @@ Hierarchical clustering produces a set of nested clusters organized as a hierarc
 
 ### Agglomerative Hierarchical Clustering
 
-Algorithm:
+**Algorithm:**
 
 1. Compute the proximity matrix.
 2. Let each data point be a cluster.

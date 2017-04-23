@@ -167,7 +167,7 @@ Given the following constraints:
 
 $$
 \begin{split}
-\boldsymbol{w} \cdot \boldsymbol{x_i} + b \geq +1 & \text{, if } y_i = 1 \\
+\boldsymbol{w} \cdot \boldsymbol{x_i} + b \geq +1 & \text{, if } y_i = +1 \\
 \boldsymbol{w} \cdot \boldsymbol{x_i} + b \leq -1 & \text{, if } y_i = -1
 \end{split}
 $$
@@ -193,7 +193,7 @@ In separable cases, there is no training data within the margin. However, in non
 
 $$
 \begin{split}
-\boldsymbol{w} \cdot \boldsymbol{x_i} + b \geq +1 - \xi_i & \text{, if } y_i = 1 \\
+\boldsymbol{w} \cdot \boldsymbol{x_i} + b \geq +1 - \xi_i & \text{, if } y_i = +1 \\
 \boldsymbol{w} \cdot \boldsymbol{x_i} + b \leq -1 + \xi_i & \text{, if } y_i = -1
 \end{split}
 $$

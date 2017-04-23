@@ -229,7 +229,7 @@ where $o_i$ is the output of $n_i$.
 - The number of nodes in the input layer.
     - Assign an input node to each numerical or binary input variable.
 - The number of nodes in the output layer.
-    - Binary class problem → single node
+    - Binary class problem → single output node
     - $k$-class problem → $k$ output nodes
 - Training examples with missing values should be removed or replaced with most likely values.
 

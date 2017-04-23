@@ -23,7 +23,7 @@ d(\boldsymbol{x_i}, \boldsymbol{x_j}) &= \sqrt{(\boldsymbol{x_i} - \boldsymbol{x
 \end{split}
 $$
 
-Another metric is the Mahalanobis Distance:
+Another metric is the Mahalanobis distance:
 
 $$
 d(\boldsymbol{x_i}, \boldsymbol{x_j}) = \sqrt{(\boldsymbol{x_i} - \boldsymbol{x_j})^T \boldsymbol{M} (\boldsymbol{x_i} - \boldsymbol{x_j})}

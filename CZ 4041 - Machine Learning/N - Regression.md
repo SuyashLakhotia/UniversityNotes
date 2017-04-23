@@ -32,7 +32,7 @@ $$
 \frac{\partial E(w)}{\partial w} &= 0 \\
 \frac{\partial \bigg(\frac{1}{2} \sum_{i = 1}^N (w \times x_i - y_i)^2 \bigg)}{\partial w} &= 0 \\
 \sum_{i = 1}^N (w \times x_i - y_i) \times x_i &= 0 \\
-w \sum_{i = 1}^N x_i^2 \sum_{i = 1}^N y_i \times x_i &= 0
+w \sum_{i = 1}^N x_i^2 - \sum_{i = 1}^N y_i \times x_i &= 0
 \end{split}
 $$
 
@@ -162,7 +162,7 @@ $$
 \therefore \: \boldsymbol{w} = (\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})^{-1}\boldsymbol{X}^T\boldsymbol{y}
 $$
 
-As long as $\lambda$ is positive, $(\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})$ is always invertible.
+As long as $\lambda$ is positive, $(\boldsymbol{X}^T\boldsymbol{X} + \lambda\boldsymbol{I})$ is always invertible (Section 16.9).
 
 ## Linear Basis Function Models
 
@@ -174,7 +174,7 @@ $$
 
 where $\boldsymbol{\phi}(\boldsymbol{x}) = (\boldsymbol{\phi}_0(\boldsymbol{x}), \boldsymbol{\phi}_1(\boldsymbol{x}), \hdots \boldsymbol{\phi}_m(\boldsymbol{x}))$ and each $\boldsymbol{\phi}_i(\boldsymbol{x})$ maps the instance $\boldsymbol{x}$ to a scalar.
 
-Typically, $\boldsymbol{\phi}_0(\boldsymbol{x}) = 1$, then $w_0$ acts as a bias. In the simplest case, if $d = m$ and $\boldsymbol{\phi}_i(\boldsymbol{x}) = x_i$, it is reduced to a standard linear model.
+Typically, $\boldsymbol{\phi}_0(\boldsymbol{x}) = 1$, then $w_0$ acts as a bias. In the simplest case, if $m = d$ and $\boldsymbol{\phi}_i(\boldsymbol{x}) = x_i$, it is reduced to a standard linear model.
 
 \vfill
 \begin{center}

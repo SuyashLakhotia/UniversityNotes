@@ -1,6 +1,6 @@
 # Bayesian Belief Networks
 
-When two features are correlated, the assumption for Naive Bayes Classifier does not hold true.
+When two features are correlated, the conditional independence assumption for Naive Bayes Classifier does not hold true.
 
 $$
 P(X_1, X_2 | Y) \neq P(X_1 | Y) \times P(X_2 | Y)

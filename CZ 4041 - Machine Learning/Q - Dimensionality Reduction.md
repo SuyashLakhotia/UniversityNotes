@@ -68,7 +68,8 @@ A projection of $\boldsymbol{x}$ in the direction of $\boldsymbol{w}$ is given b
 $$
 \begin{gathered}
 \boldsymbol{z} = \boldsymbol{w}^T \boldsymbol{x} = |\boldsymbol{w}| |\boldsymbol{x}| \cos(\theta) \\
-|\boldsymbol{w}| = 1
+|\boldsymbol{w}| = 1 \\
+|\boldsymbol{x}| = \sqrt{x_1^2 + x_2^2 + \hdots + x_d^2}
 \end{gathered}
 $$
 

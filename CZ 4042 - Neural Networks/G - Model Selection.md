@@ -1,6 +1,6 @@
 # Model Selection
 
-- In most pattern recognition techniques, there exist one or more free parameters. For example, the learning parameters, number of hidden layers, number of hidden neurons etc.
+- In most pattern recognition techniques, there exist one or more free parameters (i.e. hyperparameters). For example, the learning parameters, number of hidden layers, number of hidden neurons etc.
 - Every set of parameters for the network leads to a specific model.
 - Therefore, it is necessary to find the set of parameters that leads to the optimum model.
 
@@ -22,7 +22,7 @@ $$
 \text{ME } = \sum_{p = 1}^P 1(d_p \neq y_p)
 $$
 
-where $1(\cdot)$ is the indicator function.
+where $d_p$ is the target and $y_p$ is the predicted output of pattern $p$. $1(\cdot)$ is the indicator function.
 
 ## Terminology
 
@@ -32,7 +32,7 @@ where $1(\cdot)$ is the indicator function.
 
 ## Validation
 
-While we want to minimize the error on the entire sample population, this is often difficult as the entire sample population is unavailable. Hence, in real applications, we use **validation**, in which the available data is used to select the model and estimate the error rate. The validation uses a part of the data to select the model, which is known as the *validation test*.
+While we want to minimize the error on the entire sample population, this is difficult as the entire sample population is often unavailable. Hence, in real applications, we use **validation**, in which a part of the available data, which is known as the *validation set*, is used to select the model and estimate the error rate.
 
 Validation attempts to solve the following problems:
 
@@ -69,9 +69,8 @@ The drawbacks of holdout can be overcome using re-sampling techniques.
 
 ### Random Subsampling (K Data Splits)
 
-- Split entire dataset into K splits.
-    - Each split randomly selects a (fixed) number of examples.
-- For each data split, the classifier is retrained with the training data.
+- Split entire dataset into K splits where each split randomly selects a (fixed) number of examples.
+- For each data split, the classifier is retrained from scratch with the training data.
 - Estimate $e_i$ using the test data and compute the average test error:
 
 $$
@@ -112,21 +111,21 @@ If model selection and true error estimates are to be computed simultaneously, t
 - more likely to be able to solve the required task
 - more likely to memorize the training data without solving the task
 
-**Simple models** can learn from the training data and are more likely to *generalize* over the entire sample space, assuming they don't underfit.
+**Simple models** can learn from the training data and are more likely to *generalize* over the entire sample space, assuming they don't underfit / under-learn.
 
 ## Overfitting
 
-Overfitting occurs when the training error of the network is driven to a very small value at the expense of test error. The network learns to respond correctly to the training inputs but is unable to generalize to produce correct outputs to novel inputs.
+Overfitting occurs when the training error of the network is driven to a very small value at the expense of the test error. The network learns to respond correctly to the training inputs but is unable to generalize to produce correct outputs to novel inputs.
 
 ### Overcoming Overfitting
 
 #### Early Stopping
 
-The training of the network should be stopped when the test error starts to increase. Early stopping can be used in validation by stopping when the validation error is minimum.
+The training of the network should be stopped when the test error starts to increase. Early stopping can be used in training with a validation set by stopping when the validation error is minimum.
 
 #### Regularization of Weights
 
-During overfitting, some weights attain large values to reduce training error, which prevents the model for generalizing. In order to avoid this, a penalty term (i.e. regularization term) is added to the cost function.
+During overfitting, some weights attain large values to reduce the training error, which prevents the model from generalizing. In order to avoid this, a penalty term (i.e. regularization term) is added to the cost function.
 
 $$
 J_1(\boldsymbol{W}, \boldsymbol{b}) = J(\boldsymbol{W}, \boldsymbol{b}) + \beta_1 \sum_{i,j} |w_{ij}| + \beta_2 \sum_{i,j} (w_{ij})^2
@@ -159,7 +158,7 @@ $$
 \end{split}
 $$
 
-Gradient descent learning using regularized cost function:
+Gradient descent learning using the regularized cost function:
 
 $$
 \begin{split}
@@ -175,6 +174,6 @@ where $\beta = 2 \beta_2$ and is known as the weight decay parameter.
 
 Deep neural networks with a large number of parameters are powerful learning machines. However, overfitting is a serious problem in deep neural networks.
 
-The key idea of *dropouts* is to randomly drop neurons or *units* (along with their connections) from the network during training. This prevents neurons from co-adapting. The neurons are *present* with a probability $p$ during training and always present during testing.
+The key idea of *dropouts* is to randomly drop neurons (along with their connections) from the network during training. This prevents neurons from co-adapting. The neurons are *present* with a probability $p$ during training and always present during testing.
 
-Training is similar to standard networks, however, for mini-batch training, the training is applied on a *thinned network* dropping out units. The gradients of each parameter are averaged over the training cases in each mini-batch.
+Training is similar to standard networks, however, for mini-batch training, the training is applied on a *thinned network* with dropped-out units. The gradients of each parameter are averaged over the training cases in each mini-batch.

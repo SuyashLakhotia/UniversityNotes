@@ -1,8 +1,6 @@
 # Deep Convolutional Neural Networks
 
-Convolutional neural networks (or CNNs) are biologically inspired variants of MLP.
-
-The animal visual cortex is the most powerful visual processing system and CNNs emulate its behavior:
+Convolutional neural networks (CNNs) are biologically inspired variants of MLP. The animal visual cortex is the most powerful visual processing system and CNNs emulate its behavior:
 
 - Each neuron in the visual cortex is responsive to small subregions of the visual field, known as receptive fields.
 - The subregions are tiled together to cover the entire visual field.
@@ -13,7 +11,7 @@ Thus, two types of cells (i.e. neurons) are identified: *simple cells* and *comp
 ## Locally Connected Networks
 
 - Backpropagation works well for signals and images that are low in resolution. Deep CNNs were developed to process more realistic signals and images that are of larger dimensions.
-- Fully connected networks are not feasible for signals of large resolutions since they are computationally expensive for feedforward and backpropagation computations.
+- Fully connected networks are not feasible for signals of large resolutions as their feedforward and backpropagation computations are computationally expensive.
 - One solution is to restrict the number of connections from one layer to another to a smaller subset. The idea is to connect only a contiguous (local) set of nodes to the next layer.
 
 ### Sparse Local Connectivity
@@ -24,7 +22,7 @@ CNNs exploit spatially local correlations by enforcing local connectivity betwee
 
 In CNNs, each filter is replicated across the entire visual field. These replicated units share the same parameterization (i.e. weights & biases) and form a feature map. In the image below, weights of the same color are shared.
 
-![Feature Map](img/Feature%20Map.png)
+![Feature Map](img/Feature%20Map.png){height=100px}
 
 Replicating weights in this way allows for features to be detected regardless of the position in the visual field. Additionally, weight sharing increases learning efficiency by greatly reducing the number of free parameters.
 
@@ -40,7 +38,7 @@ CNNs are usually made of alternating convolutional and pooling layers.
 
 ### Input $\rightarrow$ Output
 
-Synaptic input at location $(i, j)$ of the first hidden layer due to a kernel $\boldsymbol{w} = \{ w(l, m) \}_{l, m = -L, -M}^{L, M}$ is given by:
+Synaptic input at location $(i, j)$ of the first hidden layer due to a kernel $\boldsymbol{w} = \{ w(l, m) \}_{l, m = -L/2, -M/2}^{L/2, M/2}$ is given by:
 
 $$
 u(i, j) = \sum_{l} \sum_{m} x(i + l, j + m) w(l, m) + b
@@ -63,7 +61,7 @@ There are two ways to handle the boundary:
 1. Apply the filter wherever it completely overlaps with the input. (default)
 2. Apply the filter wherever it partially overlaps the input.
 
-![Handling Boundaries](img/CNN%20Padding.png)
+![Handling Boundaries](img/CNN%20Padding.png){height=120px}
 
 If we have $k$ kernels, input image is $I \times J$ and kernel size is $L \times M$, then the size of the convolution-layer:
 
@@ -75,12 +73,12 @@ Stride is the factor with which the output is subsampled. The default stride is 
 
 ## Pooling Layer
 
-- To reduce the dimensions of the convolutional layer output, the pooling of the activation is performed at the pooling layer. Either max of average pooling is used at the pooling layer. Pooling *downsamples* the input.
+- To reduce the dimensions of the convolutional layer output, the pooling of the activation is performed at the pooling layer. Either max or average pooling is used at the pooling layer. Pooling *downsamples* the input.
 - The convolved features are divided into disjoint regions and pooled by either taking the maximum or the mean. Pooled features are *translational invariant*. The default stride is equal to the pooling width.
 
 ### Input $\rightarrow$ Output
 
-Consider pooling with non-overlapping windows $\{(p, q)\}_{p, q = -P, -Q}^{P, Q}$ of size $2P \times 2Q$.
+Consider pooling with non-overlapping windows $\{(p, q)\}_{p, q = -P/2, -Q/2}^{P/2, Q/2}$ of size $P \times Q$.
 
 The max pooling output is the maximum of the activation inside the pooling window:
 
@@ -91,7 +89,7 @@ $$
 The mean pooling output is the mean of activations in the pooling window:
 
 $$
-z(i, j) = \frac{1}{2P \times 2Q} \sum_{p} \sum_{q} y(i + p, j + q)
+z(i, j) = \frac{1}{P \times Q} \sum_{p} \sum_{q} y(i + p, j + q)
 $$
 
 ## Fully Connected Layer
@@ -105,7 +103,7 @@ For example, with three filters (of size $5 \times 5$) followed by pooling (of $
 
 ## Backpropagation for CNNs
 
-During forward propagation, activations are downsampled at the pooling layer. Thus, during error backward propagation, the error terms need to be upsampled at the pooling layer.
+During forward propagation, activations are downsampled at the pooling layer. Thus, during error backpropagation, the error terms need to be upsampled at the pooling layer.
 
 In MLP, the error $\Delta^{l + 1}$ is propagated to layer $l$ as:
 
@@ -125,7 +123,7 @@ The method of momentum is designed to accelerate learning, especially in the fac
 
 When the error function has the form a shallow ravine leading to the optimum and steep walls on the side, stochastic gradient descent algorithm tends to oscillate near the optimum. This leads to very slow converging rates. The problem is typical in deep learning architecture.
 
-![GD with Momentum](img/GD%20with%20Momentum.png)
+![GD Oscillation](img/GD%20Oscillation.png){height=150px}
 
 Momentum is one method of speeding the convergence along a narrow ravine. The momentum update is given by:
 
@@ -152,13 +150,11 @@ $$
 \alpha(t) = \frac{a}{b + t}
 $$
 
-where $\alpha(0) = a / b$ and $\alpha(\infty) = 0$.
+where $a$ & $b$ are two positive constants, $\alpha(0) = a / b$ and $\alpha(\infty) = 0$.
 
 ## RMSProp Algorithm
 
-Adaptive learning rates with annealing usually works with convex cost functions.
-
-The learning trajectory of a neural network minimizing a non-convex cost function passes through many different structures and eventually arrives at a region that is locally convex.
+Adaptive learning rates with annealing usually works with convex cost functions. The learning trajectory of a neural network minimizing a non-convex cost function passes through many different structures and eventually arrives at a region that is locally convex.
 
 RMSProp uses an exponentially decaying average to discard the history from the extreme past so that it can converge rapidly after finding a convex region.
 
@@ -172,3 +168,7 @@ $$
 where $\rho$, $\epsilon$ and $\delta$ are parameters to be determined empirically.
 
 RMSProp has been shown to be an effective and practical optimization algorithm for deep neural networks.
+
+## Examples of CNN Architectures
+
+See Lecture Notes for details on **LeNet** & **AlexNet**.

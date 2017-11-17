@@ -88,6 +88,8 @@ where the noise $\epsilon$ could be binomially distributed (i.e. $\epsilon \sim 
 - The hidden layer has a higher dimension than the input of overcomplete autoencoders.
 - When the hidden dimensions are large, one could explore interesting structures of inputs by introducing other constraints such as the 'sparsity' of input data.
 
+Both, undercomplete and overcomplete autoencoders, fail to learn anything useful if the encoder and decoder are given too much capacity. Some constraints are required to make them useful.
+
 ## Regularizing Autoencoders
 
 Regularized autoencoders provide the ability to train any autoencoder architecture successfully, choosing the code dimension and the capacity of the encoder and decoder based on the complexity of the distribution to be modeled.
@@ -112,7 +114,7 @@ $$
 
 The sparsity penalty term makes the features (weights) learned by the hidden layer to be sparse.
 
-Consider a sigmoid activation function, we say that the neuron is "active" when its output is close to 1 and the neuron is "inactive" when its output is close to 0. With the sparsity constraint, we the neurons at the hidden layer(s) are constrained to be inactive for most of the time.
+Consider a sigmoid activation function, we say that the neuron is "active" when its output is close to 1 and the neuron is "inactive" when its output is close to 0. With the sparsity constraint, the neurons at the hidden layer(s) are constrained to be inactive for most of the time.
 
 ### Sparsity Constraint
 
@@ -145,12 +147,17 @@ $$
 For gradient descent (complete derivation in Lecture Notes):
 
 $$
+\begin{gathered}
+\frac{\partial J_1(\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{b}')}{\partial \boldsymbol{W}} = \frac{\partial J(\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{b}')}{\partial \boldsymbol{W}} + \beta \frac{\partial D(\boldsymbol{H})}{\partial \b oldsymbol{W}} \\
 \frac{\partial D(\boldsymbol{H})}{\partial \boldsymbol{w}_j} = \frac{1}{P} \Bigg(\frac{\rho}{\rho_j} + \frac{1 - \rho}{1 - \rho_j} \Bigg) \sum_p f'(u_{pj}) \boldsymbol{x}_p
+\end{gathered}
 $$
 
 ## Deep Stacked Autoencoders
 
 Deep autoencoders can be built by stacking autoencoders. After training the first level denoising autoencoder, the resulting representation is used to train a second level denoising encoder. This process is repeated and a deep stacked autoencoder is realized.
+
+![Training Stacked Autoencoders](img/Training%20Stacked%20Autoencoders.png)
 
 ### Fine-Tuning Deep Network for Classification
 

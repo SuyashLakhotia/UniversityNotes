@@ -14,7 +14,7 @@ where $\phi$ is the tanh activation function and the RNN cell is referred to as 
 
 Though RNNs have been proven to solve sequential problems, it is difficult to train them to learn long-term dynamics.
 
-During gradient backpropagation, the gradient can end up being multiplied a large number of times (as many as the number of time steps) by the weight matrix associated with the connections between the neurons of the recurrent hidden layer. Note that each time the activations are forward propagated in time, the activations are multiplied by $\boldsymbol{W}$ and each time the gradients are backpropagated, the gradients are multiplied by $\boldsymbol{W}^T$).
+During gradient backpropagation, the gradient can end up being multiplied a large number of times (as many as the number of time steps) by the weight matrix associated with the connections between the neurons of the recurrent hidden layer. Note that each time the activations are forward propagated in time, the activations are multiplied by $\boldsymbol{W}$ and each time the gradients are backpropagated, the gradients are multiplied by $\boldsymbol{W}^T$.
 
 If the weights in this matrix are small, it can lead to a situation called *vanishing gradients* where the gradient signal gets so small that learning either becomes very slow or stops working altogether.
 
@@ -103,4 +103,4 @@ $$
 
 ## Deep LSTM & Deep GRUs
 
-![Deep Vanilla RNN, Deep LSTM Network & Deep GRNN](img/Deep%20GRNN.png)
+![Deep Vanilla RNN, LSTM Network & GRNN](img/Deep%20GRNN.png)

@@ -4,7 +4,7 @@
 
 - A multilayer perceptron (MLP) is a feedforward network with $L$ layers, where the hidden layers of the network consists of perceptrons.
 - MLP has been applied successfully to resolve many complex real-world problems consisting of *non-linear decision boundaries*.
-- The network is trained in a *supervised* manner with the *error back-propagation algorithm* based on the gradient descent algorithm.
+- The network is trained in a *supervised* manner with the *error backpropagation algorithm* based on the gradient descent algorithm.
 - Backpropagation learning can be seen as a generalization of the delta learning equations for multilayer networks.
 
 ## Three-Layer MLP Network

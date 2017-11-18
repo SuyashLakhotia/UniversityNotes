@@ -2,17 +2,19 @@
 
 ## Computational Graphs
 
-The computations in a neural network can be described in a *computational graph*. Each *node* in the graph indicates a variable that could be a scalar, vector, matrix, tensor or a variable of another type. A *directed edge* denotes an operation executed on one variable and results in another variable. An *operation* is a simple function of one or more variables. A set of allowable operations defines the language of the computational graph. *Functions* are described by a set of operations together.
+The computations in a neural network can be described in a *computational graph*. Each *node* in the graph indicates a variable that could be a scalar, vector, matrix, tensor or a variable of another type. A *directed edge* denotes an *operation* executed on one or more variables that results in another variable. A set of allowable operations defines the language of the computational graph. *Functions* are described by a set of operations together.
 
 ## Recurrent Neural Networks (RNNs)
 
-RNNs are designed to process sequential information (i.e. data represented as sequences). The next data point in a sequence is usually dependent on the current data point. RNNs attempt to capture dependency among the data points in the sequence.
+RNNs are designed to process sequential information (i.e. data represented as sequences). The next data point in a sequence is usually dependent on the current data point and RNNs attempt to capture this dependency.
 
-RNNs have memory that captures information about what has been processed so far. It achieves this by using feedback connections that enable learning of sequential (temporal) information of sequences.
+RNNs are called *recurrent* because they perform the same task for every element of a sequence, with the output depending on the previous computations. RNNs have memory that captures information about what has been processed so far. It achieves this by using feedback connections that enable learning of sequential (temporal) information of sequences.
 
 ### Types of RNNs
 
 ![Types of RNNs](img/RNN%20Types.png)
+
+\pagebreak
 
 From left to right:
 
@@ -28,11 +30,9 @@ In Elman-type RNNs, the output at the hidden layer at time $t - 1$ is kept and f
 
 ![Elman-type RNN](img/Elman-type%20RNN.png){height=150px}
 
-Note that time $t$ is assumed to be discretized and activations are updated at each time instance $t$. The delay unit is added to indicate that the activation is held until the next time instance.
+Note that time $t$ is assumed to be discretized and activations are updated at each time instance $t$. The delay unit (blue box) is added to indicate that the activation is held until the next time instance.
 
-![RNN w/ Hidden Recurrence](img/Elman-type%20RNN%20Unfolded.png)
-
-The recurrent connections can be unfolded in time as shown in the diagram above.
+![RNN w/ Hidden Recurrence (Unfolded)](img/Elman-type%20RNN%20Unfolded.png)
 
 By considering the unfolded recurrence:
 
@@ -69,7 +69,7 @@ $$
 - $\boldsymbol{c}$ - Bias connected to the output layer.
 - $\phi$ is the tanh activation function (for hidden layer) and $\sigma$ is the sigmoid activation function (for output layer).
 
-The output layer activation function is a softmax for classification and a linear/sigmoid activation for regression.
+The output layer activation function is softmax for classification and linear/sigmoidal for regression.
 
 Typically, the hidden layer activation function is given by the tanh function:
 
@@ -81,8 +81,6 @@ $$
 $$
 
 ### Deep RNN w/ Hidden Recurrence
-
-![Deep RNN w/ Hidden Recurrence](img/Deep%20Elman-type%20RNN.png){height=180px}
 
 First hidden layer, $l = 1$:
 
@@ -108,7 +106,7 @@ In Jordan-type RNNs, the output of the output layer at time $t - 1$ is kept and 
 
 ![RNN w/ Top-Down Recurrence](img/Jordan-type%20RNN.png){height=150px}
 
-Note that time $t$ is assumed to be discretized and activations are updated at each time instance $t$. The delay unit is added to indicate that the activation is held until the next time instance.
+Note that time $t$ is assumed to be discretized and activations are updated at each time instance $t$. The delay unit (blue box) is added to indicate that the activation is held until the next time instance.
 
 ### Forward Propagation
 
@@ -149,9 +147,13 @@ $$
 \boldsymbol{h}^L(t) = \sigma \Big({\boldsymbol{U}^L}^T \boldsymbol{h}^{L - 1}(t) + \boldsymbol{b}^L \Big)
 $$
 
-where $\boldsymbol{U}^l$ is the weight matrix connecting the output of hidden layer $l - 1$ to hidden layer $l$ and $\boldsymbol{W}^l$ is the weight matrix connecting the hidden layer output of the previous time instance to the current output of the hidden layer.
-
 ## Chain Rule in Multidimensions
+
+If $x \in \boldsymbol{R}$, $x \in \boldsymbol{R}$ and $x \in \boldsymbol{R}$, and $y = f(x)$ and $z = g(y)$, the chain rule of differentiation says:
+
+$$
+\frac{\partial z}{\partial x} = \frac{\partial z}{\partial y} \frac{\partial y}{\partial x}
+$$
 
 If $\boldsymbol{x} = (x_i) \in \boldsymbol{R}^n$, $\boldsymbol{y} = (y_k) \in \boldsymbol{R}^K$ and $z \in \boldsymbol{R}$, and $\boldsymbol{y} = f(\boldsymbol{x})$ and $z = g(\boldsymbol{y})$, the chain rule of differentiation in multidimensions is:
 
@@ -212,8 +214,6 @@ $$
 
 ![Computational Graph of a Neuron Layer](img/Neuron%20Layer%20Computational%20Graph.png)
 
-\pagebreak
-
 For a softmax layer:
 
 $$
@@ -255,11 +255,12 @@ That is, the error terms at the synaptic inputs can be transformed to the input 
 Therefore,
 
 $$
-\begin{gathered}
-\boldsymbol{\nabla}_{\boldsymbol{W}} J = \sum_k (\boldsymbol{\nabla}_{\boldsymbol{W}} u_k) \frac{\partial J}{\partial u_k} \\
-\boldsymbol{\nabla}_{\boldsymbol{W}} J = \boldsymbol{x} \Bigg(\frac{\partial J}{\partial \boldsymbol{u}} \Bigg)^T \\
-\boldsymbol{\nabla}_{\boldsymbol{b}} J = \Bigg(\frac{\partial J}{\partial \boldsymbol{u}} \Bigg)
-\end{gathered}
+\begin{split}
+\boldsymbol{\nabla}_{\boldsymbol{W}} J
+&= \sum_k (\boldsymbol{\nabla}_{\boldsymbol{W}} u_k) \frac{\partial J}{\partial u_k} \\
+&= \boldsymbol{x} \Bigg(\frac{\partial J}{\partial \boldsymbol{u}} \Bigg)^T \\
+\boldsymbol{\nabla}_{\boldsymbol{b}} J &= \Bigg(\frac{\partial J}{\partial \boldsymbol{u}} \Bigg)
+\end{split}
 $$
 
 ## Backpropagation Revisited

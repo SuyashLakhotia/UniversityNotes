@@ -63,7 +63,7 @@ There are two ways to handle the boundary:
 
 ![Handling Boundaries](img/CNN%20Padding.png){height=120px}
 
-If we have $k$ kernels, input image is $I \times J$ and kernel size is $L \times M$, then the size of the convolution-layer:
+If we have $k$ kernels, input image is $I \times J$ and kernel size is $L \times M$, then the size of the convolution layer:
 
 Case 1: $k \times (I - L + 1) \times (J - M + 1)$
 

@@ -10,7 +10,7 @@ $$
 P(\boldsymbol{x}) = \frac{e^{-E(\boldsymbol{x})}}{Z_1}
 $$
 
-where the normalizing constant $Z$ is called the *partition function* and is given by:
+where the normalizing constant $Z_1$ is called the *partition function* and is given by:
 
 $$
 Z_1 = \sum_{\boldsymbol{x}} e^{-E(\boldsymbol{x})}
@@ -18,7 +18,7 @@ $$
 
 The summation in the partition function is taken over the sample space (all the configurations) of $\boldsymbol{x}$.
 
-Learning of energy-based models corresponds to modifying the energy function so that its shape reaches desirable properties such as minimum energy.
+The learning of energy-based models corresponds to modifying the energy function such that its shape reaches desirable properties such as minimum energy.
 
 ### EBM Learning
 
@@ -52,7 +52,7 @@ $$
 P(\boldsymbol{x}) = \sum_{\boldsymbol{h}} P(\boldsymbol{x}, \boldsymbol{h}) = \frac{\sum_{\boldsymbol{h}} e^{-E(\boldsymbol{x}, \boldsymbol{h})}}{Z} \quad \text{(A)}
 $$
 
-For energy-based models with hidden units, the notion of free energy is used such that:
+For energy-based models with hidden units, the notion of *free energy* $F(\boldsymbol{x})$ is used such that:
 
 $$
 P(\boldsymbol{x}) = \frac{e^{-F(\boldsymbol{x})}}{Z} \quad \text{(B)}
@@ -100,14 +100,14 @@ That is, the positive phase of the cost function corresponds to the free energy 
 
 ![Restricted Boltzmann Machine](img/Restricted%20Boltzmann%20Machine.png)
 
-An RBM is an EBM, defined by the energy function:
+A RBM is an EBM, defined by the energy function:
 
 $$
 E(\boldsymbol{x}, \boldsymbol{h}) = - \boldsymbol{b}^T \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{h} - \boldsymbol{h}^T \boldsymbol{W}^T \boldsymbol{x}
 $$
 
-- $\boldsymbol{x} = (x_1, x_2, \cdots, x_n)^T$ are the activations of visible units (i.e. inputs).
-- $\boldsymbol{h} = (h_1, h_2, \cdots, h_M)^T$ are the activations of hidden units.
+- $\boldsymbol{x} = (x_1, x_2, \cdots x_n)^T$ are the activations of visible units (i.e. inputs).
+- $\boldsymbol{h} = (h_1, h_2, \cdots h_M)^T$ are the activations of hidden units.
 - $\boldsymbol{W} = \{w_{ij}\}_{n \times M}$ is the weight matrix connecting the inputs to the hidden units.
 - $\boldsymbol{b}$ is the bias vector connected to the input layer (top down).
 - $\boldsymbol{c}$ is the bias vector connected to the hidden layer (bottom up).
@@ -177,14 +177,17 @@ and $E(\boldsymbol{x}, h_j) = - h_j (c_j + \boldsymbol{x}^T \boldsymbol{w}_j)$ a
 
 ### Sampling in RBM
 
-- Samples of $P(\boldsymbol{x})$ are obtained by running a *Markov chain* to convergence, using *Gibbs sampling* as the transition operator.
-- A Markov chain is a sequence of states, which satisfies the Markov property — the future states are determined only by the current state.
-- Gibbs sampling of joint distribution of $N$ random variables $\boldsymbol{s} = (s_1, s_2, \cdots, s_N)$ is done through $N$ sampling subsets of the form $s_i \sim P(s_i | s_{-i})$ where $s_{-i}$ contains $N - 1$ variables in $\boldsymbol{s}$ excluding the variable $s_i$.
-- Gibbs sampling forms a Markov chain and when executed long enough, converges to the samples from the true distribution.
+Samples of $P(\boldsymbol{x})$ are obtained by running a *Markov chain* to convergence, using *Gibbs sampling* as the transition operator.
+
+A *Markov chain* is a sequence of states, which satisfies the Markov property — future states are determined only by the current state.
+
+*Gibbs sampling* of joint distribution of $N$ random variables $\boldsymbol{s} = (s_1, s_2, \cdots s_N)$ is done through $N$ sampling subsets of the form $s_i \sim P(s_i | s_{-i})$ where $s_{-i}$ contains $N - 1$ variables in $\boldsymbol{s}$ excluding the variable $s_i$.
+
+Gibbs sampling forms a Markov chain and when executed long enough, converges to the samples from the true distribution.
 
 In RBM, the set of random variables consists of the set of hidden units and visible units. However, since they are conditionally independent, one can perform block Gibbs sampling. In this setting, visible units are sampled given the fixed values of hidden units (i.e. from $P(\boldsymbol{x} | \boldsymbol{h})$) and similarly, hidden units are sampled simultaneously given the values of visible units (i.e. from $P(\boldsymbol{h} | \boldsymbol{x})$).
 
-For $t$ Gibbs sampling steps starting from the training samples (i.e. $\hat{P}(\boldsymbol{x})$:
+For $t$ Gibbs sampling steps starting from the training samples (i.e. $\hat{P}(\boldsymbol{x})$):
 
 $$
 \begin{gathered}
@@ -198,7 +201,7 @@ $$
 \end{gathered}
 $$
 
-It makes sense to start with training samples $\hat{P}(\boldsymbol{x}))$ because as the model becomes better at capturing the structure, model distribution $P$ and $\hat{P}$ become similar.
+It makes sense to start with training samples $\hat{P}(\boldsymbol{x})$ because as the model becomes better at capturing the structure, model distribution $P$ and $\hat{P}$ become similar.
 
 As $t \rightarrow \infty$, samples $(\boldsymbol{x}^{(t)}, \boldsymbol{h}^{(t)})$ are guaranteed to be samples from $P(\boldsymbol{x}, \boldsymbol{h})$.
 
@@ -214,7 +217,7 @@ $$
 P(h_j = 1 | \boldsymbol{x}) = \text{logistic}(c_j + \boldsymbol{x}^T \boldsymbol{w}_j)
 $$
 
-Note that the synaptic input to hidden units is $s_j = c_j + \boldsymbol{x}^T \boldsymbol{w}_j$ and the conditional probability is given by the activation.
+where $s_j = c_j + \boldsymbol{x}^T \boldsymbol{w}_j$.
 
 Similarly,
 
@@ -233,7 +236,7 @@ $$
 \end{gathered}
 $$
 
-The $t$th step in the Markov chain becomes:
+The $t$-th step in the Markov chain becomes:
 
 $$
 \begin{gathered}
@@ -286,9 +289,7 @@ Contrastive Divergence uses two tricks to speed up the sampling process:
 
 ## Persistent CD
 
-Persistent CD uses another approximation for sampling from $P(\boldsymbol{x}, \boldsymbol{h})$.
-
-It relies on a single Markov chain, which has a persistent chain (i.e. not restarting the chain for each observed sample). For each parameter update, we extract new samples by simply running the chain for $k$ steps. The state of the chain is then preserved for subsequent updates.
+Persistent CD uses another approximation for sampling from $P(\boldsymbol{x}, \boldsymbol{h})$. It relies on a single Markov chain, which has a persistent chain (i.e. not restarting the chain for each observed sample). For each parameter update, we extract new samples by simply running the chain for $k$ steps. The state of the chain is then preserved for subsequent updates.
 
 The general intuition is that if parameter updates are small enough compared to the mixing rate of the chain, the Markov chain should be able to 'catch up' to the changes of the model.
 
@@ -303,7 +304,7 @@ RBMs are particularly tricky to train because of the partition function $Z$, the
 **Proxies to Likelihood:**
 
 1. Reconstruction Error (Cross-Entropy)
-2. Pseudo-Likelihood
+2. Pseudo-Likelihood (for Persistent CD)
 
 ### Reconstruction Error
 

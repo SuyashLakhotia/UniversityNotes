@@ -6,7 +6,7 @@ Convolutional neural networks (CNNs) are biologically inspired variants of MLP. 
 - The subregions are tiled together to cover the entire visual field.
 - The neurons act as local filters over the input space and exploit the strong local correlations in natural images.
 
-Thus, two types of cells (i.e. neurons) are identified: *simple cells* and *complex cells*. Simple cells respond maximally to specific edge-like patterns within their respective receptive field whereas complex cells have larger receptive fields and are locally invariant to the exact position of the patterns.
+Thus, two types of cells (i.e. neurons) are identified: *simple cells* and *complex cells*. Simple cells respond maximally to specific edge-like patterns within their respective receptive fields whereas complex cells have larger receptive fields and are locally invariant to the exact position of the patterns.
 
 ## Locally Connected Networks
 
@@ -33,7 +33,7 @@ CNNs are usually made of alternating convolutional and pooling layers.
 - Features of natural images are invariant at every location of the image. Thus, filters can be replicated and used to cover the entire visual field.
 - The convolutional layer learns the features over small patches of the image and the learned features are then convolved with the image to obtain feature activations.
 - The weights can be learned using feature detectors or backpropagation.
-- The region of the input layer that is connected to a layer is referred to as the *receptive field*. The weights learned are known as *filters* or *kernels*.
+- The region of the input layer that is connected to a convolutional layer is referred to as the *receptive field*. The weights learned are known as *filters* or *kernels*.
 - The output activation learned by a particular filter is known as a feature map.
 
 ### Input $\rightarrow$ Output
@@ -73,7 +73,7 @@ Stride is the factor with which the output is subsampled. The default stride is 
 
 ## Pooling Layer
 
-- To reduce the dimensions of the convolutional layer output, the pooling of the activation is performed at the pooling layer. Either max or average pooling is used at the pooling layer. Pooling *downsamples* the input.
+- To reduce the dimensions of the convolutional layer output, pooling of the activation is performed at the pooling layer. Either max or average pooling is used at the pooling layer. Pooling *downsamples* the input.
 - The convolved features are divided into disjoint regions and pooled by either taking the maximum or the mean. Pooled features are *translational invariant*. The default stride is equal to the pooling width.
 
 ### Input $\rightarrow$ Output
@@ -83,7 +83,7 @@ Consider pooling with non-overlapping windows $\{(p, q)\}_{p, q = -P/2, -Q/2}^{P
 The max pooling output is the maximum of the activation inside the pooling window:
 
 $$
-z(i, j) = \underset{max}{p, q} \{y(i + p, j + q)\}
+z(i, j) = \underset{p, q}{\text{max}} \{y(i + p, j + q)\}
 $$
 
 The mean pooling output is the mean of activations in the pooling window:
@@ -140,7 +140,7 @@ Often, $\gamma$ is initially set to $0.1$ until learning stabilizes and increase
 
 ## GD w/ Annealing
 
-Often, stochastic gradient descent is employed in a few training samples or a mini batch. This reduces variance of the individual patterns and achieves stable convergence but at the expense of the true minima.
+Often, stochastic gradient descent is employed in a few training samples or a mini-batch. This reduces variance of the individual patterns and achieves stable convergence but at the expense of the true minima.
 
 The learning rate in the online (stochastic) version is usually much less than the learning rate in a batch version. When online or mini-batch versions of gradient descent is used, it is not easy to determine the value of the learning parameter because of the variance in individual patterns. One way to overcome this is to use an annealing schedule, that is, to start with a large learning factor and then gradually reduce it.
 
@@ -154,7 +154,7 @@ where $a$ & $b$ are two positive constants, $\alpha(0) = a / b$ and $\alpha(\inf
 
 ## RMSProp Algorithm
 
-Adaptive learning rates with annealing usually works with convex cost functions. The learning trajectory of a neural network minimizing a non-convex cost function passes through many different structures and eventually arrives at a region that is locally convex.
+Adaptive learning rates with annealing usually works well with convex cost functions. However, the learning trajectory of a neural network minimizing a non-convex cost function passes through many different structures before eventually arriving at a region that is locally convex.
 
 RMSProp uses an exponentially decaying average to discard the history from the extreme past so that it can converge rapidly after finding a convex region.
 

@@ -1,6 +1,6 @@
 # Perceptron
 
-Fundamental Objective: To provide meaningful categorization from some input information.
+Fundamental Objective: To provide meaningful categorization for some input information.
 
 A typical pattern recognition system is comprised of two stages:
 
@@ -133,7 +133,7 @@ Note that $\delta_p \in \{ -1, 0, +1 \}$ and the simple perceptron algorithm cor
 
 ## Continuous Perceptron
 
-- A continuous perceptron has a sigmoidal activation function.
+A continuous perceptron has a sigmoidal activation function.
 
 Assuming the training dataset ${{(\boldsymbol{x}_p, d_p)}}_{p = 1}^P$ where $\boldsymbol{x}_p = (x_{p1}, x_{p2}, \hdots, x_{pn})^T \in \boldsymbol{R}^n$ and $d_p \in \boldsymbol{R}$, the continuous perceptron finds the following functional mapping through learning:
 
@@ -165,7 +165,7 @@ b = b - \alpha \frac{\partial J(\boldsymbol{w}, b)}{\partial \boldsymbol{w}}
 \end{gathered}
 $$
 
-The error function $J$ for the continuous function is defined as the mean squared error of the outputs.
+The error function $J$ for the continuous function is defined as the **mean squared error** of the outputs.
 
 $$
 J(\boldsymbol{w}, b) = \frac{1}{P} \sum_{p = 1}^P (d_p - y_p)^2
@@ -281,7 +281,7 @@ In (batch) gradient descent, in one epoch, all the patterns are applied in a bat
 - At a higher learning rate, the number of epochs required for convergence decreases but the convergence may not be stable. A higher learning rate is possible with GD.
 - The time for one add/multiply computation is less when patterns are trained in a batch. Usually, time for a weight update versus batch size takes a U-shape curve.
 - The optimal learning rate is the largest rate at which learning does not diverge. The optimum learning speed depends on the *learning rate* & *batch size*.
-- In practice, *mini-batch SGD* is used.
+- In practice, *mini-batch GD* is used.
 
 ## Limitations of Perceptrons
 

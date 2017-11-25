@@ -17,7 +17,7 @@ The neuron either fires or it doesn't and synapses may be excitatory or inhibito
 
 ![Artificial Neuron](img/Artificial%20Neuron.png)
 
-An artificial neuron is the basic unit of neural networks. The total synaptic input ($u$) is given by the sum of the products of the inputs and their corresponding connecting weights minus the threshold (or bias) of the neuron.
+An artificial neuron is the basic unit of neural networks. The total synaptic input ($u$) is given by the sum of the products of the inputs and their corresponding connecting weights minus the threshold (or plus the bias) of the neuron.
 
 $$
 u = \sum_{i = 1}^n x_i w_i - \theta = \boldsymbol{x}^T \boldsymbol{w} - \theta
@@ -128,9 +128,9 @@ $$
 \Delta \boldsymbol{w_k} = \alpha \cdot r (\boldsymbol{w_k}, b_k, \boldsymbol{x}, d)
 $$
 
-where $r (\boldsymbol{w_k}, b_k, \boldsymbol{x}, d)$ is the learning signal which depends on the current weight vector, input and desired output & $\alpha$ is the learning parameter which spans between 0 and 1. Note that $d$ is zero for unsupervised learning.
+where $r (\boldsymbol{w_k}, b_k, \boldsymbol{x}, d)$ is the learning signal which depends on the current weight vector, bias, input and desired output & $\alpha$ is the learning parameter which spans between 0 and 1. Note that $d$ is zero for unsupervised learning.
 
-Training occurs iteratively for all training patterns and all output nodes until convergence. A cycle of iteration refers to a set of iterations that goes over all the input patterns (i.e. one epoch) and convergence is achieved when there is no change of the values of weights (incl. bias) with iterations.
+Training occurs iteratively for all training patterns and all output nodes until convergence. A cycle of iteration refers to a set of iterations that goes over all the input patterns (i.e. one epoch) and convergence is achieved when there is no change in the values of weights (and bias) with every iteration.
 
 ### Hebbian Learning Rule
 

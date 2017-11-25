@@ -2,9 +2,7 @@
 
 ## Energy-Based Models (EBM)
 
-Energy-based models associate a scalar *energy* $E(\boldsymbol{x})$ to each configuration of the variables $\boldsymbol{x}$ of interest.
-
-Energy-based models define the probability distribution through an energy function:
+Energy-based models associate a scalar *energy* $E(\boldsymbol{x})$ to each configuration of the variables $\boldsymbol{x}$ of interest. They define the probability distribution through an energy function:
 
 $$
 P(\boldsymbol{x}) = \frac{e^{-E(\boldsymbol{x})}}{Z_1}
@@ -34,7 +32,7 @@ Parameters $\boldsymbol{\theta}$ (i.e. biases and weights) are found by computin
 
 In many cases of interest, we do not observe $\boldsymbol{x}$ fully or we want to include non-observed variables such as variables of hidden units.
 
-Let $\boldsymbol{x}$ be the observed part (usually the input) and $\boldsymbol{h}$ be the non-observed part (i.e. hidden variables). Then, the join probability of both observed and non-observed variables can be written as:
+Let $\boldsymbol{x}$ be the observed part (usually the input) and $\boldsymbol{h}$ be the non-observed part (i.e. hidden variables). Then, the joint probability of both observed and non-observed variables can be written as:
 
 $$
 P(\boldsymbol{x}, \boldsymbol{h}) = \frac{e^{-E(\boldsymbol{x}, \boldsymbol{h})}}{Z}
@@ -88,7 +86,7 @@ $$
 J(\boldsymbol{\theta}) = F(\boldsymbol{x}) - \frac{1}{N} \sum_{\boldsymbol{\tilde{x}}} F(\boldsymbol{\tilde{x}})
 $$
 
-Usually, $N = P$:
+Usually, $N = P$ (i.e. no. of training samples):
 
 $$
 J(\boldsymbol{\theta}) = F(\text{positive samples}) - F(\text{negative samples})
@@ -164,7 +162,7 @@ $$
 P(\boldsymbol{x} | \boldsymbol{h}) = \prod_i P(x_i | \boldsymbol{h})
 $$
 
-That is, because of the specific structure of RBM, visible and hidden units are conditionally independent given one another, where the conditional probabilities are given by:
+That is, because of the specific structure of RBMs, visible and hidden units are conditionally independent given one another, where the conditional probabilities are given by:
 
 $$
 \begin{gathered}
@@ -173,7 +171,7 @@ P(x_i | \boldsymbol{h}) = \frac{e^{-E(x_i, \boldsymbol{h})}}{\sum_{x_i} e^{-E(x_
 \end{gathered}
 $$
 
-and $E(\boldsymbol{x}, h_j) = - h_j (c_j + \boldsymbol{x}^T \boldsymbol{w}_j)$ and $E(x_i, \boldsymbol{h}) = - x_i (b_i + \boldsymbol{h}^T {\boldsymbol{w}'}_i)$.
+and $E(\boldsymbol{x}, h_j) = - h_j (\boldsymbol{x}^T \boldsymbol{w}_j + c_j)$ and $E(x_i, \boldsymbol{h}) = - x_i (\boldsymbol{h}^T {\boldsymbol{w}'}_i + b_i)$.
 
 ### Sampling in RBM
 
@@ -181,11 +179,11 @@ Samples of $P(\boldsymbol{x})$ are obtained by running a *Markov chain* to conve
 
 A *Markov chain* is a sequence of states, which satisfies the Markov property — future states are determined only by the current state.
 
-*Gibbs sampling* of joint distribution of $N$ random variables $\boldsymbol{s} = (s_1, s_2, \cdots s_N)$ is done through $N$ sampling subsets of the form $s_i \sim P(s_i | s_{-i})$ where $s_{-i}$ contains $N - 1$ variables in $\boldsymbol{s}$ excluding the variable $s_i$.
+*Gibbs sampling* of a joint distribution of $N$ random variables $\boldsymbol{s} = (s_1, s_2, \cdots s_N)$ is done through $N$ sampling subsets of the form $s_i \sim P(s_i | s_{-i})$ where $s_{-i}$ contains $N - 1$ variables in $\boldsymbol{s}$ excluding the variable $s_i$.
 
 Gibbs sampling forms a Markov chain and when executed long enough, converges to the samples from the true distribution.
 
-In RBM, the set of random variables consists of the set of hidden units and visible units. However, since they are conditionally independent, one can perform block Gibbs sampling. In this setting, visible units are sampled given the fixed values of hidden units (i.e. from $P(\boldsymbol{x} | \boldsymbol{h})$) and similarly, hidden units are sampled simultaneously given the values of visible units (i.e. from $P(\boldsymbol{h} | \boldsymbol{x})$).
+In a RBM, the set of random variables consists of the set of hidden units and visible units. However, since they are conditionally independent, one can perform block Gibbs sampling. In this setting, visible units are sampled given the fixed values of hidden units (i.e. from $P(\boldsymbol{x} | \boldsymbol{h})$) and similarly, hidden units are sampled simultaneously given the values of visible units (i.e. from $P(\boldsymbol{h} | \boldsymbol{x})$).
 
 For $t$ Gibbs sampling steps starting from the training samples (i.e. $\hat{P}(\boldsymbol{x})$):
 
@@ -214,20 +212,20 @@ RBMs are mostly studied with binary units. That is, $x_i, h_i \in \{0, 1\}$.
 For this case (complete derivation in Lecture Notes):
 
 $$
-P(h_j = 1 | \boldsymbol{x}) = \text{logistic}(c_j + \boldsymbol{x}^T \boldsymbol{w}_j)
+P(h_j = 1 | \boldsymbol{x}) = \text{logistic}(\boldsymbol{x}^T \boldsymbol{w}_j + c_j)
 $$
 
-where $s_j = c_j + \boldsymbol{x}^T \boldsymbol{w}_j$.
+where $s_j = \boldsymbol{x}^T \boldsymbol{w}_j$ + c_j.
 
 Similarly,
 
 $$
-P(x_i = 1 | \boldsymbol{h}) = \text{logistic}(b_i + \boldsymbol{h}^T  {\boldsymbol{w}'}_i)
+P(x_i = 1 | \boldsymbol{h}) = \text{logistic}(\boldsymbol{h}^T  {\boldsymbol{w}'}_i + b_i)
 $$
 
-where $u_i = b_i + \boldsymbol{h}^T {\boldsymbol{w}'}_i$.
+where $u_i = \boldsymbol{h}^T {\boldsymbol{w}'}_i$ + b_i.
 
-Outputs are sampled by drawing bits from binomial distribution with the above probabilities:
+Outputs are sampled by drawing bits from binomial distributions with the above probabilities:
 
 $$
 \begin{gathered}
@@ -259,10 +257,10 @@ $$
 Substituting energy $E(\boldsymbol{x}, \boldsymbol{h})$ for RBM into the equation for free energy $F(\boldsymbol{x})$:
 
 $$
-F(\boldsymbol{x}) = - \boldsymbol{b}^T \boldsymbol{x} - \sum_j \log \sum_{h_j} e^{h_j (c_j + \boldsymbol{x}^T \boldsymbol{w}_j)}
+F(\boldsymbol{x}) = - \boldsymbol{b}^T \boldsymbol{x} - \sum_j \log \sum_{h_j} e^{h_j (\boldsymbol{x}^T \boldsymbol{w}_j + c_j)}
 $$
 
-Since $E(\boldsymbol{x}, h_j) = -h_j(c_j + \boldsymbol{x}^T \boldsymbol{w}_j)$, free energy is given by:
+Since $E(\boldsymbol{x}, h_j) = -h_j(\boldsymbol{x}^T \boldsymbol{w}_j + c_j)$, free energy is given by:
 
 $$
 F(\boldsymbol{x}) = - \boldsymbol{b}^T \boldsymbol{x} - \sum_j \log \sum_{h_j} e^{E(\boldsymbol{x}, h_j)}
@@ -271,7 +269,7 @@ $$
 For RBM with binary units:
 
 $$
-F(\boldsymbol{x}) = - \boldsymbol{b}^T \boldsymbol{x} - \sum_j \log \big(1 + e^{(c_j + \boldsymbol{x}^T \boldsymbol{w}_j)} \big)
+F(\boldsymbol{x}) = - \boldsymbol{b}^T \boldsymbol{x} - \sum_j \log \big(1 + e^{(\boldsymbol{x}^T \boldsymbol{w}_j + c_j)} \big)
 $$
 
 Note that the cost function is computed as the difference of free energies of positive (training) samples and negative (model) samples:

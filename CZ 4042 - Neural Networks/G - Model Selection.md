@@ -34,7 +34,7 @@ where $d_p$ is the target and $y_p$ is the predicted output of pattern $p$. $1(\
 
 While we want to minimize the error on the entire sample population, this is difficult as the entire sample population is often unavailable. Hence, in real applications, we use **validation**, in which a part of the available data, which is known as the *validation set*, is used to select the model and estimate the error rate.
 
-Validation attempts to solve the following problems:
+Validation attempts to solve the following problems of using training error:
 
 - The final model tends to *overfit* the training data.
 - There is no way of knowing how well the model performs on unseen data.
@@ -87,8 +87,8 @@ $$
 ### Leave-One-Out Cross Validation
 
 - Leave-one-out is the degenerate case of K-fold cross validation, where K is chosen as the total number of examples.
-- For a dataset with N examples, perform N experiments i.e. K = N.
-- For each experiment, use N - 1 examples for training and the remaining one example for testing.
+- For a dataset with N examples, N experiments are performed i.e. K = N.
+- For each experiment, N - 1 examples are used for training and the remaining one example is used for testing.
 
 ## Three-Way Data Split
 
@@ -96,7 +96,7 @@ If model selection and true error estimates are to be computed simultaneously, t
 
 1. Training Set, which is used for learning.
 2. Validation Set, which determines the error $J_m$ of different models $m$. For multi-layer perceptrons, the validation set is used to estimate the error rate of the model.
-3. Training & Validation Set are combined to re-train the optimal model (i.e. lowest validation error).
+3. Training & Validation Set are combined to re-train the optimal model (i.e. model with lowest validation error).
 4. Test Set, which is used only to assess the performance of the final optimal model.
 
 **Why separate test and validation sets?**

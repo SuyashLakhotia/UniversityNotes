@@ -67,9 +67,9 @@ $$
 - $\boldsymbol{V}$ - Weight vector connecting the hidden layer to the output layer.
 - $\boldsymbol{b}$ - Bias connected to the hidden layer.
 - $\boldsymbol{c}$ - Bias connected to the output layer.
-- $\phi$ is the tanh activation function (for hidden layer) and $\sigma$ is the sigmoid activation function (for output layer).
+- $\phi$ is the tanh activation function (for hidden layer) and $\sigma$ is the output layer activation function.
 
-The output layer activation function is softmax for classification and linear/sigmoidal for regression.
+Note that the output layer activation function is softmax for classification and linear/sigmoidal for regression.
 
 Typically, the hidden layer activation function is given by the tanh function:
 

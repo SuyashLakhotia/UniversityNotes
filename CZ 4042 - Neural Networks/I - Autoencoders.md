@@ -25,7 +25,7 @@ Reverse mapping may be optionally constrained such that $\boldsymbol{W}' = \bold
 
 ## Cost Function
 
-The cost function can be measured by many ways, depending on the appropriate distributional assumptions on the input given the code.
+The cost function can be measured by many ways, depending on the appropriate distributional assumptions on the input.
 
 If the data is assumed to be continuous and Gaussian distributed, the mean squared error cost is usually used:
 
@@ -74,18 +74,18 @@ $$
 \widetilde{x_i} = \epsilon x_i
 $$
 
-where the noise $\epsilon$ could be binomially distributed (i.e. $\epsilon \sim \text{Binomial}(p)$) and $p$ is the probability of ones and $1 - p$ is the probability of zeroes (i.e. noise).
+where the noise $\epsilon$ could be binomially distributed (i.e. $\epsilon \sim \text{Binomial}(p)$, where $p$ is the probability of ones and $1 - p$ is the probability of zeroes i.e. noise).
 
 ## Undercomplete Autoencoders
 
 - The hidden layer has a lower dimension than the input in undercomplete autoencoders.
 - Learning an undercomplete representation forces the autoencoder to capture the most salient features.
 - By limiting the number of hidden neurons, interesting (hidden) structures of input data can be inferred from autoencoders. For example, correlations among input variables, principal components of data etc.
-- By learning to approximate $n$-dimensional inputs with $M$ (< $n$) number of hidden units, a lower dimensional representation of the input signals is obtained. The network reconstructs the input signals from the hidden representation.
+- By learning to approximate $n$-dimensional inputs with $M$ (< $n$) number of hidden units, a lower dimensional representation of the input signals is obtained. The network reconstructs the input signals from this hidden representation.
 
 ## Overcomplete Autoencoders
 
-- The hidden layer has a higher dimension than the input of overcomplete autoencoders.
+- The hidden layer has a higher dimension than the input in overcomplete autoencoders.
 - When the hidden dimensions are large, one could explore interesting structures of inputs by introducing other constraints such as the 'sparsity' of input data.
 
 Both, undercomplete and overcomplete autoencoders, fail to learn anything useful if the encoder and decoder are given too much capacity. Some constraints are required to make them useful.
@@ -114,7 +114,7 @@ $$
 
 The sparsity penalty term makes the features (weights) learned by the hidden layer to be sparse.
 
-Consider a sigmoid activation function, we say that the neuron is "active" when its output is close to 1 and the neuron is "inactive" when its output is close to 0. With the sparsity constraint, the neurons at the hidden layer(s) are constrained to be inactive for most of the time.
+Consider a sigmoid activation function, we say that the neuron is "active" when its output is close to 1 and the neuron is "inactive" when its output is close to 0. With the sparsity constraint, the neurons at the hidden layer(s) are constrained to be inactive most of the time.
 
 ### Sparsity Constraint
 
@@ -148,17 +148,17 @@ For gradient descent (complete derivation in Lecture Notes):
 
 $$
 \begin{gathered}
-\frac{\partial J_1(\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{b}')}{\partial \boldsymbol{W}} = \frac{\partial J(\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{b}')}{\partial \boldsymbol{W}} + \beta \frac{\partial D(\boldsymbol{H})}{\partial \b oldsymbol{W}} \\
+\frac{\partial J_1(\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{b}')}{\partial \boldsymbol{W}} = \frac{\partial J(\boldsymbol{W}, \boldsymbol{b}, \boldsymbol{b}')}{\partial \boldsymbol{W}} + \beta \frac{\partial D(\boldsymbol{H})}{\partial \boldsymbol{W}} \\
 \frac{\partial D(\boldsymbol{H})}{\partial \boldsymbol{w}_j} = \frac{1}{P} \Bigg(\frac{\rho}{\rho_j} + \frac{1 - \rho}{1 - \rho_j} \Bigg) \sum_p f'(u_{pj}) \boldsymbol{x}_p
 \end{gathered}
 $$
 
 ## Deep Stacked Autoencoders
 
-Deep autoencoders can be built by stacking autoencoders. After training the first level denoising autoencoder, the resulting representation is used to train a second level denoising encoder. This process is repeated and a deep stacked autoencoder is realized.
+Deep autoencoders can be built by stacking autoencoders. After training the first level autoencoder, the resulting representation is used to train a second level encoder. The second hidden layer attempts to reconstruct the output of the first hidden layer. This process is repeated and a deep stacked autoencoder is realized.
 
 ![Training Stacked Autoencoders](img/Training%20Stacked%20Autoencoders.png)
 
 ### Fine-Tuning Deep Network for Classification
 
-After training a stacked autoencoder, an output layer (softmax or linear layer) may be added on the top of the stack for classification. The parameters of the entire system are fine-tuned to minimize the error in predicting the supervised target by supervised gradient descent learning.
+After training a stacked autoencoder, an output layer (softmax or linear layer) may be added on the top of the stack. The parameters of the entire system are fine-tuned to minimize the error in predicting the supervised target by supervised gradient descent learning.

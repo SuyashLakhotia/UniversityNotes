@@ -125,7 +125,7 @@ $$
 y_p = \underset{k}{\text{argmax }} \{ P(y_p = k | \boldsymbol{x}_p) \}
 $$
 
-And the output of the layer is:
+And the output of all the patterns is:
 
 $$
 \boldsymbol{y} = \underset{k}{\text{argmax }} \{ P(\boldsymbol{y} = k | \boldsymbol{X}) \}
@@ -201,7 +201,7 @@ $$
 \end{split}
 $$
 
-Note that $\boldsymbol{K}$ is a binary matrix, where every row corresponds to an input pattern and has 1 corresponding to the class of the pattern.
+Note that $\boldsymbol{K}$ is a binary matrix, where every row corresponds to an input pattern and has a '1' corresponding to the class of the pattern.
 
 The gradient descent learning for softmax layer is given by:
 
@@ -231,9 +231,7 @@ $$
 
 ### GD for Perceptron Layer
 
-Consider a training dataset $\{(\boldsymbol{x}_p, \boldsymbol{d}_p)\}_{p = 1}^P$ where $\boldsymbol{x} \in \boldsymbol{R}^n$ and $\boldsymbol{d}_p \in \boldsymbol{R}^K$.
-
-As a batch:
+Consider a training dataset $\{(\boldsymbol{x}_p, \boldsymbol{d}_p)\}_{p = 1}^P$ where $\boldsymbol{x} \in \boldsymbol{R}^n$ and $\boldsymbol{d}_p \in \boldsymbol{R}^K$. As a batch:
 
 $$
 \boldsymbol{X} = \begin{pmatrix} \boldsymbol{x}_1^T \\ \boldsymbol{x}_2^T \\ \vdots \\ \boldsymbol{x}_P^T \end{pmatrix} \quad

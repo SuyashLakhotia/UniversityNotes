@@ -54,7 +54,7 @@ $$
 \end{gathered}
 $$
 
-where $\sigma$ is the sigmoid activation function, $\phi$ is the tanh activation function and $\odot$ is the element-wise product. $\boldsymbol{c}(t)$ is the synaptic input to the cell and $\boldsymbol{\tilde{c}}(t)$ is the candidate cell activation.
+where $\sigma$ is the sigmoid activation function, $\phi$ is the tanh activation function and $\odot$ is the element-wise product. $\boldsymbol{\tilde{c}}(t)$ is the candidate state value and $\boldsymbol{c}(t)$ is the cell's new state at time $t$.
 
 ## LSTM Recurrent Network
 
@@ -82,16 +82,19 @@ $$
 \begin{gathered}
 \boldsymbol{r}(t) = \sigma({\boldsymbol{U}_r}^T \boldsymbol{x}(t) + {\boldsymbol{W}_r}^T \boldsymbol{h}(t - 1) + \boldsymbol{b}_r) \\
 \boldsymbol{z}(t) = \sigma({\boldsymbol{U}_z}^T \boldsymbol{x}(t) + {\boldsymbol{W}_z}^T \boldsymbol{h}(t - 1) + \boldsymbol{b}_z) \\
-\boldsymbol{\tilde{h}}(t) = \phi({\boldsymbol{U}_h}^T \boldsymbol{x}(t) + {\boldsymbol{W}_h}^T (\boldsymbol{r}(t) \odot \boldsymbol{h}(t - 1)) + \boldsymbol{b}_h) \\
-\boldsymbol{h}(t) = (1 - \boldsymbol{z}(t)) \odot \boldsymbol{h}(t - 1) + \boldsymbol{z}(t) \odot \boldsymbol{\tilde{h}}(t)
+\boldsymbol{\tilde{h}}(t) = \phi({\boldsymbol{U}_h}^T \boldsymbol{x}(t) + {\boldsymbol{W}_h}^T (\boldsymbol{r}(t) \odot \boldsymbol{h}(t - 1)) + \boldsymbol{b}_h)
 \end{gathered}
 $$
 
-where $\boldsymbol{r}$ is the reset gate and $\boldsymbol{z}$ is the update gate inputs. $\boldsymbol{\tilde{h}}(t)$ is the candidate hidden activation.
+$$
+\boldsymbol{h}(t) = (1 - \boldsymbol{z}(t)) \odot \boldsymbol{h}(t - 1) + \boldsymbol{z}(t) \odot \boldsymbol{\tilde{h}}(t)
+$$
+
+where $\boldsymbol{r}$ is the reset gate and $\boldsymbol{z}$ is the update gate inputs. $\boldsymbol{\tilde{h}}(t)$ is the candidate cell state.
 
 ## Gated Recurrent Neural Network (GRNN)
 
-![Gated Recurrent Neural Network](img/GRNN.png)
+![Gated Recurrent Neural Network](img/GRNN.png){height=210px}
 
 $$
 \begin{gathered}

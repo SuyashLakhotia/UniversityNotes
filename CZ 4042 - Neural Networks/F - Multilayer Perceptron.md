@@ -4,7 +4,7 @@
 
 - A multilayer perceptron (MLP) is a feedforward network with $L$ layers, where the hidden layers of the network consists of perceptrons.
 - MLP has been applied successfully to resolve many complex real-world problems consisting of *non-linear decision boundaries*.
-- The network is trained in a *supervised* manner with the *error backpropagation algorithm* based on the gradient descent algorithm.
+- The network is trained in a *supervised* manner with the error backpropagation algorithm based on the gradient descent algorithm.
 - Backpropagation learning can be seen as a generalization of the delta learning equations for multilayer networks.
 
 ## Three-Layer MLP Network
@@ -240,9 +240,9 @@ GD has one update per training epoch. Updates are based on the average loss of e
 
 GD can explore the parallelism in batch processing and matrix processing. So, the time for one iteration is less for GD than for SGD. For large training datasets, SGD is computationally prohibitive.
 
-### Mini-Batch SGD
+### Mini-Batch GD
 
-In practice, gradient descent is performed on mini-batch updates of gradients within a batch or block of data of size $B$. In mini-batch SGD, the data is divided into blocks and the gradients are averaged for each block in an epoch.
+In practice, gradient descent is performed on mini-batch updates of gradients within a batch or block of data of size $B$. In mini-batch GD, the data is divided into blocks and the gradients are averaged for each block in an epoch.
 
 - $B = 1$: stochastic (online) gradient descent
 - $B = P$: (batch) gradient descent

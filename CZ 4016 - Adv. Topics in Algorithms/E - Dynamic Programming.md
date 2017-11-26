@@ -7,20 +7,17 @@
 ## Top-Down (Memoization)
 
 ```
-FibDP(n) {
-    F[0] = 0;
-    F[1] = 1;
-    F[2...n] = -1;
+F[0] = 0;
+F[1] = 1;
+F[2...n] = -1;
 
+FibDP(n) {
     if (n == 0 || n == 1)
         return F[n];
 
-    if (F[n - 1] < 0)
-        F[n - 1] = FibDP(n - 1);
-    else if (F[n - 2] < 0)
-        F[n - 2] = FibDP(n - 2);
+    if (F[n] < 0)
+        F[n] = FibDP(n - 1) + FibDP(n - 2);
 
-    F[n] = F[n - 1] + F[n - 2];
     return F[n];
 }
 ```
@@ -28,14 +25,13 @@ FibDP(n) {
 ## Bottom-Up
 
 ```
-FibDP(n) {
-    F[0] = 0;
-    F[1] = 1;
-    F[2...n] = -1;
+F[0] = 0;
+F[1] = 1;
+F[2...n] = -1;
 
+FibDP(n) {
     for (i = 1 to i = n)
-        if (F[i] < 0)
-            F[i] = F[i - 1] + F[i - 2];
+        F[i] = F[i - 1] + F[i - 2];
 
     return F[n];
 }

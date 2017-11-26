@@ -28,7 +28,7 @@ We say that $f(n)$ is **asymptotically lower bound** by $g(n)$, when $f(n) \in \
 
 $$
 \begin{split}
-\Theta(g(n)) = \{f(n) \enspace | \enspace \exists c > 0, \exists n_0 \text{ s.t. } \forall n > n_0 : \\ 0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n)\}
+\Theta(g(n)) = \{f(n) \enspace | \enspace \exists c_1, c_2 > 0, \exists n_0 \text{ s.t. } \forall n > n_0 : \\ 0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n)\}
 \end{split}
 $$
 

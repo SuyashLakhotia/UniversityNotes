@@ -248,7 +248,7 @@ $$
 = \boldsymbol{X} \boldsymbol{w} + b \boldsymbol{1}_P
 $$
 
-where $\boldsymbol{X}$ is the data matrix where each data point is represented as a row.
+where $\boldsymbol{X}$ is the data matrix where each row is a data point.
 
 ### Derivatives of Sigmoid Functions
 
@@ -256,8 +256,12 @@ where $\boldsymbol{X}$ is the data matrix where each data point is represented a
 
 $$
 \begin{gathered}
-y = f(u) = \frac{1}{1 + e^{-u}} \\
-f'(u) = y(1 - y)
+y = f(u) = \frac{a}{1 + e^{-bu}} + c \\
+\begin{split}
+f'(u)
+&= b\bigg((y - c)\bigg(1 - \frac{y - c}{a}\bigg)\bigg) \\
+&= y(1 - y) \quad \{a = 1.0, b = 1.0, c = 0.0\}
+\end{split}
 \end{gathered}
 $$
 

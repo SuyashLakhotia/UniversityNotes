@@ -351,7 +351,7 @@ $$
 \boldsymbol{\nabla}_{\boldsymbol{h}(t)} J = \boldsymbol{W}^T \text{diag}(1 - \boldsymbol{h}^2(t + 1)) \boldsymbol{\nabla}_{\boldsymbol{h}(t + 1)} J + \boldsymbol{V} \boldsymbol{\nabla}_{\boldsymbol{u}(t)} J
 $$
 
-Using above error gradients, we can calculate the gradients with respect to the parameters $\boldsymbol{\theta} = \{\boldsymbol{U}, \boldsymbol{V}, \boldsymbol{W}, \boldsymbol{b}, \boldsymbol{c}\}$:
+Using these error gradients, we can calculate the gradients with respect to the parameters $\boldsymbol{\theta} = \{\boldsymbol{U}, \boldsymbol{V}, \boldsymbol{W}, \boldsymbol{b}, \boldsymbol{c}\}$:
 
 $$
 \begin{gathered}

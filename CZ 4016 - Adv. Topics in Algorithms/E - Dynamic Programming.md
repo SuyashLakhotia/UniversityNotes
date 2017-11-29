@@ -41,8 +41,8 @@ FibDP(n) {
 
 - Optimal sub-structure
 - Overlapping sub-problems
-- "Side information" for optimal solution reconstruction
 - Memoization (trading space for time)
+- "Side information" for optimal solution reconstruction
 
 A problem exhibits **optimal sub-structure**, if an optimal solution can be (re)constructed from optimal solutions to sub-problems.
 

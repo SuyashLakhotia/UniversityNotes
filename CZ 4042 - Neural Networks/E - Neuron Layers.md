@@ -133,7 +133,7 @@ $$
 
 ### GD for Softmax
 
-Given a training dataset $\{ (\boldsymbol{x}_p, d_p) \}_{p = 1}^P$ where $\boldsymbol{x}_p \in \boldsymbol{R}^n$ and $d_p \in \{1, 2, \cdots, K\}$, the cost function for logistic regression is given by the **multiclass cross-entropy** (or negative log-likelihood):
+Given a training dataset $\{ (\boldsymbol{x}_p, d_p) \}_{p = 1}^P$ where $\boldsymbol{x}_p \in \boldsymbol{R}^n$ and $d_p \in \{1, 2, \hdots, K\}$, the cost function for logistic regression is given by the **multiclass cross-entropy** (or negative log-likelihood):
 
 $$
 J(\boldsymbol{W}, \boldsymbol{b}) = - \sum_{p = 1}^P \bigg(\sum_{k = 1}^K 1(d_p = k) \log \big( f(u_{pk}) \big) \bigg)

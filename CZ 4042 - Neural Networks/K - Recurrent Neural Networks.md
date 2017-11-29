@@ -39,7 +39,7 @@ By considering the unfolded recurrence:
 $$
 \begin{split}
 \boldsymbol{h}(t)
-&= g^t(\boldsymbol{x}(t), \boldsymbol{x}(t - 1), \cdots, \boldsymbol{x}(2), \boldsymbol{x}(1)) \\
+&= g^t(\boldsymbol{x}(t), \boldsymbol{x}(t - 1), \hdots, \boldsymbol{x}(2), \boldsymbol{x}(1)) \\
 &= f(\boldsymbol{h}(t - 1), \boldsymbol{x}(t))
 \end{split}
 $$
@@ -88,7 +88,7 @@ $$
 \boldsymbol{h}^1(t) = \phi \Big({\boldsymbol{U}^1}^T \boldsymbol{x}(t) + {\boldsymbol{W}^1}^T \boldsymbol{h}^1(t - 1) + \boldsymbol{b}^1 \Big)
 $$
 
-For hidden layers $l = 2, \cdots, L - 1$:
+For hidden layers $l = 2, \hdots, L - 1$:
 
 $$
 \boldsymbol{h}^l(t) = \phi \Big({\boldsymbol{U}^l}^T \boldsymbol{h}^{l - 1}(t) + {\boldsymbol{W}^l}^T \boldsymbol{h}^l(t - 1) + \boldsymbol{b}^l \Big)
@@ -129,7 +129,7 @@ $$
 \boldsymbol{h}^1(t) = \phi \Big({\boldsymbol{U}^1}^T \boldsymbol{x}(t) + {\boldsymbol{W}^1}^T \boldsymbol{h}^2(t - 1) + \boldsymbol{b}^1 \Big)
 $$
 
-For hidden layers $l = 2, \cdots, L - 2$:
+For hidden layers $l = 2, \hdots, L - 2$:
 
 $$
 \boldsymbol{h}^l(t) = \phi \Big({\boldsymbol{U}^l}^T \boldsymbol{h}^{l - 1}(t) + {\boldsymbol{W}^l}^T \boldsymbol{h}^{l + 1}(t - 1) + \boldsymbol{b}^l \Big)
@@ -330,7 +330,7 @@ $$
 \boldsymbol{\nabla}_{\boldsymbol{h}(\tau)} J = \boldsymbol{V}^T \boldsymbol{\nabla}_{\boldsymbol{u}(\tau)} J
 $$
 
-We can then iterate backward in time to backpropagate gradients. For $t < \tau$, $\boldsymbol{h}(t)$ has descendants both $\boldsymbol{h}(t + 1)$ and $\boldsymbol{u}(t)$. Therefore, for $t = 1, \cdots, \tau - 1$:
+We can then iterate backward in time to backpropagate gradients. For $t < \tau$, $\boldsymbol{h}(t)$ has descendants both $\boldsymbol{h}(t + 1)$ and $\boldsymbol{u}(t)$. Therefore, for $t = 1, \hdots, \tau - 1$:
 
 $$
 \boldsymbol{\nabla}_{\boldsymbol{h}(t)} J = \Bigg(\frac{\partial \boldsymbol{h}(t + 1)}{\partial \boldsymbol{h}(t)} \Bigg)^T \boldsymbol{\nabla}_{\boldsymbol{h}(t + 1)} J + \Bigg(\frac{\partial \boldsymbol{u}(t)}{\partial \boldsymbol{h}(t)} \Bigg)^T \boldsymbol{\nabla}_{\boldsymbol{u}(t)} J

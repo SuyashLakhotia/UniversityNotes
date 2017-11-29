@@ -104,8 +104,8 @@ $$
 E(\boldsymbol{x}, \boldsymbol{h}) = - \boldsymbol{b}^T \boldsymbol{x} - \boldsymbol{c}^T \boldsymbol{h} - \boldsymbol{h}^T \boldsymbol{W}^T \boldsymbol{x}
 $$
 
-- $\boldsymbol{x} = (x_1, x_2, \cdots x_n)^T$ are the activations of visible units (i.e. inputs).
-- $\boldsymbol{h} = (h_1, h_2, \cdots h_M)^T$ are the activations of hidden units.
+- $\boldsymbol{x} = (x_1, x_2, \hdots, x_n)^T$ are the activations of visible units (i.e. inputs).
+- $\boldsymbol{h} = (h_1, h_2, \hdots, h_M)^T$ are the activations of hidden units.
 - $\boldsymbol{W} = \{w_{ij}\}_{n \times M}$ is the weight matrix connecting the inputs to the hidden units.
 - $\boldsymbol{b}$ is the bias vector connected to the input layer (top down).
 - $\boldsymbol{c}$ is the bias vector connected to the hidden layer (bottom up).
@@ -179,7 +179,7 @@ Samples of $P(\boldsymbol{x})$ are obtained by running a *Markov chain* to conve
 
 A *Markov chain* is a sequence of states, which satisfies the Markov property — future states are determined only by the current state.
 
-*Gibbs sampling* of a joint distribution of $N$ random variables $\boldsymbol{s} = (s_1, s_2, \cdots s_N)$ is done through $N$ sampling subsets of the form $s_i \sim P(s_i | s_{-i})$ where $s_{-i}$ contains $N - 1$ variables in $\boldsymbol{s}$ excluding the variable $s_i$.
+*Gibbs sampling* of a joint distribution of $N$ random variables $\boldsymbol{s} = (s_1, s_2, \hdots, s_N)$ is done through $N$ sampling subsets of the form $s_i \sim P(s_i | s_{-i})$ where $s_{-i}$ contains $N - 1$ variables in $\boldsymbol{s}$ excluding the variable $s_i$.
 
 Gibbs sampling forms a Markov chain and when executed long enough, converges to the samples from the true distribution.
 
@@ -239,7 +239,7 @@ The $t$-th step in the Markov chain becomes:
 $$
 \begin{gathered}
 \boldsymbol{h}^{(t + 1)} \sim \text{logistic}(\boldsymbol{W}^T \boldsymbol{x}^{(t)} + \boldsymbol{c}) \\
-\boldsymbol{x}^{(t + 1)} \sim \text{logistic}(\boldsymbol{W} \boldsymbol{h}^{(t)} + \boldsymbol{b})
+\boldsymbol{x}^{(t + 1)} \sim \text{logistic}(\boldsymbol{W} \boldsymbol{h}^{(t + 1)} + \boldsymbol{b})
 \end{gathered}
 $$
 
@@ -248,7 +248,7 @@ Since the outputs of hidden and visible units are binary, the samples are drawn 
 $$
 \begin{gathered}
 \boldsymbol{h}^{(t + 1)} = \text{Binomial}\big(p = \text{logistic}(\boldsymbol{W}^T \boldsymbol{x}^{(t)} + \boldsymbol{c})\big) \\
-\boldsymbol{x}^{(t + 1)} = \text{Binomial}\big(p = \text{logistic}(\boldsymbol{W} \boldsymbol{h}^{(t)} + \boldsymbol{b})\big)
+\boldsymbol{x}^{(t + 1)} = \text{Binomial}\big(p = \text{logistic}(\boldsymbol{W} \boldsymbol{h}^{(t + 1)} + \boldsymbol{b})\big)
 \end{gathered}
 $$
 
